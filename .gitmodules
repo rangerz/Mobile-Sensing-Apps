@@ -1,0 +1,51 @@
+[submodule "SMU-MSLC/SMUExampleOne"]
+	path = SMU-MSLC/SMUExampleOne
+	url = git@github.com:SMU-MSLC/SMUExampleOne.git
+[submodule "SMU-MSLC/PDFSlides"]
+	path = SMU-MSLC/PDFSlides
+	url = https://github.com/SMU-MSLC/PDFSlides
+[submodule "SMU-MSLC/ARSMUExample"]
+	path = SMU-MSLC/ARSMUExample
+	url = git@github.com:SMU-MSLC/ARSMUExample.git
+[submodule "SMU-MSLC/Example2018"]
+	path = SMU-MSLC/Example2018
+	url = git@github.com:SMU-MSLC/Example2018.git
+[submodule "SMU-MSLC/SwiftHTTPExample"]
+	path = SMU-MSLC/SwiftHTTPExample
+	url = git@github.com:SMU-MSLC/SwiftHTTPExample.git
+[submodule "SMU-MSLC/tornado_bare"]
+	path = SMU-MSLC/tornado_bare
+	url = git@github.com:SMU-MSLC/tornado_bare.git
+[submodule "SMU-MSLC/ImageLab"]
+	path = SMU-MSLC/ImageLab
+	url = git@github.com:SMU-MSLC/ImageLab.git
+[submodule "SMU-MSLC/BleSwift"]
+	path = SMU-MSLC/BleSwift
+	url = git@github.com:SMU-MSLC/BleSwift.git
+[submodule "SMU-MSLC/ImageDSPUtils"]
+	path = SMU-MSLC/ImageDSPUtils
+	url = git@github.com:SMU-MSLC/ImageDSPUtils.git
+[submodule "SMU-MSLC/Commotion"]
+	path = SMU-MSLC/Commotion
+	url = git@github.com:SMU-MSLC/Commotion.git
+[submodule "SMU-MSLC/AudioLabSwift"]
+	path = SMU-MSLC/AudioLabSwift
+	url = git@github.com:SMU-MSLC/AudioLabSwift.git
+[submodule "SMU-MSLC/AudioDSPUtils"]
+	path = SMU-MSLC/AudioDSPUtils
+	url = git@github.com:SMU-MSLC/AudioDSPUtils.git
+[submodule "SMU-MSLC/AudioLab"]
+	path = SMU-MSLC/AudioLab
+	url = git@github.com:SMU-MSLC/AudioLab.git
+[submodule "SMU-MSLC/TestingGit"]
+	path = SMU-MSLC/TestingGit
+	url = git@github.com:SMU-MSLC/TestingGit.git
+[submodule "SMU-MSLC/AutoLayoutExample"]
+	path = SMU-MSLC/AutoLayoutExample
+	url = git@github.com:SMU-MSLC/AutoLayoutExample.git
+[submodule "SMU-MSLC/HTTPFlippedExample"]
+	path = SMU-MSLC/HTTPFlippedExample
+	url = git@github.com:SMU-MSLC/HTTPFlippedExample.git
+[submodule "SMU-MSLC/BLEChat"]
+	path = SMU-MSLC/BLEChat
+	url = git@github.com:SMU-MSLC/BLEChat.git

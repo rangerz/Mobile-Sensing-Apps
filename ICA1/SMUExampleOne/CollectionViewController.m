@@ -76,7 +76,6 @@ static NSString * const reuseIdentifier = @"ImageCollectCell";
     
     // Configure the cell
     cell.backgroundColor = [UIColor blueColor];
-//    cell.imageView.image = [self.myImageModel getImageWithName:[self.myImageModel getImageNameByIdx:indexPath.row]];
     cell.imageView.image = [self.myImageModel getImageByIdx:indexPath.row];
     
     return cell;

@@ -12,14 +12,15 @@
 @property (strong,nonatomic) NSArray* imageNames;
 @property (strong,nonatomic) NSMutableArray* images;
 @end
-@implementation ImageModel
 
+@implementation ImageModel
 @synthesize imageNames = _imageNames;
 
 -(NSArray*)imageNames{
-    if (!_imageNames)
+    if (!_imageNames) {
         _imageNames = @[@"Eric1", @"Eric2", @"Eric3", @"sample1", @"sample2", @"sample3"];
-    
+    }
+
     return _imageNames;
 }
 

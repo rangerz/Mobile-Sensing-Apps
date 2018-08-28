@@ -12,6 +12,7 @@
 @interface ImageModel : NSObject
 
 +(ImageModel*) sharedInstance;
+
 -(UIImage*)getImageWithName:(NSString*)name;
 -(UIImage*)getImageByIdx:(NSInteger)index;
 -(NSString*)getImageNameByIdx:(NSInteger)index;

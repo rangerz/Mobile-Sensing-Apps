@@ -10,7 +10,7 @@
 
 @interface ImageModel()
 @property (strong,nonatomic) NSArray* imageNames;
-@property (strong,nonatomic) NSArray* images;
+@property (strong,nonatomic) NSMutableArray* images;
 @end
 @implementation ImageModel
 
@@ -26,10 +26,14 @@
 
 -(NSArray*)images{
     
-    if(!_images)
-        _images = @[[self getImageWithName:[self getImageNameByIdx:0]], [self getImageWithName:[self getImageNameByIdx:1]], [self getImageWithName:[self getImageNameByIdx:2]], [self getImageWithName:[self getImageNameByIdx:3]], [self getImageWithName:[self getImageNameByIdx:4]], [self getImageWithName:[self getImageNameByIdx:5]]];
+    if(!_images) {
+        _images = [[NSMutableArray alloc] init];
+        for(NSString* name in _imageNames){
+            [_images addObject:[self getImageWithName:name]];
+        }
+    }
     
-    return _imageNames;
+    return _images;
 }
 
 +(ImageModel*)sharedInstance{

@@ -17,22 +17,19 @@
 @synthesize imageNames = _imageNames;
 
 -(NSArray*)imageNames{
-    
-    if(!_imageNames)
-        _imageNames = @[@"Eric1",@"Eric2",@"Eric3",@"sample1",@"sample2",@"sample3"];
+    if (!_imageNames)
+        _imageNames = @[@"Eric1", @"Eric2", @"Eric3", @"sample1", @"sample2", @"sample3"];
     
     return _imageNames;
 }
 
--(NSArray*)images{
-    
-    if(!_images) {
+-(NSArray*)image{
+    if (!_images) {
         _images = [[NSMutableArray alloc] init];
-        for(NSString* name in _imageNames){
+        for (NSString* name in _imageNames) {
             [_images addObject:[self getImageWithName:name]];
         }
     }
-    
     return _images;
 }
 
@@ -48,25 +45,22 @@
     return _sharedInstance;
 }
 
--(UIImage*)getImageWithName:(NSString *)name{
+-(UIImage*)getImageWithName:(NSString*)name{
     UIImage* image = nil;
     image = [UIImage imageNamed:name];
     return image;
 }
 
 -(UIImage*)getImageByIdx:(NSInteger)index{
-//    UIImage* image = nil;
-//    NSString* name = [self getImageNameByIdx: index];
-//    image = [UIImage imageNamed:name];
-    return self.images[index];
+    return self.image[index];
+}
+
+-(NSString*)getImageNameByIdx:(NSInteger)index {
+    return self.imageNames[index];
 }
 
 -(NSInteger)getImageCount {
     return [self.imageNames count];
-}
-
--(NSString*)getImageNameByIdx:(NSInteger) index {
-    return self.imageNames[index];
 }
 
 @end

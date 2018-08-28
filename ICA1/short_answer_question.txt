@@ -3,11 +3,9 @@
 Since the properties are made private, It prohibits the access from other instances.
 
 
-2. In case the images are fewer the model is scalable, but in case the images are in large 
-quantity the model is not scalable.
+2. In case the images are fewer the model is scalable, but in case the images are in large quantity the model is not scalable. 
+The model is not scalable because image names are being hardcoded.
 
 
-
-3. We can create a memory pool. Pull in the images we need, and throw out the images that are 
-not needed.
-
+3. We can create a memory pool. Pull in the images we need, and throw out the images that are not needed.
+Also we need to find a way to list all images from images.assests.

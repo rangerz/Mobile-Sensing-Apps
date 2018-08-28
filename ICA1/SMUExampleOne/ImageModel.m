@@ -18,7 +18,7 @@
 -(NSArray*)imageNames{
     
     if(!_imageNames)
-        _imageNames = @[@"Eric1",@"Eric2",@"Eric3"];
+        _imageNames = @[@"Eric1",@"Eric2",@"Eric3",@"sample1",@"sample2",@"sample3"];
     
     return _imageNames;
 }

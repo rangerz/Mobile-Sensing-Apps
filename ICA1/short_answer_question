@@ -1,0 +1,13 @@
+
+1. Yes it is more efficient. This program now is more object oriented. 
+Since the properties are made private, It prohibits the access from other instances.
+
+
+2. In case the images are fewer the model is scalable, but in case the images are in large 
+quantity the model is not scalable.
+
+
+
+3. We can create a memory pool. Pull in the images we need, and throw out the images that are 
+not needed.
+

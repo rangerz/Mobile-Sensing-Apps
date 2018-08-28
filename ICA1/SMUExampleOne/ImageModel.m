@@ -10,6 +10,7 @@
 
 @interface ImageModel()
 @property (strong,nonatomic) NSArray* imageNames;
+@property (strong,nonatomic) NSArray* images;
 @end
 @implementation ImageModel
 
@@ -19,6 +20,14 @@
     
     if(!_imageNames)
         _imageNames = @[@"Eric1",@"Eric2",@"Eric3",@"sample1",@"sample2",@"sample3"];
+    
+    return _imageNames;
+}
+
+-(NSArray*)images{
+    
+    if(!_images)
+        _images = @[[self getImageWithName:[self getImageNameByIdx:0]], [self getImageWithName:[self getImageNameByIdx:1]], [self getImageWithName:[self getImageNameByIdx:2]], [self getImageWithName:[self getImageNameByIdx:3]], [self getImageWithName:[self getImageNameByIdx:4]], [self getImageWithName:[self getImageNameByIdx:5]]];
     
     return _imageNames;
 }
@@ -42,10 +51,10 @@
 }
 
 -(UIImage*)getImageByIdx:(NSInteger)index{
-    UIImage* image = nil;
-    NSString* name = [self getImageNameByIdx: index];
-    image = [UIImage imageNamed:name];
-    return image;
+//    UIImage* image = nil;
+//    NSString* name = [self getImageNameByIdx: index];
+//    image = [UIImage imageNamed:name];
+    return self.images[index];
 }
 
 -(NSInteger)getImageCount {

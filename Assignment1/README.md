@@ -1,0 +1,22 @@
+## Required elements
+
+- [x] Automatic Layout
+- [x] Buttons
+- [ ] Sliders
+- [x] Labels
+- [ ] Stepper
+- [ ] Switch
+- [ ] Picker (you must implement picker delegate)
+- [x] Segmented Control
+- [ ] Timer (which should repeat and somehow update the UIView)
+- [x] ScrollView (with scrollable, zoomable content)
+- [x] Image View
+- [x] Navigation Controller
+- [x] Collection View Controller
+- [x] Table View Controller with dynamic prototype cells
+- [x] The design should work in both portrait and landscape mode
+- [x] I should not be able to crash your app
+- [x] Your design must strictly adhere to Model View Controller programming practices
+- [x] Use lazy instantiation when possible
+- [ ] Three types of Table View Cells
+- [ ] Modal

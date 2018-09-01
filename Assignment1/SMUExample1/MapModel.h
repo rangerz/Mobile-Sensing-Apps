@@ -14,5 +14,6 @@
 
 -(NSDictionary*)getMapByIndex:(NSInteger)index;
 -(NSInteger)getMapCount;
+-(NSArray*)getMaps;
 
 @end

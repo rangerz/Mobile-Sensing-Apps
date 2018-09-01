@@ -14,19 +14,9 @@
 
 @interface MapTableViewController ()
 
-@property (strong, nonatomic) MapModel* myMapModel;
-
 @end
 
 @implementation MapTableViewController
-
--(MapModel*)myMapModel{
-    
-    if(!_myMapModel)
-        _myMapModel = [MapModel sharedInstance];
-    
-    return _myMapModel;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,15 +35,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //    return 3;
-    return [self.myMapModel getMapCount];
+    return self.countries.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MapCell" forIndexPath:indexPath];
     
     // Configure the cell...
-    cell.textLabel.text = [self.myMapModel getMapByIndex:indexPath.row][@"name"];
+    cell.textLabel.text = self.countries[indexPath.row][@"name"];
     return cell;
 }
 
@@ -101,7 +90,7 @@
     
     if(isVC){
         MapViewController *vc = [segue destinationViewController];
-        vc.currentMap = [self.myMapModel getMapByIndex:[self.tableView indexPathForCell:sender].row];
+        vc.currentMap = self.countries[[self.tableView indexPathForCell:sender].row];
     }
     
 }

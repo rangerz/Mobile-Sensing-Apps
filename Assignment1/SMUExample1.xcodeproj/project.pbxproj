@@ -18,6 +18,8 @@
 		B52C3AD221331F4F008B991B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B52C3AD121331F4F008B991B /* main.m */; };
 		B52C3ADC21331F50008B991B /* SMUExample1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = B52C3ADB21331F50008B991B /* SMUExample1Tests.m */; };
 		B52C3AE721331F50008B991B /* SMUExample1UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B52C3AE621331F50008B991B /* SMUExample1UITests.m */; };
+		B54C0506213A04D800B882ED /* CurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C0505213A04D800B882ED /* CurrencyViewController.m */; };
+		B54C0509213A1E4200B882ED /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C0508213A1E4200B882ED /* MainViewController.m */; };
 		B59E79A921333E08000B85AD /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E79A821333E08000B85AD /* CollectionViewController.m */; };
 		B59E79AC21333F90000B85AD /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E79AB21333F90000B85AD /* CollectionViewCell.m */; };
 /* End PBXBuildFile section */
@@ -62,6 +64,10 @@
 		B52C3AE221331F50008B991B /* SMUExample1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SMUExample1UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52C3AE621331F50008B991B /* SMUExample1UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMUExample1UITests.m; sourceTree = "<group>"; };
 		B52C3AE821331F50008B991B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B54C0504213A04D800B882ED /* CurrencyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyViewController.h; sourceTree = "<group>"; };
+		B54C0505213A04D800B882ED /* CurrencyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyViewController.m; sourceTree = "<group>"; };
+		B54C0507213A1E4200B882ED /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		B54C0508213A1E4200B882ED /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		B59E79A721333E08000B85AD /* CollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
 		B59E79A821333E08000B85AD /* CollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
 		B59E79AA21333F90000B85AD /* CollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
@@ -121,6 +127,10 @@
 				B51F4D2E21384C320098C1B0 /* MapViewController.h */,
 				B51F4D2F21384C320098C1B0 /* MapViewController.m */,
 				B52C3AC521331F4F008B991B /* ViewController.h */,
+				B54C0504213A04D800B882ED /* CurrencyViewController.h */,
+				B54C0505213A04D800B882ED /* CurrencyViewController.m */,
+				B54C0507213A1E4200B882ED /* MainViewController.h */,
+				B54C0508213A1E4200B882ED /* MainViewController.m */,
 				B52C3AC621331F4F008B991B /* ViewController.m */,
 				B52C3AC821331F4F008B991B /* Main.storyboard */,
 				B51F4D2821384B3F0098C1B0 /* MapTableViewController.h */,
@@ -288,7 +298,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B51F4D2D21384B5F0098C1B0 /* MapModel.m in Sources */,
+				B54C0506213A04D800B882ED /* CurrencyViewController.m in Sources */,
 				B51F4D2A21384B3F0098C1B0 /* MapTableViewController.m in Sources */,
+				B54C0509213A1E4200B882ED /* MainViewController.m in Sources */,
 				B52C3AC721331F4F008B991B /* ViewController.m in Sources */,
 				B52C3AD221331F4F008B991B /* main.m in Sources */,
 				B59E79A921333E08000B85AD /* CollectionViewController.m in Sources */,

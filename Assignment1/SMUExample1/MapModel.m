@@ -48,5 +48,9 @@
     return [self.maps count];
 }
 
+-(NSArray*)getMaps{
+    return self.maps;
+}
+
 @end
 

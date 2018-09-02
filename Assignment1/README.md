@@ -2,11 +2,11 @@
 
 - [x] Automatic Layout
 - [x] Buttons
-- [ ] Sliders
+- [x] Sliders
 - [x] Labels
-- [ ] Stepper
-- [ ] Switch
-- [ ] Picker (you must implement picker delegate)
+- [x] Stepper
+- [x] Switch
+- [x] Picker (you must implement picker delegate)
 - [x] Segmented Control
 - [ ] Timer (which should repeat and somehow update the UIView)
 - [x] ScrollView (with scrollable, zoomable content)

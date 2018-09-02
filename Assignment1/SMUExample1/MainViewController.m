@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "MapModel.h"
 #import "MapTableViewController.h"
+#import "CurrencyViewController.h"
 
 @interface MainViewController ()
 
@@ -38,9 +39,15 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     BOOL isMapVC = [[segue destinationViewController] isKindOfClass:[MapTableViewController class]];
+    BOOL isCurrencyVC = [[segue destinationViewController] isKindOfClass:[CurrencyViewController class]];
     
     if(isMapVC){
         MapTableViewController *vc = [segue destinationViewController];
+        vc.countries = [self.myMapModel getMaps];
+    }
+    
+    if(isCurrencyVC){
+        CurrencyViewController *vc = [segue destinationViewController];
         vc.countries = [self.myMapModel getMaps];
     }
 }

@@ -19,12 +19,9 @@
 -(NSMutableArray*)maps{
     if (!_maps) {
         _maps = [[NSMutableArray alloc] init];
-        [_maps addObject:@{@"name": @"China", @"latitude": @"34.4160627", @"longitude": @"86.0603785",
-                           @"images": @[@"china1", @"china2", @"china3"]}];
-        [_maps addObject:@{@"name": @"Taiwan", @"latitude": @"23.4696876", @"longitude": @"117.8402375",
-                           @"images": @[@"taiwan1", @"taiwan2", @"taiwan3"]}];
-        [_maps addObject:@{@"name": @"Mexico", @"latitude": @"23.2936843", @"longitude": @"-111.6462031",
-                           @"images": @[@"mexico1", @"mexico2", @"mexico3"]}];
+        [_maps addObject:@{@"name": @"China", @"latitude": @"34.4160627", @"longitude": @"86.0603785", @"images": @[@"china1", @"china2", @"china3"], @"currencyName": @"Chinese Yuan", @"currencyShortName": @"CNY", @"dollarPrice": @0.15}];
+        [_maps addObject:@{@"name": @"Taiwan", @"latitude": @"23.4696876", @"longitude": @"117.8402375", @"images": @[@"taiwan1", @"taiwan2", @"taiwan3"], @"currencyName": @"Taiwan Dollar", @"currencyShortName": @"TWD", @"dollarPrice": @0.033}];
+        [_maps addObject:@{@"name": @"Mexico", @"latitude": @"23.2936843", @"longitude": @"-111.6462031", @"images": @[@"mexico1", @"mexico2", @"mexico3"], @"currencyName": @"Mexican Peso", @"currencyShortName": @"MXN", @"dollarPrice": @0.052}];
     }
     return _maps;
 }

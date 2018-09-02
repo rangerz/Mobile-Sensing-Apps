@@ -14,7 +14,7 @@
 - [x] Navigation Controller
 - [x] Collection View Controller
 - [x] Table View Controller with dynamic prototype cells
-- [x] The design should work in both portrait and landscape mode
+- [ ] The design should work in both portrait and landscape mode
 - [x] I should not be able to crash your app
 - [x] Your design must strictly adhere to Model View Controller programming practices
 - [x] Use lazy instantiation when possible

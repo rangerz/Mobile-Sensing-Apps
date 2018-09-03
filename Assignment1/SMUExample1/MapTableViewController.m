@@ -39,7 +39,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MapCell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MapViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
     cell.textLabel.text = self.countries[indexPath.row][@"name"];

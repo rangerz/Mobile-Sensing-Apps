@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3363A0B9213DDD6B00506AF0 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3363A0B8213DDD6B00506AF0 /* MainTableViewController.m */; };
+		3363A0BC213E322500506AF0 /* TimeDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3363A0BB213E322500506AF0 /* TimeDateViewController.m */; };
 		B51F4D2A21384B3F0098C1B0 /* MapTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B51F4D2921384B3F0098C1B0 /* MapTableViewController.m */; };
-		B51F4D2D21384B5F0098C1B0 /* MapModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B51F4D2C21384B5F0098C1B0 /* MapModel.m */; };
+		B51F4D2D21384B5F0098C1B0 /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B51F4D2C21384B5F0098C1B0 /* AppModel.m */; };
 		B51F4D3021384C320098C1B0 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B51F4D2F21384C320098C1B0 /* MapViewController.m */; };
 		B52C3AC421331F4F008B991B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B52C3AC321331F4F008B991B /* AppDelegate.m */; };
 		B52C3AC721331F4F008B991B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B52C3AC621331F4F008B991B /* ViewController.m */; };
@@ -19,7 +21,6 @@
 		B52C3ADC21331F50008B991B /* SMUExample1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = B52C3ADB21331F50008B991B /* SMUExample1Tests.m */; };
 		B52C3AE721331F50008B991B /* SMUExample1UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B52C3AE621331F50008B991B /* SMUExample1UITests.m */; };
 		B54C0506213A04D800B882ED /* CurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C0505213A04D800B882ED /* CurrencyViewController.m */; };
-		B54C0509213A1E4200B882ED /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C0508213A1E4200B882ED /* MainViewController.m */; };
 		B59E79A921333E08000B85AD /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E79A821333E08000B85AD /* CollectionViewController.m */; };
 		B59E79AC21333F90000B85AD /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E79AB21333F90000B85AD /* CollectionViewCell.m */; };
 /* End PBXBuildFile section */
@@ -42,10 +43,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3363A0B7213DDD6B00506AF0 /* MainTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
+		3363A0B8213DDD6B00506AF0 /* MainTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
+		3363A0BA213E322500506AF0 /* TimeDateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeDateViewController.h; sourceTree = "<group>"; };
+		3363A0BB213E322500506AF0 /* TimeDateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeDateViewController.m; sourceTree = "<group>"; };
 		B51F4D2821384B3F0098C1B0 /* MapTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapTableViewController.h; sourceTree = "<group>"; };
 		B51F4D2921384B3F0098C1B0 /* MapTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapTableViewController.m; sourceTree = "<group>"; };
-		B51F4D2B21384B5F0098C1B0 /* MapModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapModel.h; sourceTree = "<group>"; };
-		B51F4D2C21384B5F0098C1B0 /* MapModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapModel.m; sourceTree = "<group>"; };
+		B51F4D2B21384B5F0098C1B0 /* AppModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
+		B51F4D2C21384B5F0098C1B0 /* AppModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppModel.m; sourceTree = "<group>"; };
 		B51F4D2E21384C320098C1B0 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		B51F4D2F21384C320098C1B0 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		B52C3ABF21331F4F008B991B /* SMUExample1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SMUExample1.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,8 +71,6 @@
 		B52C3AE821331F50008B991B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B54C0504213A04D800B882ED /* CurrencyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyViewController.h; sourceTree = "<group>"; };
 		B54C0505213A04D800B882ED /* CurrencyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyViewController.m; sourceTree = "<group>"; };
-		B54C0507213A1E4200B882ED /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		B54C0508213A1E4200B882ED /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		B59E79A721333E08000B85AD /* CollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
 		B59E79A821333E08000B85AD /* CollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
 		B59E79AA21333F90000B85AD /* CollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
@@ -124,25 +127,27 @@
 			children = (
 				B52C3AC221331F4F008B991B /* AppDelegate.h */,
 				B52C3AC321331F4F008B991B /* AppDelegate.m */,
-				B51F4D2E21384C320098C1B0 /* MapViewController.h */,
-				B51F4D2F21384C320098C1B0 /* MapViewController.m */,
-				B52C3AC521331F4F008B991B /* ViewController.h */,
-				B54C0504213A04D800B882ED /* CurrencyViewController.h */,
-				B54C0505213A04D800B882ED /* CurrencyViewController.m */,
-				B54C0507213A1E4200B882ED /* MainViewController.h */,
-				B54C0508213A1E4200B882ED /* MainViewController.m */,
-				B52C3AC621331F4F008B991B /* ViewController.m */,
-				B52C3AC821331F4F008B991B /* Main.storyboard */,
+				B51F4D2B21384B5F0098C1B0 /* AppModel.h */,
+				B51F4D2C21384B5F0098C1B0 /* AppModel.m */,
+				3363A0B7213DDD6B00506AF0 /* MainTableViewController.h */,
+				3363A0B8213DDD6B00506AF0 /* MainTableViewController.m */,
 				B51F4D2821384B3F0098C1B0 /* MapTableViewController.h */,
 				B51F4D2921384B3F0098C1B0 /* MapTableViewController.m */,
-				B51F4D2B21384B5F0098C1B0 /* MapModel.h */,
-				B51F4D2C21384B5F0098C1B0 /* MapModel.m */,
+				B51F4D2E21384C320098C1B0 /* MapViewController.h */,
+				B51F4D2F21384C320098C1B0 /* MapViewController.m */,
 				B59E79A721333E08000B85AD /* CollectionViewController.h */,
 				B59E79A821333E08000B85AD /* CollectionViewController.m */,
 				B59E79AA21333F90000B85AD /* CollectionViewCell.h */,
 				B59E79AB21333F90000B85AD /* CollectionViewCell.m */,
-				B52C3ACB21331F4F008B991B /* Assets.xcassets */,
+				B52C3AC521331F4F008B991B /* ViewController.h */,
+				B52C3AC621331F4F008B991B /* ViewController.m */,
+				B54C0504213A04D800B882ED /* CurrencyViewController.h */,
+				B54C0505213A04D800B882ED /* CurrencyViewController.m */,
+				3363A0BA213E322500506AF0 /* TimeDateViewController.h */,
+				3363A0BB213E322500506AF0 /* TimeDateViewController.m */,
+				B52C3AC821331F4F008B991B /* Main.storyboard */,
 				B52C3ACD21331F4F008B991B /* LaunchScreen.storyboard */,
+				B52C3ACB21331F4F008B991B /* Assets.xcassets */,
 				B52C3AD021331F4F008B991B /* Info.plist */,
 				B52C3AD121331F4F008B991B /* main.m */,
 			);
@@ -297,10 +302,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B51F4D2D21384B5F0098C1B0 /* MapModel.m in Sources */,
+				3363A0BC213E322500506AF0 /* TimeDateViewController.m in Sources */,
+				3363A0B9213DDD6B00506AF0 /* MainTableViewController.m in Sources */,
+				B51F4D2D21384B5F0098C1B0 /* AppModel.m in Sources */,
 				B54C0506213A04D800B882ED /* CurrencyViewController.m in Sources */,
 				B51F4D2A21384B3F0098C1B0 /* MapTableViewController.m in Sources */,
-				B54C0509213A1E4200B882ED /* MainViewController.m in Sources */,
 				B52C3AC721331F4F008B991B /* ViewController.m in Sources */,
 				B52C3AD221331F4F008B991B /* main.m in Sources */,
 				B59E79A921333E08000B85AD /* CollectionViewController.m in Sources */,
@@ -480,6 +486,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9GAP7JC7AZ;
 				INFOPLIST_FILE = SMUExample1/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -497,6 +504,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9GAP7JC7AZ;
 				INFOPLIST_FILE = SMUExample1/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -514,6 +522,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9GAP7JC7AZ;
 				INFOPLIST_FILE = SMUExample1Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -533,6 +542,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9GAP7JC7AZ;
 				INFOPLIST_FILE = SMUExample1Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -551,6 +561,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9GAP7JC7AZ;
 				INFOPLIST_FILE = SMUExample1UITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -569,6 +580,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9GAP7JC7AZ;
 				INFOPLIST_FILE = SMUExample1UITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

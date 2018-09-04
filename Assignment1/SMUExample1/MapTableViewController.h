@@ -11,9 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MapTableViewController : UITableViewController
-
-@property (strong, nonatomic) NSArray* countries;
-
 @end
 
 NS_ASSUME_NONNULL_END

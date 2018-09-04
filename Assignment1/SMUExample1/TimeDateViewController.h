@@ -1,5 +1,5 @@
 //
-//  MainTableViewController.h
+//  TimeDateViewController.h
 //  SMUExample1
 //
 //  Created by RR on 9/3/18.
@@ -8,5 +8,5 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainTableViewController : UITableViewController
+@interface TimeDateViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
 @end

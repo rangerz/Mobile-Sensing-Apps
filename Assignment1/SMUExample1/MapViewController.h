@@ -11,9 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MapViewController : UIViewController
-
-@property (strong, nonatomic) NSDictionary* currentMap;
-
+-(void)setCountryData: (NSDictionary*)data;
 @end
 
 NS_ASSUME_NONNULL_END

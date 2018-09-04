@@ -8,7 +8,7 @@
 - [x] Switch
 - [x] Picker (you must implement picker delegate)
 - [x] Segmented Control
-- [ ] Timer (which should repeat and somehow update the UIView)
+- [x] Timer (which should repeat and somehow update the UIView)
 - [x] ScrollView (with scrollable, zoomable content)
 - [x] Image View
 - [x] Navigation Controller
@@ -18,5 +18,5 @@
 - [x] I should not be able to crash your app
 - [x] Your design must strictly adhere to Model View Controller programming practices
 - [x] Use lazy instantiation when possible
-- [ ] Three types of Table View Cells
-- [ ] Modal
+- [x] Three types of Table View Cells
+- [x] Modal

@@ -11,9 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CollectionViewController : UICollectionViewController
-
-@property (strong, nonatomic) NSArray* galleryNames;
-
+-(void)setImageNames: (NSArray*)imageNames;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -9,24 +9,27 @@
 #import "ViewController.h"
 
 @interface ViewController () <UIScrollViewDelegate>
-
+@property (strong, nonatomic) UIImage* imageData;
 @property (strong, nonatomic) UIImageView* imageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-
 @end
 
 @implementation ViewController
 
--(UIImageView*)imageView{
-    if(!_imageView)
-        _imageView = [[UIImageView alloc] initWithImage:self.currImage];
+-(void)setImageData: (UIImage*)image {
+    _imageData = image;
+}
+
+-(UIImageView*)imageView {
+    if (!_imageView) {
+        _imageView = [[UIImageView alloc] initWithImage: self.imageData];
+    }
     return _imageView;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    
+
     [self.scrollView addSubview:self.imageView];
     self.scrollView.contentSize = self.imageView.image.size;
     self.scrollView.minimumZoomScale = 0.1;
@@ -36,6 +39,5 @@
 -(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView{
     return self.imageView;
 }
-
 
 @end

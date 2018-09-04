@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
-
-@property (strong, nonatomic) UIImage* currImage;
-
+-(void)setImageData: (UIImage*)image;
 @end
 

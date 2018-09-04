@@ -13,7 +13,7 @@
 @interface MapViewController ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UILabel *mapLabel;
-
+@property (strong, nonatomic) NSDictionary *currentData;
 @end
 
 @implementation MapViewController
@@ -36,38 +36,26 @@
     }
 }
 
+-(void)setCountryData: (NSDictionary*)data {
+    self.currentData = data;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    _mapLabel.text = _currentMap[@"name"];
-    [_mapView setCenterCoordinate:CLLocationCoordinate2DMake([_currentMap[@"latitude"] doubleValue], [_currentMap[@"longitude"] doubleValue])];
+    _mapLabel.text = self.currentData[@"name"];
+    [_mapView setCenterCoordinate:CLLocationCoordinate2DMake([self.currentData[@"latitude"] doubleValue], [self.currentData[@"longitude"] doubleValue])];
 }
 
 - (IBAction)handleClickGalleryButton:(id)sender {
-    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
     BOOL isVC = [[segue destinationViewController] isKindOfClass:[CollectionViewController class]];
     
-    if(isVC){
+    if (isVC){
         CollectionViewController *vc = [segue destinationViewController];
-        vc.galleryNames = _currentMap[@"images"];
+        [vc setImageNames: self.currentData[@"images"]];
     }
-    
 }
 
 @end

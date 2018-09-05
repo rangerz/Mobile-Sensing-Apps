@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		3363A0B9213DDD6B00506AF0 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3363A0B8213DDD6B00506AF0 /* MainTableViewController.m */; };
 		3363A0BC213E322500506AF0 /* TimeDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3363A0BB213E322500506AF0 /* TimeDateViewController.m */; };
+		3363A0C2213FAF7900506AF0 /* WelcomeModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3363A0C0213FAF7900506AF0 /* WelcomeModalViewController.m */; };
+		3363A0C3213FAF7900506AF0 /* WelcomeModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3363A0C1213FAF7900506AF0 /* WelcomeModalViewController.xib */; };
+		3363A0C6213FCA5D00506AF0 /* UIViewController+MaryPopin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3363A0C5213FCA5D00506AF0 /* UIViewController+MaryPopin.m */; };
 		B51F4D2A21384B3F0098C1B0 /* MapTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B51F4D2921384B3F0098C1B0 /* MapTableViewController.m */; };
 		B51F4D2D21384B5F0098C1B0 /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B51F4D2C21384B5F0098C1B0 /* AppModel.m */; };
 		B51F4D3021384C320098C1B0 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B51F4D2F21384C320098C1B0 /* MapViewController.m */; };
@@ -18,35 +21,21 @@
 		B52C3ACC21331F4F008B991B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B52C3ACB21331F4F008B991B /* Assets.xcassets */; };
 		B52C3ACF21331F4F008B991B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B52C3ACD21331F4F008B991B /* LaunchScreen.storyboard */; };
 		B52C3AD221331F4F008B991B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B52C3AD121331F4F008B991B /* main.m */; };
-		B52C3ADC21331F50008B991B /* SMUExample1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = B52C3ADB21331F50008B991B /* SMUExample1Tests.m */; };
-		B52C3AE721331F50008B991B /* SMUExample1UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B52C3AE621331F50008B991B /* SMUExample1UITests.m */; };
 		B54C0506213A04D800B882ED /* CurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C0505213A04D800B882ED /* CurrencyViewController.m */; };
 		B59E79A921333E08000B85AD /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E79A821333E08000B85AD /* CollectionViewController.m */; };
 		B59E79AC21333F90000B85AD /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B59E79AB21333F90000B85AD /* CollectionViewCell.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		B52C3AD821331F50008B991B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B52C3AB721331F4F008B991B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B52C3ABE21331F4F008B991B;
-			remoteInfo = SMUExample1;
-		};
-		B52C3AE321331F50008B991B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B52C3AB721331F4F008B991B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B52C3ABE21331F4F008B991B;
-			remoteInfo = SMUExample1;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3363A0B7213DDD6B00506AF0 /* MainTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
 		3363A0B8213DDD6B00506AF0 /* MainTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
 		3363A0BA213E322500506AF0 /* TimeDateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeDateViewController.h; sourceTree = "<group>"; };
 		3363A0BB213E322500506AF0 /* TimeDateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeDateViewController.m; sourceTree = "<group>"; };
+		3363A0BF213FAF7900506AF0 /* WelcomeModalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WelcomeModalViewController.h; sourceTree = "<group>"; };
+		3363A0C0213FAF7900506AF0 /* WelcomeModalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WelcomeModalViewController.m; sourceTree = "<group>"; };
+		3363A0C1213FAF7900506AF0 /* WelcomeModalViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeModalViewController.xib; sourceTree = "<group>"; };
+		3363A0C4213FCA5C00506AF0 /* UIViewController+MaryPopin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+MaryPopin.h"; path = "SMUExample1/MaryPopin/UIViewController+MaryPopin.h"; sourceTree = SOURCE_ROOT; };
+		3363A0C5213FCA5D00506AF0 /* UIViewController+MaryPopin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+MaryPopin.m"; path = "SMUExample1/MaryPopin/UIViewController+MaryPopin.m"; sourceTree = SOURCE_ROOT; };
 		B51F4D2821384B3F0098C1B0 /* MapTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapTableViewController.h; sourceTree = "<group>"; };
 		B51F4D2921384B3F0098C1B0 /* MapTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapTableViewController.m; sourceTree = "<group>"; };
 		B51F4D2B21384B5F0098C1B0 /* AppModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
@@ -63,12 +52,6 @@
 		B52C3ACE21331F4F008B991B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B52C3AD021331F4F008B991B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B52C3AD121331F4F008B991B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		B52C3AD721331F50008B991B /* SMUExample1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SMUExample1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B52C3ADB21331F50008B991B /* SMUExample1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMUExample1Tests.m; sourceTree = "<group>"; };
-		B52C3ADD21331F50008B991B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B52C3AE221331F50008B991B /* SMUExample1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SMUExample1UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B52C3AE621331F50008B991B /* SMUExample1UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMUExample1UITests.m; sourceTree = "<group>"; };
-		B52C3AE821331F50008B991B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B54C0504213A04D800B882ED /* CurrencyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyViewController.h; sourceTree = "<group>"; };
 		B54C0505213A04D800B882ED /* CurrencyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyViewController.m; sourceTree = "<group>"; };
 		B59E79A721333E08000B85AD /* CollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
@@ -85,29 +68,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B52C3AD421331F50008B991B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B52C3ADF21331F50008B991B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3363A0C7213FCA6800506AF0 /* MaryPopin */ = {
+			isa = PBXGroup;
+			children = (
+				3363A0C4213FCA5C00506AF0 /* UIViewController+MaryPopin.h */,
+				3363A0C5213FCA5D00506AF0 /* UIViewController+MaryPopin.m */,
+			);
+			path = MaryPopin;
+			sourceTree = "<group>";
+		};
 		B52C3AB621331F4F008B991B = {
 			isa = PBXGroup;
 			children = (
 				B52C3AC121331F4F008B991B /* SMUExample1 */,
-				B52C3ADA21331F50008B991B /* SMUExample1Tests */,
-				B52C3AE521331F50008B991B /* SMUExample1UITests */,
 				B52C3AC021331F4F008B991B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -116,8 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				B52C3ABF21331F4F008B991B /* SMUExample1.app */,
-				B52C3AD721331F50008B991B /* SMUExample1Tests.xctest */,
-				B52C3AE221331F50008B991B /* SMUExample1UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -125,6 +99,7 @@
 		B52C3AC121331F4F008B991B /* SMUExample1 */ = {
 			isa = PBXGroup;
 			children = (
+				3363A0C7213FCA6800506AF0 /* MaryPopin */,
 				B52C3AC221331F4F008B991B /* AppDelegate.h */,
 				B52C3AC321331F4F008B991B /* AppDelegate.m */,
 				B51F4D2B21384B5F0098C1B0 /* AppModel.h */,
@@ -150,26 +125,11 @@
 				B52C3ACB21331F4F008B991B /* Assets.xcassets */,
 				B52C3AD021331F4F008B991B /* Info.plist */,
 				B52C3AD121331F4F008B991B /* main.m */,
+				3363A0BF213FAF7900506AF0 /* WelcomeModalViewController.h */,
+				3363A0C0213FAF7900506AF0 /* WelcomeModalViewController.m */,
+				3363A0C1213FAF7900506AF0 /* WelcomeModalViewController.xib */,
 			);
 			path = SMUExample1;
-			sourceTree = "<group>";
-		};
-		B52C3ADA21331F50008B991B /* SMUExample1Tests */ = {
-			isa = PBXGroup;
-			children = (
-				B52C3ADB21331F50008B991B /* SMUExample1Tests.m */,
-				B52C3ADD21331F50008B991B /* Info.plist */,
-			);
-			path = SMUExample1Tests;
-			sourceTree = "<group>";
-		};
-		B52C3AE521331F50008B991B /* SMUExample1UITests */ = {
-			isa = PBXGroup;
-			children = (
-				B52C3AE621331F50008B991B /* SMUExample1UITests.m */,
-				B52C3AE821331F50008B991B /* Info.plist */,
-			);
-			path = SMUExample1UITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,42 +152,6 @@
 			productReference = B52C3ABF21331F4F008B991B /* SMUExample1.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B52C3AD621331F50008B991B /* SMUExample1Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B52C3AEE21331F50008B991B /* Build configuration list for PBXNativeTarget "SMUExample1Tests" */;
-			buildPhases = (
-				B52C3AD321331F50008B991B /* Sources */,
-				B52C3AD421331F50008B991B /* Frameworks */,
-				B52C3AD521331F50008B991B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B52C3AD921331F50008B991B /* PBXTargetDependency */,
-			);
-			name = SMUExample1Tests;
-			productName = SMUExample1Tests;
-			productReference = B52C3AD721331F50008B991B /* SMUExample1Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		B52C3AE121331F50008B991B /* SMUExample1UITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B52C3AF121331F50008B991B /* Build configuration list for PBXNativeTarget "SMUExample1UITests" */;
-			buildPhases = (
-				B52C3ADE21331F50008B991B /* Sources */,
-				B52C3ADF21331F50008B991B /* Frameworks */,
-				B52C3AE021331F50008B991B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B52C3AE421331F50008B991B /* PBXTargetDependency */,
-			);
-			name = SMUExample1UITests;
-			productName = SMUExample1UITests;
-			productReference = B52C3AE221331F50008B991B /* SMUExample1UITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -239,14 +163,6 @@
 				TargetAttributes = {
 					B52C3ABE21331F4F008B991B = {
 						CreatedOnToolsVersion = 10.0;
-					};
-					B52C3AD621331F50008B991B = {
-						CreatedOnToolsVersion = 10.0;
-						TestTargetID = B52C3ABE21331F4F008B991B;
-					};
-					B52C3AE121331F50008B991B = {
-						CreatedOnToolsVersion = 10.0;
-						TestTargetID = B52C3ABE21331F4F008B991B;
 					};
 				};
 			};
@@ -264,8 +180,6 @@
 			projectRoot = "";
 			targets = (
 				B52C3ABE21331F4F008B991B /* SMUExample1 */,
-				B52C3AD621331F50008B991B /* SMUExample1Tests */,
-				B52C3AE121331F50008B991B /* SMUExample1UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -277,21 +191,8 @@
 			files = (
 				B52C3ACF21331F4F008B991B /* LaunchScreen.storyboard in Resources */,
 				B52C3ACC21331F4F008B991B /* Assets.xcassets in Resources */,
+				3363A0C3213FAF7900506AF0 /* WelcomeModalViewController.xib in Resources */,
 				B52C3ACA21331F4F008B991B /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B52C3AD521331F50008B991B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B52C3AE021331F50008B991B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +210,8 @@
 				B51F4D2A21384B3F0098C1B0 /* MapTableViewController.m in Sources */,
 				B52C3AC721331F4F008B991B /* ViewController.m in Sources */,
 				B52C3AD221331F4F008B991B /* main.m in Sources */,
+				3363A0C2213FAF7900506AF0 /* WelcomeModalViewController.m in Sources */,
+				3363A0C6213FCA5D00506AF0 /* UIViewController+MaryPopin.m in Sources */,
 				B59E79A921333E08000B85AD /* CollectionViewController.m in Sources */,
 				B52C3AC421331F4F008B991B /* AppDelegate.m in Sources */,
 				B51F4D3021384C320098C1B0 /* MapViewController.m in Sources */,
@@ -316,36 +219,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B52C3AD321331F50008B991B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B52C3ADC21331F50008B991B /* SMUExample1Tests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B52C3ADE21331F50008B991B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B52C3AE721331F50008B991B /* SMUExample1UITests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		B52C3AD921331F50008B991B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B52C3ABE21331F4F008B991B /* SMUExample1 */;
-			targetProxy = B52C3AD821331F50008B991B /* PBXContainerItemProxy */;
-		};
-		B52C3AE421331F50008B991B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B52C3ABE21331F4F008B991B /* SMUExample1 */;
-			targetProxy = B52C3AE321331F50008B991B /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B52C3AC821331F4F008B991B /* Main.storyboard */ = {
@@ -515,84 +389,6 @@
 			};
 			name = Release;
 		};
-		B52C3AEF21331F50008B991B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9GAP7JC7AZ;
-				INFOPLIST_FILE = SMUExample1Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.AlexHenkel.SMUExample1Tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SMUExample1.app/SMUExample1";
-			};
-			name = Debug;
-		};
-		B52C3AF021331F50008B991B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9GAP7JC7AZ;
-				INFOPLIST_FILE = SMUExample1Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.AlexHenkel.SMUExample1Tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SMUExample1.app/SMUExample1";
-			};
-			name = Release;
-		};
-		B52C3AF221331F50008B991B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9GAP7JC7AZ;
-				INFOPLIST_FILE = SMUExample1UITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.AlexHenkel.SMUExample1UITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SMUExample1;
-			};
-			name = Debug;
-		};
-		B52C3AF321331F50008B991B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9GAP7JC7AZ;
-				INFOPLIST_FILE = SMUExample1UITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.AlexHenkel.SMUExample1UITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = SMUExample1;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -610,24 +406,6 @@
 			buildConfigurations = (
 				B52C3AEC21331F50008B991B /* Debug */,
 				B52C3AED21331F50008B991B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B52C3AEE21331F50008B991B /* Build configuration list for PBXNativeTarget "SMUExample1Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B52C3AEF21331F50008B991B /* Debug */,
-				B52C3AF021331F50008B991B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B52C3AF121331F50008B991B /* Build configuration list for PBXNativeTarget "SMUExample1UITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B52C3AF221331F50008B991B /* Debug */,
-				B52C3AF321331F50008B991B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -11,6 +11,8 @@
 #import "MapTableViewController.h"
 #import "CurrencyViewController.h"
 #import "TimeDateViewController.h"
+#import "WelcomeModalViewController.h"
+#import "UIViewController+MaryPopin.h"
 
 @interface MainTableViewController ()
 @property (strong, nonatomic) AppModel* appModel;
@@ -50,6 +52,26 @@
     cell.textLabel.text = title;
 
     return cell;
+}
+
+- (IBAction)pressModalButton:(id)sender {
+    WelcomeModalViewController *welcome = [[WelcomeModalViewController alloc] init];
+    [welcome setPopinTransitionStyle:0]; //Slide
+    [welcome setPopinOptions:BKTPopinDefault];
+    [welcome setPopinAlignment:0];
+
+    BKTBlurParameters *blurParameters = [BKTBlurParameters new];
+    blurParameters.alpha = 1.0f;
+    blurParameters.radius = 8.0f;
+    blurParameters.saturationDeltaFactor = 1.8f;
+    blurParameters.tintColor = [UIColor colorWithRed:0.966 green:0.851 blue:0.038 alpha:0.2];
+    [welcome setBlurParameters:blurParameters];
+    [welcome setPopinOptions:[welcome popinOptions]|BKTPopinBlurryDimmingView];
+    [welcome setPreferedPopinContentSize:CGSizeMake(320.0, 240.0)];
+    [welcome setPopinTransitionDirection:BKTPopinTransitionDirectionTop];
+    [self.navigationController presentPopinController:welcome animated:YES completion:^{
+        //NSLog(@"Popin presented !");
+    }];
 }
 
 @end

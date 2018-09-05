@@ -239,7 +239,13 @@
                             <outlet property="delegate" destination="YqF-cy-kUA" id="Led-m5-Lia"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Assignment 1" id="JlJ-iL-VVb"/>
+                    <navigationItem key="navigationItem" title="Assignment 1" leftItemsSupplementBackButton="YES" id="JlJ-iL-VVb">
+                        <barButtonItem key="rightBarButtonItem" title="Hello" id="S7f-4o-gDg">
+                            <connections>
+                                <action selector="pressModalButton:" destination="YqF-cy-kUA" id="nTe-ru-YWa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="98V-te-1Dy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

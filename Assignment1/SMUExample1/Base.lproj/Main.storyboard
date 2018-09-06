@@ -302,25 +302,25 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zk1-xL-v4o" userLabel="Conversion Results">
-                                <rect key="frame" x="16" y="140.5" width="635" height="32"/>
+                                <rect key="frame" x="16" y="166" width="635" height="32"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="bgv-Wq-6kQ">
-                                <rect key="frame" x="20" y="182" width="625" height="31"/>
+                                <rect key="frame" x="20" y="207" width="625" height="31"/>
                                 <connections>
                                     <action selector="onSliderChange:" destination="2MJ-ms-c13" eventType="valueChanged" id="ebu-hb-1Ni"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QKm-XC-Uyc">
-                                <rect key="frame" x="16" y="227" width="635" height="21"/>
+                                <rect key="frame" x="16" y="252" width="635" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of zeros" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RiS-4e-74f">
-                                <rect key="frame" x="393.5" y="50" width="143.5" height="24"/>
+                                <rect key="frame" x="393" y="50" width="144" height="24"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -332,7 +332,7 @@
                                 </connections>
                             </stepper>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Convert from USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rx3-Zq-BPK">
-                                <rect key="frame" x="393.5" y="90" width="158.5" height="24"/>
+                                <rect key="frame" x="393" y="90" width="159" height="24"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -351,9 +351,10 @@
                         <constraints>
                             <constraint firstItem="Rx3-Zq-BPK" firstAttribute="leading" secondItem="Kkt-se-0XA" secondAttribute="leading" constant="16" id="0r0-yV-5EU"/>
                             <constraint firstItem="RiS-4e-74f" firstAttribute="centerY" secondItem="aIM-X3-hYN" secondAttribute="centerY" id="32Z-GT-eqo"/>
-                            <constraint firstItem="bgv-Wq-6kQ" firstAttribute="top" secondItem="ZLg-8Q-XZh" secondAttribute="top" constant="200" id="3Wq-Ob-ZbL"/>
                             <constraint firstItem="sVN-hH-mCw" firstAttribute="leading" secondItem="Kkt-se-0XA" secondAttribute="leading" constant="16" id="42h-jB-URn"/>
-                            <constraint firstItem="etD-Up-W8h" firstAttribute="top" secondItem="Rx3-Zq-BPK" secondAttribute="bottom" constant="17" id="ApV-vA-YQP"/>
+                            <constraint firstItem="etD-Up-W8h" firstAttribute="top" secondItem="Rx3-Zq-BPK" secondAttribute="bottom" constant="-20" id="ApV-vA-YQP"/>
+                            <constraint firstItem="RiS-4e-74f" firstAttribute="top" secondItem="bgv-Wq-6kQ" secondAttribute="bottom" constant="50" id="EoE-NH-DSp"/>
+                            <constraint firstItem="bgv-Wq-6kQ" firstAttribute="top" secondItem="Kkt-se-0XA" secondAttribute="bottom" constant="-168" id="FkE-Gc-WBo"/>
                             <constraint firstItem="aIM-X3-hYN" firstAttribute="leading" secondItem="RiS-4e-74f" secondAttribute="trailing" constant="20" id="GVx-eN-wY9"/>
                             <constraint firstItem="bgv-Wq-6kQ" firstAttribute="firstBaseline" secondItem="Zk1-xL-v4o" secondAttribute="baseline" constant="16" id="H6u-ED-HQi"/>
                             <constraint firstItem="sVN-hH-mCw" firstAttribute="top" secondItem="Kkt-se-0XA" secondAttribute="top" constant="16" id="Hn0-6g-2gi"/>
@@ -379,8 +380,9 @@
                         <viewLayoutGuide key="safeArea" id="Kkt-se-0XA"/>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="3Wq-Ob-ZbL"/>
+                                <exclude reference="FkE-Gc-WBo"/>
                                 <exclude reference="l0n-ob-MNc"/>
+                                <exclude reference="EoE-NH-DSp"/>
                                 <exclude reference="uai-34-Qkm"/>
                                 <exclude reference="0r0-yV-5EU"/>
                                 <exclude reference="ApV-vA-YQP"/>
@@ -391,7 +393,8 @@
                         </variation>
                         <variation key="heightClass=compact-widthClass=compact">
                             <mask key="constraints">
-                                <include reference="l0n-ob-MNc"/>
+                                <include reference="FkE-Gc-WBo"/>
+                                <exclude reference="l0n-ob-MNc"/>
                                 <include reference="GVx-eN-wY9"/>
                                 <include reference="f7X-1I-2yv"/>
                                 <include reference="NFc-Sk-I6N"/>
@@ -407,7 +410,7 @@
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
-                                <include reference="3Wq-Ob-ZbL"/>
+                                <include reference="EoE-NH-DSp"/>
                                 <include reference="uai-34-Qkm"/>
                                 <include reference="0r0-yV-5EU"/>
                                 <include reference="ApV-vA-YQP"/>
@@ -439,9 +442,9 @@
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UJL-cH-4nz">
                                 <rect key="frame" x="20" y="229" width="627" height="162"/>
                             </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rEU-Kw-b8h">
-                                <rect key="frame" x="20" y="100" width="627" height="57"/>
-                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="50"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="characterWrap" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rEU-Kw-b8h">
+                                <rect key="frame" x="20" y="100" width="627" height="53.5"/>
+                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="47"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>

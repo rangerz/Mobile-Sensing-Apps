@@ -11,7 +11,7 @@
 		3363A0BC213E322500506AF0 /* TimeDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3363A0BB213E322500506AF0 /* TimeDateViewController.m */; };
 		3363A0C2213FAF7900506AF0 /* WelcomeModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3363A0C0213FAF7900506AF0 /* WelcomeModalViewController.m */; };
 		3363A0C3213FAF7900506AF0 /* WelcomeModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3363A0C1213FAF7900506AF0 /* WelcomeModalViewController.xib */; };
-		3363A0C6213FCA5D00506AF0 /* UIViewController+MaryPopin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3363A0C5213FCA5D00506AF0 /* UIViewController+MaryPopin.m */; };
+		447D16392141BCB4003CB91C /* UIViewController+MaryPopin.m in Sources */ = {isa = PBXBuildFile; fileRef = 447D16372141BCB4003CB91C /* UIViewController+MaryPopin.m */; };
 		B51F4D2A21384B3F0098C1B0 /* MapTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B51F4D2921384B3F0098C1B0 /* MapTableViewController.m */; };
 		B51F4D2D21384B5F0098C1B0 /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B51F4D2C21384B5F0098C1B0 /* AppModel.m */; };
 		B51F4D3021384C320098C1B0 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B51F4D2F21384C320098C1B0 /* MapViewController.m */; };
@@ -34,15 +34,15 @@
 		3363A0BF213FAF7900506AF0 /* WelcomeModalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WelcomeModalViewController.h; sourceTree = "<group>"; };
 		3363A0C0213FAF7900506AF0 /* WelcomeModalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WelcomeModalViewController.m; sourceTree = "<group>"; };
 		3363A0C1213FAF7900506AF0 /* WelcomeModalViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeModalViewController.xib; sourceTree = "<group>"; };
-		3363A0C4213FCA5C00506AF0 /* UIViewController+MaryPopin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+MaryPopin.h"; path = "SMUExample1/MaryPopin/UIViewController+MaryPopin.h"; sourceTree = SOURCE_ROOT; };
-		3363A0C5213FCA5D00506AF0 /* UIViewController+MaryPopin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+MaryPopin.m"; path = "SMUExample1/MaryPopin/UIViewController+MaryPopin.m"; sourceTree = SOURCE_ROOT; };
+		447D16372141BCB4003CB91C /* UIViewController+MaryPopin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MaryPopin.m"; sourceTree = "<group>"; };
+		447D16382141BCB4003CB91C /* UIViewController+MaryPopin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MaryPopin.h"; sourceTree = "<group>"; };
 		B51F4D2821384B3F0098C1B0 /* MapTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapTableViewController.h; sourceTree = "<group>"; };
 		B51F4D2921384B3F0098C1B0 /* MapTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapTableViewController.m; sourceTree = "<group>"; };
 		B51F4D2B21384B5F0098C1B0 /* AppModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
 		B51F4D2C21384B5F0098C1B0 /* AppModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppModel.m; sourceTree = "<group>"; };
 		B51F4D2E21384C320098C1B0 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		B51F4D2F21384C320098C1B0 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
-		B52C3ABF21331F4F008B991B /* SMUExample1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SMUExample1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B52C3ABF21331F4F008B991B /* SinkorSwim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SinkorSwim.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52C3AC221331F4F008B991B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B52C3AC321331F4F008B991B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		B52C3AC521331F4F008B991B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -74,8 +74,8 @@
 		3363A0C7213FCA6800506AF0 /* MaryPopin */ = {
 			isa = PBXGroup;
 			children = (
-				3363A0C4213FCA5C00506AF0 /* UIViewController+MaryPopin.h */,
-				3363A0C5213FCA5D00506AF0 /* UIViewController+MaryPopin.m */,
+				447D16382141BCB4003CB91C /* UIViewController+MaryPopin.h */,
+				447D16372141BCB4003CB91C /* UIViewController+MaryPopin.m */,
 			);
 			path = MaryPopin;
 			sourceTree = "<group>";
@@ -83,7 +83,7 @@
 		B52C3AB621331F4F008B991B = {
 			isa = PBXGroup;
 			children = (
-				B52C3AC121331F4F008B991B /* SMUExample1 */,
+				B52C3AC121331F4F008B991B /* SinkorSwim */,
 				B52C3AC021331F4F008B991B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -91,15 +91,15 @@
 		B52C3AC021331F4F008B991B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B52C3ABF21331F4F008B991B /* SMUExample1.app */,
+				B52C3ABF21331F4F008B991B /* SinkorSwim.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B52C3AC121331F4F008B991B /* SMUExample1 */ = {
+		B52C3AC121331F4F008B991B /* SinkorSwim */ = {
 			isa = PBXGroup;
 			children = (
-				3363A0C7213FCA6800506AF0 /* MaryPopin */,
+				B52C3AD121331F4F008B991B /* main.m */,
 				B52C3AC221331F4F008B991B /* AppDelegate.h */,
 				B52C3AC321331F4F008B991B /* AppDelegate.m */,
 				B51F4D2B21384B5F0098C1B0 /* AppModel.h */,
@@ -120,24 +120,24 @@
 				B54C0505213A04D800B882ED /* CurrencyViewController.m */,
 				3363A0BA213E322500506AF0 /* TimeDateViewController.h */,
 				3363A0BB213E322500506AF0 /* TimeDateViewController.m */,
+				3363A0BF213FAF7900506AF0 /* WelcomeModalViewController.h */,
+				3363A0C0213FAF7900506AF0 /* WelcomeModalViewController.m */,
+				3363A0C1213FAF7900506AF0 /* WelcomeModalViewController.xib */,
 				B52C3AC821331F4F008B991B /* Main.storyboard */,
 				B52C3ACD21331F4F008B991B /* LaunchScreen.storyboard */,
 				B52C3ACB21331F4F008B991B /* Assets.xcassets */,
 				B52C3AD021331F4F008B991B /* Info.plist */,
-				B52C3AD121331F4F008B991B /* main.m */,
-				3363A0BF213FAF7900506AF0 /* WelcomeModalViewController.h */,
-				3363A0C0213FAF7900506AF0 /* WelcomeModalViewController.m */,
-				3363A0C1213FAF7900506AF0 /* WelcomeModalViewController.xib */,
+				3363A0C7213FCA6800506AF0 /* MaryPopin */,
 			);
-			path = SMUExample1;
+			path = SinkorSwim;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B52C3ABE21331F4F008B991B /* SMUExample1 */ = {
+		B52C3ABE21331F4F008B991B /* SinkorSwim */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B52C3AEB21331F50008B991B /* Build configuration list for PBXNativeTarget "SMUExample1" */;
+			buildConfigurationList = B52C3AEB21331F50008B991B /* Build configuration list for PBXNativeTarget "SinkorSwim" */;
 			buildPhases = (
 				B52C3ABB21331F4F008B991B /* Sources */,
 				B52C3ABC21331F4F008B991B /* Frameworks */,
@@ -147,9 +147,9 @@
 			);
 			dependencies = (
 			);
-			name = SMUExample1;
-			productName = SMUExample1;
-			productReference = B52C3ABF21331F4F008B991B /* SMUExample1.app */;
+			name = SinkorSwim;
+			productName = SinkorSwim;
+			productReference = B52C3ABF21331F4F008B991B /* SinkorSwim.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -166,7 +166,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B52C3ABA21331F4F008B991B /* Build configuration list for PBXProject "SMUExample1" */;
+			buildConfigurationList = B52C3ABA21331F4F008B991B /* Build configuration list for PBXProject "SinkorSwim" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -179,7 +179,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B52C3ABE21331F4F008B991B /* SMUExample1 */,
+				B52C3ABE21331F4F008B991B /* SinkorSwim */,
 			);
 		};
 /* End PBXProject section */
@@ -211,8 +211,8 @@
 				B52C3AC721331F4F008B991B /* ViewController.m in Sources */,
 				B52C3AD221331F4F008B991B /* main.m in Sources */,
 				3363A0C2213FAF7900506AF0 /* WelcomeModalViewController.m in Sources */,
-				3363A0C6213FCA5D00506AF0 /* UIViewController+MaryPopin.m in Sources */,
 				B59E79A921333E08000B85AD /* CollectionViewController.m in Sources */,
+				447D16392141BCB4003CB91C /* UIViewController+MaryPopin.m in Sources */,
 				B52C3AC421331F4F008B991B /* AppDelegate.m in Sources */,
 				B51F4D3021384C320098C1B0 /* MapViewController.m in Sources */,
 				B59E79AC21333F90000B85AD /* CollectionViewCell.m in Sources */,
@@ -358,14 +358,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9GAP7JC7AZ;
-				INFOPLIST_FILE = SMUExample1/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				DEVELOPMENT_TEAM = 5X63A6VFQZ;
+				INFOPLIST_FILE = SinkorSwim/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.AlexHenkel.SMUExample1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AlexHenkel.SinkorSwim;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -376,14 +376,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9GAP7JC7AZ;
-				INFOPLIST_FILE = SMUExample1/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				DEVELOPMENT_TEAM = 5X63A6VFQZ;
+				INFOPLIST_FILE = SinkorSwim/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.AlexHenkel.SMUExample1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AlexHenkel.SinkorSwim;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -392,7 +392,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B52C3ABA21331F4F008B991B /* Build configuration list for PBXProject "SMUExample1" */ = {
+		B52C3ABA21331F4F008B991B /* Build configuration list for PBXProject "SinkorSwim" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B52C3AE921331F50008B991B /* Debug */,
@@ -401,7 +401,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B52C3AEB21331F50008B991B /* Build configuration list for PBXNativeTarget "SMUExample1" */ = {
+		B52C3AEB21331F50008B991B /* Build configuration list for PBXNativeTarget "SinkorSwim" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B52C3AEC21331F50008B991B /* Debug */,

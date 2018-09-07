@@ -14,7 +14,6 @@
 
 -(NSInteger)getMainCellCount;
 -(NSDictionary*)getMainCell: (NSInteger)index;
-
 -(NSInteger)getCountryCount;
 -(NSDictionary*)getCountryData: (NSInteger)index;
 

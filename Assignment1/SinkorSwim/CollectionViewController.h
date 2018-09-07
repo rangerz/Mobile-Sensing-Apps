@@ -11,7 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CollectionViewController : UICollectionViewController
+
 -(void)setImageNames: (NSArray*)imageNames;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomClass.h"
 
-@interface MainTableViewController : UITableViewController
+@interface MainTableViewController : UITableViewController <CustomClassDelegate>
+
 @end

@@ -16,6 +16,7 @@
 
 @interface MainTableViewController ()
 @property (strong, nonatomic) AppModel* appModel;
+@property (nonatomic, strong) CustomClass* custom;
 @end
 
 @implementation MainTableViewController
@@ -29,6 +30,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.custom = [[CustomClass alloc] init];
+    self.custom.delegate = self;
 }
 
 #pragma mark - Table view data source
@@ -55,11 +59,16 @@
 }
 
 - (IBAction)pressModalButton:(id)sender {
-    WelcomeModalViewController *welcome = [[WelcomeModalViewController alloc] init];
-    [welcome setPopinTransitionStyle:0]; //Slide
-    [welcome setPopinOptions:BKTPopinDefault];
-    [welcome setPopinAlignment:0];
+    [self.custom openModalDelegate];
+}
 
+-(void)openModal:(CustomClass *)customClass
+{
+    WelcomeModalViewController *welcome = [[WelcomeModalViewController alloc] init];
+    [welcome setPopinTransitionStyle:BKTPopinTransitionStyleSlide];
+    [welcome setPopinOptions:BKTPopinDefault];
+    [welcome setPopinAlignment:BKTPopinAlignementOptionCentered];
+    
     BKTBlurParameters *blurParameters = [BKTBlurParameters new];
     blurParameters.alpha = 1.0f;
     blurParameters.radius = 8.0f;
@@ -70,7 +79,7 @@
     [welcome setPreferedPopinContentSize:CGSizeMake(320.0, 240.0)];
     [welcome setPopinTransitionDirection:BKTPopinTransitionDirectionTop];
     [self.navigationController presentPopinController:welcome animated:YES completion:^{
-        //NSLog(@"Popin presented !");
+        NSLog(@"Popin presented !");
     }];
 }
 

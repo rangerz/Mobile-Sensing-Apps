@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
+
 -(void)setImageData: (UIImage*)image;
+
 @end
 

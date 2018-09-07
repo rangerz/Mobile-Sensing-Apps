@@ -16,7 +16,8 @@
 @implementation WelcomeModalViewController
 - (IBAction)closeButtonPressed:(id)sender {
     [self.presentingPopinViewController dismissCurrentPopinControllerAnimated:YES completion:^{
-        //NSLog(@"Popin dismissed !");
+        NSLog(@"Popin dismissed !");
     }];
 }
+
 @end

@@ -12,6 +12,7 @@
 		3363A0C2213FAF7900506AF0 /* WelcomeModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3363A0C0213FAF7900506AF0 /* WelcomeModalViewController.m */; };
 		3363A0C3213FAF7900506AF0 /* WelcomeModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3363A0C1213FAF7900506AF0 /* WelcomeModalViewController.xib */; };
 		447D16392141BCB4003CB91C /* UIViewController+MaryPopin.m in Sources */ = {isa = PBXBuildFile; fileRef = 447D16372141BCB4003CB91C /* UIViewController+MaryPopin.m */; };
+		447EE21721422F3F00324DF2 /* CustomClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 447EE21621422F3F00324DF2 /* CustomClass.m */; };
 		B51F4D2A21384B3F0098C1B0 /* MapTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B51F4D2921384B3F0098C1B0 /* MapTableViewController.m */; };
 		B51F4D2D21384B5F0098C1B0 /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B51F4D2C21384B5F0098C1B0 /* AppModel.m */; };
 		B51F4D3021384C320098C1B0 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B51F4D2F21384C320098C1B0 /* MapViewController.m */; };
@@ -36,6 +37,8 @@
 		3363A0C1213FAF7900506AF0 /* WelcomeModalViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeModalViewController.xib; sourceTree = "<group>"; };
 		447D16372141BCB4003CB91C /* UIViewController+MaryPopin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MaryPopin.m"; sourceTree = "<group>"; };
 		447D16382141BCB4003CB91C /* UIViewController+MaryPopin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MaryPopin.h"; sourceTree = "<group>"; };
+		447EE21521422F3F00324DF2 /* CustomClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomClass.h; sourceTree = "<group>"; };
+		447EE21621422F3F00324DF2 /* CustomClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomClass.m; sourceTree = "<group>"; };
 		B51F4D2821384B3F0098C1B0 /* MapTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapTableViewController.h; sourceTree = "<group>"; };
 		B51F4D2921384B3F0098C1B0 /* MapTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapTableViewController.m; sourceTree = "<group>"; };
 		B51F4D2B21384B5F0098C1B0 /* AppModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
@@ -99,6 +102,7 @@
 		B52C3AC121331F4F008B991B /* SinkorSwim */ = {
 			isa = PBXGroup;
 			children = (
+				3363A0C7213FCA6800506AF0 /* MaryPopin */,
 				B52C3AD121331F4F008B991B /* main.m */,
 				B52C3AC221331F4F008B991B /* AppDelegate.h */,
 				B52C3AC321331F4F008B991B /* AppDelegate.m */,
@@ -123,11 +127,12 @@
 				3363A0BF213FAF7900506AF0 /* WelcomeModalViewController.h */,
 				3363A0C0213FAF7900506AF0 /* WelcomeModalViewController.m */,
 				3363A0C1213FAF7900506AF0 /* WelcomeModalViewController.xib */,
+				447EE21521422F3F00324DF2 /* CustomClass.h */,
+				447EE21621422F3F00324DF2 /* CustomClass.m */,
 				B52C3AC821331F4F008B991B /* Main.storyboard */,
 				B52C3ACD21331F4F008B991B /* LaunchScreen.storyboard */,
 				B52C3ACB21331F4F008B991B /* Assets.xcassets */,
 				B52C3AD021331F4F008B991B /* Info.plist */,
-				3363A0C7213FCA6800506AF0 /* MaryPopin */,
 			);
 			path = SinkorSwim;
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 				B52C3AD221331F4F008B991B /* main.m in Sources */,
 				3363A0C2213FAF7900506AF0 /* WelcomeModalViewController.m in Sources */,
 				B59E79A921333E08000B85AD /* CollectionViewController.m in Sources */,
+				447EE21721422F3F00324DF2 /* CustomClass.m in Sources */,
 				447D16392141BCB4003CB91C /* UIViewController+MaryPopin.m in Sources */,
 				B52C3AC421331F4F008B991B /* AppDelegate.m in Sources */,
 				B51F4D3021384C320098C1B0 /* MapViewController.m in Sources */,

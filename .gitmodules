@@ -49,3 +49,6 @@
 [submodule "SMU-MSLC/BLEChat"]
 	path = SMU-MSLC/BLEChat
 	url = git@github.com:SMU-MSLC/BLEChat.git
+[submodule "ICA2/AudioDSPUtils"]
+	path = ICA2/AudioDSPUtils
+	url = git@github.com:SMU-MSLC/AudioDSPUtils.git

@@ -12,7 +12,8 @@
 #import "SMUGraphHelper.h"
 #import "FFTHelper.h"
 
-#define BUFFER_SIZE 2048
+#define BUFFER_SIZE 2048*4
+#define EQUALIZER_SIZE 20
 
 @interface ViewController ()
 @property (strong, nonatomic) Novocaine *audioManager;
@@ -44,7 +45,7 @@
     if(!_graphHelper){
         _graphHelper = [[SMUGraphHelper alloc]initWithController:self
                                         preferredFramesPerSecond:15
-                                                       numGraphs:2
+                                                       numGraphs:4
                                                        plotStyle:PlotStyleSeparated
                                                maxPointsPerGraph:BUFFER_SIZE];
     }
@@ -64,9 +65,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
    
-    [self.graphHelper setScreenBoundsBottomHalf];
+    [self.graphHelper setFullScreenBounds];
+    //self.edgesForExtendedLayout =  NO;
     
     __block ViewController * __weak  weakSelf = self;
     [self.audioManager setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels){
@@ -74,6 +75,18 @@
     }];
     
     [self.audioManager play];
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.audioManager pause];
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (![self.audioManager playing]) {
+        [self.audioManager play];
+    }
 }
 
 #pragma mark GLK Inherited Functions
@@ -84,6 +97,8 @@
     // get audio stream data
     float* arrayData = malloc(sizeof(float)*BUFFER_SIZE);
     float* fftMagnitude = malloc(sizeof(float)*BUFFER_SIZE/2);
+    float* equalizerData = malloc(sizeof(float)*EQUALIZER_SIZE);
+    float* equalizerData2 = malloc(sizeof(float)*EQUALIZER_SIZE);
     
     [self.buffer fetchFreshData:arrayData withNumSamples:BUFFER_SIZE];
     
@@ -102,10 +117,42 @@
                      forGraphIndex:1
                  withNormalization:64.0
                      withZeroValue:-60];
+
+    float maxVal = 0.0;
+    int unit = BUFFER_SIZE/EQUALIZER_SIZE/2;
+    for (int i=0; i<EQUALIZER_SIZE; i++) {
+        vDSP_maxv(&fftMagnitude[i*unit], 1, &maxVal, unit);
+        equalizerData[i] = maxVal;
+    }
+
+    // graph the equalizer
+    [self.graphHelper setGraphData:equalizerData
+                    withDataLength:EQUALIZER_SIZE
+                     forGraphIndex:2
+                 withNormalization:64.0
+                     withZeroValue:-60];
+    
+    for (int i=0; i<EQUALIZER_SIZE; i++) {
+        float max = -FLT_MAX;
+        for (int j=0; j<unit; j++) {
+            if (max < fftMagnitude[i*unit + j]) {
+                max = fftMagnitude[i*unit + j];
+            }
+        }
+        equalizerData2[i] = max;
+    }
+
+    [self.graphHelper setGraphData:equalizerData2
+                    withDataLength:EQUALIZER_SIZE
+                     forGraphIndex:3
+                 withNormalization:64.0
+                     withZeroValue:-60];
     
     [self.graphHelper update]; // update the graph
     free(arrayData);
     free(fftMagnitude);
+    free(equalizerData);
+    free(equalizerData2);
 }
 
 //  override the GLKView draw function, from OpenGLES

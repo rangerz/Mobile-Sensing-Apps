@@ -11,6 +11,7 @@
 #import "CircularBuffer.h"
 #import "SMUGraphHelper.h"
 #import "FFTHelper.h"
+#import "AudioFileReader.h"
 
 #define BUFFER_SIZE 2048*4
 #define EQUALIZER_SIZE 20
@@ -20,11 +21,23 @@
 @property (strong, nonatomic) CircularBuffer *buffer;
 @property (strong, nonatomic) SMUGraphHelper *graphHelper;
 @property (strong, nonatomic) FFTHelper *fftHelper;
+@property (strong, nonatomic) AudioFileReader *fileReader;
 @end
 
 
 
 @implementation ViewController
+
+-(AudioFileReader*)fileReader{
+    if (!_fileReader) {
+        NSURL *inputFileURL = [[NSBundle mainBundle] URLForResource:@"satisfaction" withExtension:@"mp3"];
+        _fileReader = [[AudioFileReader alloc]
+                       initWithAudioFileURL:inputFileURL
+                       samplingRate:self.audioManager.samplingRate
+                       numChannels:self.audioManager.numOutputChannels];
+    }
+    return _fileReader;
+}
 
 #pragma mark Lazy Instantiation
 -(Novocaine*)audioManager{
@@ -45,7 +58,7 @@
     if(!_graphHelper){
         _graphHelper = [[SMUGraphHelper alloc]initWithController:self
                                         preferredFramesPerSecond:15
-                                                       numGraphs:4
+                                                       numGraphs:3
                                                        plotStyle:PlotStyleSeparated
                                                maxPointsPerGraph:BUFFER_SIZE];
     }
@@ -65,14 +78,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-   
+        __block ViewController * __weak weakSelf = self;
+    
+    [self.fileReader play];
+    self.fileReader.currentTime = 0.0;
+
+    [self.audioManager setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels) {
+        [weakSelf.fileReader retrieveFreshAudio:data numFrames:numFrames numChannels:numChannels];
+        NSLog(@"TIme: %f", weakSelf.fileReader.currentTime);
+        [weakSelf.buffer addNewFloatData:data withNumSamples:numFrames];
+    }];
+    
     [self.graphHelper setFullScreenBounds];
     //self.edgesForExtendedLayout =  NO;
     
-    __block ViewController * __weak  weakSelf = self;
-    [self.audioManager setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels){
-        [weakSelf.buffer addNewFloatData:data withNumSamples:numFrames];
-    }];
+//    [self.audioManager setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels){
+//        [weakSelf.buffer addNewFloatData:data withNumSamples:numFrames];
+//    }];
     
     [self.audioManager play];
 }
@@ -98,7 +120,6 @@
     float* arrayData = malloc(sizeof(float)*BUFFER_SIZE);
     float* fftMagnitude = malloc(sizeof(float)*BUFFER_SIZE/2);
     float* equalizerData = malloc(sizeof(float)*EQUALIZER_SIZE);
-    float* equalizerData2 = malloc(sizeof(float)*EQUALIZER_SIZE);
     
     [self.buffer fetchFreshData:arrayData withNumSamples:BUFFER_SIZE];
     
@@ -124,6 +145,18 @@
         vDSP_maxv(&fftMagnitude[i*unit], 1, &maxVal, unit);
         equalizerData[i] = maxVal;
     }
+    
+#if 0 // direct implement
+    for (int i=0; i<EQUALIZER_SIZE; i++) {
+        float max = -FLT_MAX;
+        for (int j=0; j<unit; j++) {
+            if (max < fftMagnitude[i*unit + j]) {
+                max = fftMagnitude[i*unit + j];
+            }
+        }
+        equalizerData[i] = max;
+    }
+#endif
 
     // graph the equalizer
     [self.graphHelper setGraphData:equalizerData
@@ -132,27 +165,10 @@
                  withNormalization:64.0
                      withZeroValue:-60];
     
-    for (int i=0; i<EQUALIZER_SIZE; i++) {
-        float max = -FLT_MAX;
-        for (int j=0; j<unit; j++) {
-            if (max < fftMagnitude[i*unit + j]) {
-                max = fftMagnitude[i*unit + j];
-            }
-        }
-        equalizerData2[i] = max;
-    }
-
-    [self.graphHelper setGraphData:equalizerData2
-                    withDataLength:EQUALIZER_SIZE
-                     forGraphIndex:3
-                 withNormalization:64.0
-                     withZeroValue:-60];
-    
     [self.graphHelper update]; // update the graph
     free(arrayData);
     free(fftMagnitude);
     free(equalizerData);
-    free(equalizerData2);
 }
 
 //  override the GLKView draw function, from OpenGLES

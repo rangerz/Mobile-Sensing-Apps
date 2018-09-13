@@ -1,5 +1,6 @@
-
-
+1. If we increase the FFT Magnitude Buffer size the program won't work properly because
+since we have much more data, we end up with more similar data since we are only graphing 20 points.
+To fix it, we need to increase the Equalizer size as well, so we can map more points from the big array.
 2. ARC doesn't allow to explicitly call dealloc, so it's better to call pause.
 By calling pause when view disappears and playing again when it appear we assure that
 audioManager is only playing when user is on the corresponding view, and memory will

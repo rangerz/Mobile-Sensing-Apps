@@ -11,6 +11,7 @@
 #import "CircularBuffer.h"
 #import "SMUGraphHelper.h"
 #import "FFTHelper.h"
+#import "AudioFileReader.h"
 
 #define BUFFER_SIZE 2048*4
 #define EQUALIZER_SIZE 20
@@ -20,11 +21,23 @@
 @property (strong, nonatomic) CircularBuffer *buffer;
 @property (strong, nonatomic) SMUGraphHelper *graphHelper;
 @property (strong, nonatomic) FFTHelper *fftHelper;
+@property (strong, nonatomic) AudioFileReader *fileReader;
 @end
 
 
 
 @implementation ViewController
+
+-(AudioFileReader*)fileReader{
+    if (!_fileReader) {
+        NSURL *inputFileURL = [[NSBundle mainBundle] URLForResource:@"satisfaction" withExtension:@"mp3"];
+        _fileReader = [[AudioFileReader alloc]
+                       initWithAudioFileURL:inputFileURL
+                       samplingRate:self.audioManager.samplingRate
+                       numChannels:self.audioManager.numOutputChannels];
+    }
+    return _fileReader;
+}
 
 #pragma mark Lazy Instantiation
 -(Novocaine*)audioManager{
@@ -65,14 +78,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-   
+        __block ViewController * __weak weakSelf = self;
+    
+    [self.fileReader play];
+    self.fileReader.currentTime = 0.0;
+
+    [self.audioManager setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels) {
+        [weakSelf.fileReader retrieveFreshAudio:data numFrames:numFrames numChannels:numChannels];
+        NSLog(@"TIme: %f", weakSelf.fileReader.currentTime);
+        [weakSelf.buffer addNewFloatData:data withNumSamples:numFrames];
+    }];
+    
     [self.graphHelper setFullScreenBounds];
     //self.edgesForExtendedLayout =  NO;
     
-    __block ViewController * __weak  weakSelf = self;
-    [self.audioManager setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels){
-        [weakSelf.buffer addNewFloatData:data withNumSamples:numFrames];
-    }];
+//    [self.audioManager setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels){
+//        [weakSelf.buffer addNewFloatData:data withNumSamples:numFrames];
+//    }];
     
     [self.audioManager play];
 }

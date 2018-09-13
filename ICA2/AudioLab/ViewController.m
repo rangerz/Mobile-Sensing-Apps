@@ -45,7 +45,7 @@
     if(!_graphHelper){
         _graphHelper = [[SMUGraphHelper alloc]initWithController:self
                                         preferredFramesPerSecond:15
-                                                       numGraphs:4
+                                                       numGraphs:3
                                                        plotStyle:PlotStyleSeparated
                                                maxPointsPerGraph:BUFFER_SIZE];
     }
@@ -98,7 +98,6 @@
     float* arrayData = malloc(sizeof(float)*BUFFER_SIZE);
     float* fftMagnitude = malloc(sizeof(float)*BUFFER_SIZE/2);
     float* equalizerData = malloc(sizeof(float)*EQUALIZER_SIZE);
-    float* equalizerData2 = malloc(sizeof(float)*EQUALIZER_SIZE);
     
     [self.buffer fetchFreshData:arrayData withNumSamples:BUFFER_SIZE];
     
@@ -124,6 +123,18 @@
         vDSP_maxv(&fftMagnitude[i*unit], 1, &maxVal, unit);
         equalizerData[i] = maxVal;
     }
+    
+#if 0 // direct implement
+    for (int i=0; i<EQUALIZER_SIZE; i++) {
+        float max = -FLT_MAX;
+        for (int j=0; j<unit; j++) {
+            if (max < fftMagnitude[i*unit + j]) {
+                max = fftMagnitude[i*unit + j];
+            }
+        }
+        equalizerData[i] = max;
+    }
+#endif
 
     // graph the equalizer
     [self.graphHelper setGraphData:equalizerData
@@ -132,27 +143,10 @@
                  withNormalization:64.0
                      withZeroValue:-60];
     
-    for (int i=0; i<EQUALIZER_SIZE; i++) {
-        float max = -FLT_MAX;
-        for (int j=0; j<unit; j++) {
-            if (max < fftMagnitude[i*unit + j]) {
-                max = fftMagnitude[i*unit + j];
-            }
-        }
-        equalizerData2[i] = max;
-    }
-
-    [self.graphHelper setGraphData:equalizerData2
-                    withDataLength:EQUALIZER_SIZE
-                     forGraphIndex:3
-                 withNormalization:64.0
-                     withZeroValue:-60];
-    
     [self.graphHelper update]; // update the graph
     free(arrayData);
     free(fftMagnitude);
     free(equalizerData);
-    free(equalizerData2);
 }
 
 //  override the GLKView draw function, from OpenGLES

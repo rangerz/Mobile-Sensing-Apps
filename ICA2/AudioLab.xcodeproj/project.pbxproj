@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		440EB63E214A663D0005A778 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440EB63D214A663D0005A778 /* MainTableViewController.m */; };
-		440EB64D214ADD090005A778 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 440EB643214ADD080005A778 /* README.md */; };
 		440EB64E214ADD090005A778 /* CubicSpline.m in Sources */ = {isa = PBXBuildFile; fileRef = 440EB645214ADD080005A778 /* CubicSpline.m */; };
 		440EB64F214ADD090005A778 /* BufferedOverlapQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 440EB647214ADD080005A778 /* BufferedOverlapQueue.m */; };
 		440EB650214ADD090005A778 /* PeakFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 440EB649214ADD080005A778 /* PeakFinder.m */; };
@@ -52,7 +51,6 @@
 		440EB640214ADD080005A778 /* DataBufferBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataBufferBlock.h; path = AudioDSPUtils/DataBufferBlock.h; sourceTree = "<group>"; };
 		440EB641214ADD080005A778 /* AudioFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioFileReader.h; path = AudioDSPUtils/AudioFileReader.h; sourceTree = "<group>"; };
 		440EB642214ADD080005A778 /* PeakFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeakFinder.h; path = AudioDSPUtils/PeakFinder.h; sourceTree = "<group>"; };
-		440EB643214ADD080005A778 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = AudioDSPUtils/README.md; sourceTree = "<group>"; };
 		440EB644214ADD080005A778 /* CubicSpline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CubicSpline.h; path = AudioDSPUtils/CubicSpline.h; sourceTree = "<group>"; };
 		440EB645214ADD080005A778 /* CubicSpline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CubicSpline.m; path = AudioDSPUtils/CubicSpline.m; sourceTree = "<group>"; };
 		440EB647214ADD080005A778 /* BufferedOverlapQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BufferedOverlapQueue.m; path = AudioDSPUtils/BufferedOverlapQueue.m; sourceTree = "<group>"; };
@@ -193,7 +191,6 @@
 				440EB64B214ADD090005A778 /* DataBufferBlock.m */,
 				440EB642214ADD080005A778 /* PeakFinder.h */,
 				440EB649214ADD080005A778 /* PeakFinder.m */,
-				440EB643214ADD080005A778 /* README.md */,
 				B6BD9E621D6F4BA90009AB3F /* FFTHelper.h */,
 				B6BD9E631D6F4BA90009AB3F /* FFTHelper.m */,
 				B6BD9E571D6E43140009AB3F /* CircularBuffer.h */,
@@ -309,7 +306,6 @@
 			files = (
 				B6BD9E2D1D6E384A0009AB3F /* LaunchScreen.storyboard in Resources */,
 				B6BD9E2A1D6E384A0009AB3F /* Assets.xcassets in Resources */,
-				440EB64D214ADD090005A778 /* README.md in Resources */,
 				B6BD9E5B1D6E46790009AB3F /* satisfaction.mp3 in Resources */,
 				B6BD9E281D6E384A0009AB3F /* Main.storyboard in Resources */,
 			);

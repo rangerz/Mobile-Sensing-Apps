@@ -265,13 +265,6 @@
     
     BOOL isChangeFreq = false;
     if(peakArray){
-        float minFreq = FLT_MAX;
-        for (int i=0; i<peakArray.count; i++) {
-            Peak *peak = (Peak*)peakArray[i];
-            if (minFreq > peak.frequency) {
-                minFreq = peak.frequency;
-            }
-        }
         float guessFreq = [self guessPlanoFreq:peakArray];
 
         if (guessFreq) {
@@ -282,7 +275,7 @@
                 isChangeFreq = true;
                 audioInfo.planoFreq = guessFreq;
             } else if (audioInfo.planoFreq < guessFreq) {
-                float rate = minFreq/audioInfo.planoFreq;
+                float rate = guessFreq/audioInfo.planoFreq;
                 if(PLANO_DIV_ERR < (rate - floorf(rate))){
                     isChangeFreq = true;
                     audioInfo.planoFreq = guessFreq;

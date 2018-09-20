@@ -121,7 +121,7 @@
         self.secondFreqLabel.text = @"2nd Frequency: Detecting...";
     }
 
-    if(0 != self.audioInfo.planoFreq){
+    if((0 != self.audioInfo.planoFreq) || (0 != self.audioInfo.planoNoteFreq)){
         self.planoNoteLabel.text = [NSString stringWithFormat: @"Plano Note: %@ (%0.2f Hz)", self.audioInfo.planoNoteText, self.audioInfo.planoNoteFreq];
     } else {
         self.planoNoteLabel.text = [NSString stringWithFormat: @"Plano Note: Detecting..."];

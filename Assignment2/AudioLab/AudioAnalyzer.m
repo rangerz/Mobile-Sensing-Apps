@@ -209,9 +209,12 @@
     [self.audioManager setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels){
         [weakSelf.buffer addNewFloatData:data withNumSamples:numFrames];
     }];
+    [self.audioManager setOutputBlock:nil];
+
     if (![self.audioManager playing]) {
         [self.audioManager play];
-    }}
+    }
+}
 
 -(void)start:(float)frequency{
     __block AudioAnalyzer * __weak weakSelf = self;
@@ -222,17 +225,16 @@
     [self updateFrequencyInKhz:frequency];
     __block float phase = 0.0;
     [self.audioManager setOutputBlock:^(float* data, UInt32 numFrames, UInt32 numChannels){
-        
         for (int n=0; n<numFrames; n++) {
             data[n] = sin(phase);
             phase += self.phaseIncrement;
         }
-        
     }];
-    
+
     if (![self.audioManager playing]) {
         [self.audioManager play];
-    }}
+    }
+}
 
 -(void)stop{
     [self.audioManager pause];

@@ -24,11 +24,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AudioLab/AudioAnalyzer.m"
-            timestampString = "559109880.12246"
+            timestampString = "559116838.658951"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "346"
-            endingLineNumber = "346">
+            startingLineNumber = "348"
+            endingLineNumber = "348"
+            landmarkName = "-analyzeAudio:forAudioInfo:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -44,6 +44,9 @@
 @property (strong, nonatomic) NSDictionary *planoNoteMap;
 @property (strong, nonatomic) NSDate *date;
 @property (nonatomic) NSUInteger bufferSize;
+
+@property (nonatomic) float phaseIncrement;
+@property (nonatomic) float frequency;
 @end
 
 @implementation AudioAnalyzer
@@ -210,6 +213,27 @@
         [self.audioManager play];
     }}
 
+-(void)start:(float)frequency{
+    __block AudioAnalyzer * __weak weakSelf = self;
+    [self.audioManager setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels){
+        [weakSelf.buffer addNewFloatData:data withNumSamples:numFrames];
+    }];
+    
+    [self updateFrequencyInKhz:frequency];
+    __block float phase = 0.0;
+    [self.audioManager setOutputBlock:^(float* data, UInt32 numFrames, UInt32 numChannels){
+        
+        for (int n=0; n<numFrames; n++) {
+            data[n] = sin(phase);
+            phase += self.phaseIncrement;
+        }
+        
+    }];
+    
+    if (![self.audioManager playing]) {
+        [self.audioManager play];
+    }}
+
 -(void)stop{
     [self.audioManager pause];
 }
@@ -340,6 +364,11 @@
         note = audioInfo.planoNoteText;
         NSLog(@"note=[%@] freq=%f Hz", audioInfo.planoNoteText, audioInfo.planoNoteFreq);
     }
+}
+
+-(void)updateFrequencyInKhz:(float) freqInKHz {
+    self.frequency = freqInKHz*1000.0;
+    self.phaseIncrement = 2*M_PI*self.frequency/self.audioManager.samplingRate;
 }
 
 @end

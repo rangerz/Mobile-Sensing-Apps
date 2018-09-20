@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rl6-E5-flo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rl6-E5-flo">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -91,13 +91,37 @@
                     <view key="view" contentMode="scaleToFill" id="QrG-ar-0iO" customClass="GLKView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="15" minValue="15" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="ktc-8G-Wsy">
+                                <rect key="frame" x="48" y="84" width="279" height="31"/>
+                                <connections>
+                                    <action selector="freqChanged:" destination="YC3-C1-l05" eventType="valueChanged" id="VbS-W4-sBD"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6pA-WH-83Y">
+                                <rect key="frame" x="16" y="120" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="ktc-8G-Wsy" firstAttribute="top" secondItem="0ar-Li-i9p" secondAttribute="top" constant="20" id="1gi-iN-HHo"/>
+                            <constraint firstItem="0ar-Li-i9p" firstAttribute="trailing" secondItem="ktc-8G-Wsy" secondAttribute="trailing" constant="50" id="VwI-9V-luv"/>
+                            <constraint firstItem="ktc-8G-Wsy" firstAttribute="leading" secondItem="0ar-Li-i9p" secondAttribute="leading" constant="50" id="luV-Rp-ppS"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="0ar-Li-i9p"/>
                     </view>
+                    <connections>
+                        <outlet property="freqLabel" destination="6pA-WH-83Y" id="jzT-u7-TBk"/>
+                        <outlet property="freqSlider" destination="ktc-8G-Wsy" id="19d-8c-DAs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Ix-IO-b37" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="276" y="1146"/>
+            <point key="canvasLocation" x="276" y="1145.577211394303"/>
         </scene>
         <!--ModuleA Controller-->
         <scene sceneID="P9b-Qt-NqY">

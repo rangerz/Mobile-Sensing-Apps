@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AudioAnalyzer : NSObject
 -(id)initWithSize:(NSUInteger)size;
 -(void)start;
+-(void)start:(float)frequency;
 -(void)stop;
 -(void)fetchData:(float*)data
       withLength:(SInt64)length
@@ -30,6 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)analyzeAudio:(float*)fft
        forAudioInfo:(AudioInfo*)audioInfo;
+
+-(void)updateFrequencyInKhz:(float) freqInKHz;
 @end
 
 NS_ASSUME_NONNULL_END

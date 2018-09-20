@@ -246,6 +246,24 @@
                    andCopydBMagnitudeToBuffer:fft];
 }
 
+-(void)fetchData:(float *)data
+      withLength:(SInt64)length
+         withFft:(float *)fft
+          inZoom:(int)zoom
+        withZoom:(float *)fftZoom{
+    [self.buffer fetchFreshData:data withNumSamples:length];
+    [self.fftHelper performForwardFFTWithData:data
+                   andCopydBMagnitudeToBuffer:fft];
+    
+//    for (int i = 0, j = (int)length/zoom*2; j < length/2 - 2; ++i, ++j) {
+//        fftZoom[i] = fft[j];
+//    }
+    
+    for (int i = 0, j = (int)length/2/zoom*2; j < length/2 - 2; ++i, ++j) {
+        fftZoom[i] = fft[j];
+    }
+}
+
 - (float)guessPlanoFreq:(NSArray*)peakArray {
     float guessFreq = 0.0;
     
@@ -369,6 +387,7 @@
 -(void)updateFrequencyInKhz:(float) freqInKHz {
     self.frequency = freqInKHz*1000.0;
     self.phaseIncrement = 2*M_PI*self.frequency/self.audioManager.samplingRate;
+    NSLog(@"Rate %f", self.audioManager.samplingRate);
 }
 
 @end

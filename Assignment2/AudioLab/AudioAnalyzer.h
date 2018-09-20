@@ -33,6 +33,11 @@ NS_ASSUME_NONNULL_BEGIN
        forAudioInfo:(AudioInfo*)audioInfo;
 
 -(void)updateFrequencyInKhz:(float) freqInKHz;
+-(void)fetchData:(float *)data
+      withLength:(SInt64)length
+         withFft:(float *)fft
+          inZoom:(int)zoom
+        withZoom:(float *)fftZoom;
 @end
 
 NS_ASSUME_NONNULL_END

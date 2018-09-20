@@ -6,7 +6,7 @@
 //  Copyright © 2018 Eric Larson. All rights reserved.
 //
 
-#define BUFFER_SIZE 2048*4
+#define BUFFER_SIZE 2048*8
 
 #import "ModuleBController.h"
 #import "AudioAnalyzer.h"
@@ -34,7 +34,7 @@
     if(!_graphHelper){
         _graphHelper = [[SMUGraphHelper alloc]initWithController:self
                                         preferredFramesPerSecond:30
-                                                       numGraphs:2
+                                                       numGraphs:3
                                                        plotStyle:PlotStyleSeparated
                                                maxPointsPerGraph:BUFFER_SIZE];
     }
@@ -77,13 +77,14 @@
 //  override the GLKViewController update function, from OpenGLES
 - (void)update{
     // just plot the audio stream
-    
+    int zoom = 3;
     // get audio stream data
     float* arrayData = malloc(sizeof(float)*BUFFER_SIZE);
     float* fftMagnitude = malloc(sizeof(float)*BUFFER_SIZE/2);
+    float* fftMagnitudeZoom = malloc(sizeof(float)*BUFFER_SIZE/2/zoom);
     
     // get audio data and FFT
-    [self.audioAnalyzer fetchData:arrayData withLength:BUFFER_SIZE withFft:fftMagnitude];
+    [self.audioAnalyzer fetchData:arrayData withLength:BUFFER_SIZE withFft:fftMagnitude inZoom:zoom withZoom:fftMagnitudeZoom];
     
     //send off for graphing
     [self.graphHelper setGraphData:arrayData
@@ -97,9 +98,19 @@
                  withNormalization:64.0
                      withZeroValue:-60];
     
+    // graph the FFT Data with Zoom
+    [self.graphHelper setGraphData:fftMagnitudeZoom
+                    withDataLength:BUFFER_SIZE/2/zoom
+                     forGraphIndex:2
+                 withNormalization:64.0
+                     withZeroValue:-60];
+    
+    NSLog(@"%f", 44100.0/(BUFFER_SIZE/2));
+    
     [self.graphHelper update]; // update the graph
     free(arrayData);
     free(fftMagnitude);
+    free(fftMagnitudeZoom);
 }
 
 //  override the GLKView draw function, from OpenGLES

@@ -10,8 +10,26 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AudioAnalyzer : NSObject
+@interface AudioInfo : NSObject
+@property (nonatomic) float firstFreq;
+@property (nonatomic) float secondFreq;
+@property (nonatomic) float firstDecibel;
+@property (nonatomic) float secondDecibel;
+@property (nonatomic) NSString *planoNoteText;
+@property (nonatomic) float planoNoteFreq;
+@property (nonatomic) float planoFreq;
+@end
 
+@interface AudioAnalyzer : NSObject
+-(id)initWithSize:(NSUInteger)size;
+-(void)start;
+-(void)stop;
+-(void)fetchData:(float*)data
+      withLength:(SInt64)length
+         withFft:(float*)fft;
+
+-(void)analyzeAudio:(float*)fft
+       forAudioInfo:(AudioInfo*)audioInfo;
 @end
 
 NS_ASSUME_NONNULL_END

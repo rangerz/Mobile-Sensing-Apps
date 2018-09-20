@@ -255,10 +255,6 @@
     [self.fftHelper performForwardFFTWithData:data
                    andCopydBMagnitudeToBuffer:fft];
     
-//    for (int i = 0, j = (int)length/zoom*2; j < length/2 - 2; ++i, ++j) {
-//        fftZoom[i] = fft[j];
-//    }
-    
     for (int i = 0, j = (int)length/2/zoom*2; j < length/2 - 2; ++i, ++j) {
         fftZoom[i] = fft[j];
     }
@@ -387,7 +383,39 @@
 -(void)updateFrequencyInKhz:(float) freqInKHz {
     self.frequency = freqInKHz*1000.0;
     self.phaseIncrement = 2*M_PI*self.frequency/self.audioManager.samplingRate;
-    NSLog(@"Rate %f", self.audioManager.samplingRate);
+    
+}
+
+-(NSMutableString*)analyzeDoppler:(float*)fft
+              withLen:(SInt64)length{
+    NSMutableString* answer = [[NSMutableString alloc] init];
+    
+    float delta = self.audioManager.samplingRate/length;
+    int freqIndex = (self.frequency/delta)*2;
+    int freqWindow = 500/delta;
+    int dopplerWindow = 300/delta;
+    
+    
+    float maxValue;
+    unsigned long maxIndex;
+    vDSP_maxvi(&(fft[freqIndex - freqWindow]), 1, &maxValue, &maxIndex, freqWindow * 2);
+    NSLog(@"DB=%f Idx=%lu Rl=%d", maxValue, maxIndex + (freqIndex - freqWindow), freqIndex);
+    
+    float maxValueLeft;
+    vDSP_maxv(&fft[maxIndex - dopplerWindow], 1, &maxValueLeft, dopplerWindow - 5);
+    NSLog(@"MAX=%f", maxValueLeft);
+    if(maxValue * .6 < maxValueLeft) {
+        [answer appendString:@"Moving away\n"];
+    }
+
+    float maxValueRight;
+    vDSP_maxv(&fft[maxIndex + 5], 1, &maxValueRight, dopplerWindow);
+    NSLog(@"MAX=%f", maxValueRight);
+    if(maxValue * .6 < maxValueRight) {
+        [answer appendString:@"Moving towards\n"];
+    }
+    
+    return answer;
 }
 
 @end

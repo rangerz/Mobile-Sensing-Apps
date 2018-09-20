@@ -15,6 +15,7 @@
 @interface ModuleBController ()
 @property (strong, nonatomic) AudioAnalyzer *audioAnalyzer;
 @property (strong, nonatomic) SMUGraphHelper *graphHelper;
+@property (weak, nonatomic) IBOutlet UILabel *answerLabel;
 @property (weak, nonatomic) IBOutlet UISlider *freqSlider;
 @property (weak, nonatomic) IBOutlet UILabel *freqLabel;
 @end
@@ -105,7 +106,9 @@
                  withNormalization:64.0
                      withZeroValue:-60];
     
-    NSLog(@"%f", 44100.0/(BUFFER_SIZE/2));
+    NSString* answer = [self.audioAnalyzer analyzeDoppler:fftMagnitude withLen:BUFFER_SIZE/2];
+    
+    self.answerLabel.text = answer;
     
     [self.graphHelper update]; // update the graph
     free(arrayData);

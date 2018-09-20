@@ -38,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
          withFft:(float *)fft
           inZoom:(int)zoom
         withZoom:(float *)fftZoom;
+-(NSMutableString*)analyzeDoppler:(float*)fft
+              withLen:(SInt64)length;
 @end
 
 NS_ASSUME_NONNULL_END

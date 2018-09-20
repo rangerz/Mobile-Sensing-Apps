@@ -61,7 +61,7 @@
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.audioAnalyzer start];
+    [self.audioAnalyzer start:self.freqSlider.value];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -10,6 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_OPTIONS(NSUInteger, DopplerState) {
+    DS_Still  = 0,
+    DS_Towards = 1 << 0,
+    DS_Away = 1 << 2
+};
+
 @interface AudioInfo : NSObject
 @property (nonatomic) float firstFreq;
 @property (nonatomic) float secondFreq;
@@ -38,8 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
          withFft:(float *)fft
           inZoom:(int)zoom
         withZoom:(float *)fftZoom;
--(NSMutableString*)analyzeDoppler:(float*)fft
-              withLen:(SInt64)length;
+-(DopplerState)analyzeDoppler:(float*)fft
+                      withLen:(SInt64)length;
 @end
 
 NS_ASSUME_NONNULL_END

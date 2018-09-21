@@ -17,8 +17,11 @@
 #define MIN_FREQUENCY 50
 #define PIANO_NOTE_TOLERATE 10.0
 #define PIANO_DIV_ERR 0.1
-#define DOPPLER_CHECK_IDX  20
-#define DOPPLER_TOLERATE 0.8
+#define DOPPLER_CHECK_IDX  25
+#define DOPPLER_TOLERATE 0.9
+#define DOPPLER_KEEP_SEC 0.4
+#define AWAY_SHIFT 1
+#define TOWARDS_SHIFT 1
 
 @implementation AudioInfo
 
@@ -45,6 +48,8 @@
 @property (strong, nonatomic) PeakFinder *peakFinder;
 @property (strong, nonatomic) NSDictionary *pianoNoteMap;
 @property (strong, nonatomic) NSDate *date;
+@property (strong, nonatomic) NSDate *dopplerAwayDate;
+@property (strong, nonatomic) NSDate *dopplerTowardsDate;
 @property (nonatomic) NSUInteger bufferSize;
 
 @property (nonatomic) float phaseIncrement;
@@ -266,7 +271,7 @@
     [self.buffer fetchFreshData:data withNumSamples:length];
     [self.fftHelper performForwardFFTWithData:data
                    andCopydBMagnitudeToBuffer:fft];
-    
+
     for (int i = 0, j = (int)length/2/zoom*2; j < length/2 - 2; ++i, ++j) {
         fftZoom[i] = fft[j];
     }
@@ -351,7 +356,7 @@
                 note = [self.pianoNoteMap objectForKey:key];
             }
         }
-        
+
         if (closestDiff <= PIANO_NOTE_TOLERATE) {
             audioInfo.pianoNoteText = note;
             audioInfo.pianoNoteFreq = pianoNoteFreq;
@@ -397,9 +402,9 @@
     self.phaseIncrement = 2*M_PI*self.frequency/self.audioManager.samplingRate;
 }
 
--(NSMutableString*)analyzeDoppler:(float*)fft
-              withLen:(SInt64)length{
-    NSMutableString* answer = [[NSMutableString alloc] init];
+-(DopplerState)analyzeDoppler:(float*)fft
+                      withLen:(SInt64)length{
+    DopplerState status = DS_Still;
     float delta = self.audioManager.samplingRate/length;
     int freqIndex = (self.frequency/delta)*2;
 
@@ -407,22 +412,32 @@
     vDSP_meanv(&(fft[freqIndex - DOPPLER_CHECK_IDX]), 1, &maxValue, DOPPLER_CHECK_IDX*2);
     NSLog(@"DB=%f, Rl=%d", maxValue + 64, freqIndex);
 
+    // For keeping status for few seconds
+    if (!_dopplerAwayDate) _dopplerAwayDate = [NSDate date];
+    if (!_dopplerTowardsDate) _dopplerTowardsDate = [NSDate date];
+    NSDate *refDate = [NSDate date];
+    double awayElapsed = [refDate timeIntervalSinceDate:_dopplerAwayDate];
+    double towardsElapsed = [refDate timeIntervalSinceDate:_dopplerTowardsDate];
+    if (DOPPLER_KEEP_SEC > awayElapsed) status |= DS_Away;
+    if (DOPPLER_KEEP_SEC > towardsElapsed) status |= DS_Towards;
+
     float maxValueLeft;
-    vDSP_meanv(&(fft[freqIndex - DOPPLER_CHECK_IDX]), 1, &maxValueLeft, DOPPLER_CHECK_IDX);
+    vDSP_meanv(&(fft[freqIndex - DOPPLER_CHECK_IDX + AWAY_SHIFT]), 1, &maxValueLeft, DOPPLER_CHECK_IDX);
     NSLog(@"Left  AVG=%f", maxValueLeft + 64);
     if(maxValue * DOPPLER_TOLERATE < maxValueLeft) {
-        [answer appendString:@"Moving away\n"];
+        _dopplerAwayDate = [NSDate date];
+        status |= DS_Away;
     }
 
     float maxValueRight;
-    vDSP_meanv(&(fft[freqIndex]), 1, &maxValueRight, DOPPLER_CHECK_IDX);
+    vDSP_meanv(&(fft[freqIndex + TOWARDS_SHIFT]), 1, &maxValueRight, DOPPLER_CHECK_IDX);
     NSLog(@"Right AVG=%f", maxValueRight + 64);
     if(maxValue * DOPPLER_TOLERATE < maxValueRight) {
-        [answer appendString:@"Moving towards\n"];
+        _dopplerTowardsDate = [NSDate date];
+        status |= DS_Towards;
     }
 
-    // Still, Towards, Away
-    return answer;
+    return status;
 }
 
 @end

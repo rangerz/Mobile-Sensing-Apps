@@ -98,16 +98,14 @@
                                     <action selector="freqChanged:" destination="YC3-C1-l05" eventType="valueChanged" id="VbS-W4-sBD"/>
                                 </connections>
                             </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6pA-WH-83Y">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6pA-WH-83Y">
                                 <rect key="frame" x="16" y="120" width="343" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Static" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="663-Md-3SN">
-                                <rect key="frame" x="16" y="149" width="343" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Static" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="663-Md-3SN">
+                                <rect key="frame" x="16" y="161" width="343" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -116,7 +114,13 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
                             <constraint firstItem="ktc-8G-Wsy" firstAttribute="top" secondItem="0ar-Li-i9p" secondAttribute="top" constant="20" id="1gi-iN-HHo"/>
+                            <constraint firstItem="0ar-Li-i9p" firstAttribute="trailing" secondItem="6pA-WH-83Y" secondAttribute="trailing" constant="16" id="5XH-XH-GNv"/>
+                            <constraint firstItem="663-Md-3SN" firstAttribute="leading" secondItem="0ar-Li-i9p" secondAttribute="leading" constant="16" id="Fft-dZ-SL4"/>
                             <constraint firstItem="0ar-Li-i9p" firstAttribute="trailing" secondItem="ktc-8G-Wsy" secondAttribute="trailing" constant="50" id="VwI-9V-luv"/>
+                            <constraint firstItem="6pA-WH-83Y" firstAttribute="top" secondItem="ktc-8G-Wsy" secondAttribute="bottom" constant="6" id="Zne-cI-n5m"/>
+                            <constraint firstItem="0ar-Li-i9p" firstAttribute="trailing" secondItem="663-Md-3SN" secondAttribute="trailing" constant="16" id="b3e-8u-xdo"/>
+                            <constraint firstItem="663-Md-3SN" firstAttribute="top" secondItem="6pA-WH-83Y" secondAttribute="bottom" constant="20" id="cWO-uz-zI3"/>
+                            <constraint firstItem="6pA-WH-83Y" firstAttribute="leading" secondItem="0ar-Li-i9p" secondAttribute="leading" constant="16" id="eNt-os-0PT"/>
                             <constraint firstItem="ktc-8G-Wsy" firstAttribute="leading" secondItem="0ar-Li-i9p" secondAttribute="leading" constant="50" id="luV-Rp-ppS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0ar-Li-i9p"/>
@@ -129,7 +133,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Ix-IO-b37" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="276" y="1145.577211394303"/>
+            <point key="canvasLocation" x="275.71214392803603" y="1144.8"/>
         </scene>
         <!--ModuleA Controller-->
         <scene sceneID="P9b-Qt-NqY">

@@ -18,7 +18,7 @@
 @property (strong, nonatomic) SMUGraphHelper *graphHelper;
 @property (weak, nonatomic) IBOutlet UILabel *firstFreqLabel;
 @property (weak, nonatomic) IBOutlet UILabel *secondFreqLabel;
-@property (weak, nonatomic) IBOutlet UILabel *planoNoteLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pianoNoteLabel;
 @end
 
 @implementation ModuleAController
@@ -121,10 +121,10 @@
         self.secondFreqLabel.text = @"2nd Frequency: Detecting...";
     }
 
-    if((0 != self.audioInfo.planoFreq) || (0 != self.audioInfo.planoNoteFreq)){
-        self.planoNoteLabel.text = [NSString stringWithFormat: @"Plano Note: %@ (%0.2f Hz)", self.audioInfo.planoNoteText, self.audioInfo.planoNoteFreq];
+    if((0 != self.audioInfo.pianoFreq) || (0 != self.audioInfo.pianoNoteFreq)){
+        self.pianoNoteLabel.text = [NSString stringWithFormat: @"Plano Note: %@ (%0.2f Hz)", self.audioInfo.pianoNoteText, self.audioInfo.pianoNoteFreq];
     } else {
-        self.planoNoteLabel.text = [NSString stringWithFormat: @"Plano Note: Detecting..."];
+        self.pianoNoteLabel.text = [NSString stringWithFormat: @"Plano Note: Detecting..."];
     }
 }
 

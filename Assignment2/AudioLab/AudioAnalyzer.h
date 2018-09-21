@@ -15,9 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) float secondFreq;
 @property (nonatomic) float firstDecibel;
 @property (nonatomic) float secondDecibel;
-@property (nonatomic) NSString *planoNoteText;
-@property (nonatomic) float planoNoteFreq;
-@property (nonatomic) float planoFreq;
+@property (nonatomic) NSString *pianoNoteText;
+@property (nonatomic) float pianoNoteFreq;
+@property (nonatomic) float pianoFreq;
 @end
 
 @interface AudioAnalyzer : NSObject

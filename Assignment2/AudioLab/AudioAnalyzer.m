@@ -12,11 +12,13 @@
 #import "FFTHelper.h"
 #import "PeakFinder.h"
 
-#define WINDOWS_SIZE 20
+#define WINDOWS_SIZE 10
 #define MIN_MAGNITUDE 5
-#define MIN_FREQUENCY 100
-#define PLANO_NOTE_TOL 10.0
-#define PLANO_DIV_ERR 0.1
+#define MIN_FREQUENCY 50
+#define PIANO_NOTE_TOLERATE 10.0
+#define PIANO_DIV_ERR 0.1
+#define DOPPLER_CHECK_IDX  20
+#define DOPPLER_TOLERATE 0.8
 
 @implementation AudioInfo
 
@@ -26,9 +28,9 @@
         _secondFreq = 0.0;
         _firstDecibel = 0.0;
         _secondDecibel = 0.0;
-        _planoNoteText = @"";
-        _planoNoteFreq = 0.0;
-        _planoFreq = 0.0;
+        _pianoNoteText = @"";
+        _pianoNoteFreq = 0.0;
+        _pianoFreq = 0.0;
         return self;
     }
     return nil;
@@ -41,7 +43,7 @@
 @property (strong, nonatomic) CircularBuffer *buffer;
 @property (strong, nonatomic) FFTHelper *fftHelper;
 @property (strong, nonatomic) PeakFinder *peakFinder;
-@property (strong, nonatomic) NSDictionary *planoNoteMap;
+@property (strong, nonatomic) NSDictionary *pianoNoteMap;
 @property (strong, nonatomic) NSDate *date;
 @property (nonatomic) NSUInteger bufferSize;
 
@@ -88,10 +90,10 @@
     return _peakFinder;
 }
 
--(NSDictionary*)planoNoteMap{
-    if(!_planoNoteMap){
+-(NSDictionary*)pianoNoteMap{
+    if(!_pianoNoteMap){
         // A4 = 440 Hz
-        _planoNoteMap = @{[NSNumber numberWithFloat:16.35]:@"C0",
+        _pianoNoteMap = @{[NSNumber numberWithFloat:16.35]:@"C0",
                           [NSNumber numberWithFloat:17.32]:@"C#0/Db0",
                           [NSNumber numberWithFloat:18.35]:@"D0",
                           [NSNumber numberWithFloat:19.45]:@"D#0/Eb0",
@@ -201,9 +203,10 @@
                           [NSNumber numberWithFloat:7902.13]:@"B8"
                           };
     }
-    return _planoNoteMap;
+    return _pianoNoteMap;
 }
 
+// #MARK: for Module A's start
 -(void)start{
     __block AudioAnalyzer * __weak weakSelf = self;
     [self.audioManager setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels){
@@ -216,6 +219,7 @@
     }
 }
 
+// #MARK: for Module B's start
 -(void)start:(float)frequency{
     __block AudioAnalyzer * __weak weakSelf = self;
     [self.audioManager setInputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels){
@@ -224,10 +228,14 @@
     
     [self updateFrequencyInKhz:frequency];
     __block float phase = 0.0;
+    double sineWaveRepeatMax = 2*M_PI;
     [self.audioManager setOutputBlock:^(float* data, UInt32 numFrames, UInt32 numChannels){
         for (int n=0; n<numFrames; n++) {
             data[n] = sin(phase);
             phase += self.phaseIncrement;
+            if (phase >= sineWaveRepeatMax) {
+                phase -= sineWaveRepeatMax;
+            }
         }
     }];
 
@@ -238,6 +246,8 @@
 
 -(void)stop{
     [self.audioManager pause];
+    [self.audioManager setInputBlock:nil];
+    [self.audioManager setOutputBlock:nil];
 }
 
 -(void)fetchData:(float *)data
@@ -262,7 +272,7 @@
     }
 }
 
-- (float)guessPlanoFreq:(NSArray*)peakArray {
+- (float)guessPianoFreq:(NSArray*)peakArray {
     float guessFreq = 0.0;
     
     if (peakArray || (1 < peakArray.count)) {
@@ -286,9 +296,9 @@
         float guessRate = secondMinFreq/firstMinFreq; // 2:1 case
         float halfFreq = firstMinFreq/2;
         float guessRateN = secondMinFreq/halfFreq; // N:2 case
-        if(PLANO_DIV_ERR > (guessRate - floorf(guessRate))){
+        if(PIANO_DIV_ERR > (guessRate - floorf(guessRate))){
             guessFreq = firstMinFreq;
-        } else if (PLANO_DIV_ERR > (guessRateN - floorf(guessRateN))) {
+        } else if (PIANO_DIV_ERR > (guessRateN - floorf(guessRateN))) {
             guessFreq = halfFreq;
         } else {
             guessFreq = firstMinFreq;
@@ -298,31 +308,31 @@
     return guessFreq;
 }
 
-- (void)analyzePlanoNote:(NSArray*)peakArray forAudioInfo:(AudioInfo*)audioInfo {
+- (void)analyzePianoNote:(NSArray*)peakArray forAudioInfo:(AudioInfo*)audioInfo {
     if (!_date) {
         _date = [NSDate date];
     }
     
     BOOL isChangeFreq = false;
     if(peakArray){
-        float guessFreq = [self guessPlanoFreq:peakArray];
+        float guessFreq = [self guessPianoFreq:peakArray];
 
         if (guessFreq) {
             NSDate *refDate = [NSDate date];
             double elapsed = [refDate timeIntervalSinceDate:_date];
             
-            if ((1 < elapsed) || (!audioInfo.planoFreq)) {
+            if ((1 < elapsed) || (!audioInfo.pianoFreq)) {
                 isChangeFreq = true;
-                audioInfo.planoFreq = guessFreq;
-            } else if (audioInfo.planoFreq < guessFreq) {
-                float rate = guessFreq/audioInfo.planoFreq;
-                if(PLANO_DIV_ERR < (rate - floorf(rate))){
+                audioInfo.pianoFreq = guessFreq;
+            } else if (audioInfo.pianoFreq < guessFreq) {
+                float rate = guessFreq/audioInfo.pianoFreq;
+                if(PIANO_DIV_ERR < (rate - floorf(rate))){
                     isChangeFreq = true;
-                    audioInfo.planoFreq = guessFreq;
+                    audioInfo.pianoFreq = guessFreq;
                 }
             } else {
                 isChangeFreq = true;
-                audioInfo.planoFreq = guessFreq;
+                audioInfo.pianoFreq = guessFreq;
             }
         }
     }
@@ -331,20 +341,20 @@
         _date = [NSDate date];
         NSString *note = @"";
         float closestDiff = FLT_MAX;
-        float planoNoteFreq = 0.0;
+        float pianoNoteFreq = 0.0;
 
-        for (id key in self.planoNoteMap) {
-            float diff = fabsf(audioInfo.planoFreq - [key floatValue]);
+        for (id key in self.pianoNoteMap) {
+            float diff = fabsf(audioInfo.pianoFreq - [key floatValue]);
             if (closestDiff > diff) {
-                planoNoteFreq = [key floatValue];
+                pianoNoteFreq = [key floatValue];
                 closestDiff = diff;
-                note = [self.planoNoteMap objectForKey:key];
+                note = [self.pianoNoteMap objectForKey:key];
             }
         }
         
-        if (closestDiff <= PLANO_NOTE_TOL) {
-            audioInfo.planoNoteText = note;
-            audioInfo.planoNoteFreq = planoNoteFreq;
+        if (closestDiff <= PIANO_NOTE_TOLERATE) {
+            audioInfo.pianoNoteText = note;
+            audioInfo.pianoNoteFreq = pianoNoteFreq;
         }
     }
 }
@@ -373,50 +383,45 @@
         }
     }
 
-    [self analyzePlanoNote:peakArray forAudioInfo:audioInfo];
+    [self analyzePianoNote:peakArray forAudioInfo:audioInfo];
     
     static NSString *note = @"";
-    if (note != audioInfo.planoNoteText) {
-        note = audioInfo.planoNoteText;
-        NSLog(@"note=[%@] freq=%f Hz", audioInfo.planoNoteText, audioInfo.planoNoteFreq);
+    if (note != audioInfo.pianoNoteText) {
+        note = audioInfo.pianoNoteText;
+        NSLog(@"note=[%@] freq=%f Hz", audioInfo.pianoNoteText, audioInfo.pianoNoteFreq);
     }
 }
 
 -(void)updateFrequencyInKhz:(float) freqInKHz {
     self.frequency = freqInKHz*1000.0;
     self.phaseIncrement = 2*M_PI*self.frequency/self.audioManager.samplingRate;
-    
 }
 
 -(NSMutableString*)analyzeDoppler:(float*)fft
               withLen:(SInt64)length{
     NSMutableString* answer = [[NSMutableString alloc] init];
-    
     float delta = self.audioManager.samplingRate/length;
     int freqIndex = (self.frequency/delta)*2;
-    int freqWindow = 500/delta;
-    int dopplerWindow = 300/delta;
-    
-    
+
     float maxValue;
-    unsigned long maxIndex;
-    vDSP_maxvi(&(fft[freqIndex - freqWindow]), 1, &maxValue, &maxIndex, freqWindow * 2);
-    NSLog(@"DB=%f Idx=%lu Rl=%d", maxValue, maxIndex + (freqIndex - freqWindow), freqIndex);
-    
+    vDSP_meanv(&(fft[freqIndex - DOPPLER_CHECK_IDX]), 1, &maxValue, DOPPLER_CHECK_IDX*2);
+    NSLog(@"DB=%f, Rl=%d", maxValue + 64, freqIndex);
+
     float maxValueLeft;
-    vDSP_maxv(&fft[maxIndex - dopplerWindow], 1, &maxValueLeft, dopplerWindow - 5);
-    NSLog(@"MAX=%f", maxValueLeft);
-    if(maxValue * .6 < maxValueLeft) {
+    vDSP_meanv(&(fft[freqIndex - DOPPLER_CHECK_IDX]), 1, &maxValueLeft, DOPPLER_CHECK_IDX);
+    NSLog(@"Left  AVG=%f", maxValueLeft + 64);
+    if(maxValue * DOPPLER_TOLERATE < maxValueLeft) {
         [answer appendString:@"Moving away\n"];
     }
 
     float maxValueRight;
-    vDSP_maxv(&fft[maxIndex + 5], 1, &maxValueRight, dopplerWindow);
-    NSLog(@"MAX=%f", maxValueRight);
-    if(maxValue * .6 < maxValueRight) {
+    vDSP_meanv(&(fft[freqIndex]), 1, &maxValueRight, DOPPLER_CHECK_IDX);
+    NSLog(@"Right AVG=%f", maxValueRight + 64);
+    if(maxValue * DOPPLER_TOLERATE < maxValueRight) {
         [answer appendString:@"Moving towards\n"];
     }
-    
+
+    // Still, Towards, Away
     return answer;
 }
 

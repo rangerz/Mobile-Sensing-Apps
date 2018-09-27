@@ -152,6 +152,7 @@
                     <navigationItem key="navigationItem" title="Assignment 3 - Module A" id="cs7-rd-Pkl"/>
                     <connections>
                         <outlet property="currentActivityLabel" destination="c23-yf-5zw" id="teG-zp-idb"/>
+                        <outlet property="gameButton" destination="hnv-gz-HhN" id="SLZ-nM-2DO"/>
                         <outlet property="goalMissingStepsLabel" destination="4d0-3A-qSX" id="S71-6Q-qov"/>
                         <outlet property="goalStepsLabel" destination="CoE-QS-1Wc" id="Wju-Sd-xYt"/>
                         <outlet property="goalStepsSlider" destination="S39-xF-NDT" id="gqb-AC-jsQ"/>

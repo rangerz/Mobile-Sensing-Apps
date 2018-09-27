@@ -31,6 +31,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var goalStepsSlider: UISlider!
     @IBOutlet weak var goalStepsLabel: UILabel!
     @IBOutlet weak var goalMissingStepsLabel: UILabel!
+    @IBOutlet weak var gameButton: UIButton!
     
     
     // MARK: ======Class Variables======
@@ -147,8 +148,10 @@ class ViewController: UIViewController {
             let missingSteps = goalSteps - currentSteps
             if missingSteps <= 0 {
                 self.goalMissingStepsLabel.text = "Congratulations! You've reached your goal"
+                self.gameButton.isHidden = false
             } else {
                 self.goalMissingStepsLabel.text = "\(missingSteps) steps"
+                self.gameButton.isHidden = true
             }
         }
     }

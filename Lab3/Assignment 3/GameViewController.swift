@@ -26,20 +26,4 @@ class GameViewController: UIViewController {
     override var prefersStatusBarHidden : Bool {
         return true
     }
-
-    override var shouldAutorotate: Bool {
-        return false
-    }
-
-    override var preferredInterfaceOrientationForPresentation : UIInterfaceOrientation {
-        get {
-            return .portrait
-        }
-    }
-
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        get {
-            return .portrait
-        }
-    }
 }

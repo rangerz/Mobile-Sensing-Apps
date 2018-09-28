@@ -11,26 +11,17 @@ import SpriteKit
 import CoreMotion
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    //@IBOutlet weak var scoreLabel: UILabel!
 
     // MARK: Raw Motion Functions
     let motion = CMMotionManager()
     func startMotionUpdates(){
         // some internal inconsistency here: we need to ask the device manager for device
-
         if self.motion.isDeviceMotionAvailable{
             self.motion.deviceMotionUpdateInterval = 0.1
             self.motion.startDeviceMotionUpdates(to: OperationQueue.main, withHandler: self.handleMotion)
         }
     }
-    
-    //TOOD: need this
-    func stopMotionUpdates(){
-        if self.motion.isDeviceMotionAvailable{
-            self.motion.stopDeviceMotionUpdates()
-        }
-    }
-    
+
     func handleMotion(_ motionData:CMDeviceMotion?, error:Error?){
         if let gravity = motionData?.gravity {
             self.physicsWorld.gravity = CGVector(dx: CGFloat(9.8*gravity.x), dy: CGFloat(9.8*gravity.y))
@@ -48,6 +39,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    // MARK: Start here
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         backgroundColor = SKColor.white
@@ -79,15 +71,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func addBall(){
-        let ball = SKSpriteNode(imageNamed: "ball") // this is literally a sprite bottle... 😎
-
-        ball.size = CGSize(width:25 ,height:25)
+        let ballRadius: CGFloat = 12
+        let ball = SKSpriteNode(imageNamed: "ball")
+        ball.size = CGSize(width:ballRadius*2 ,height:ballRadius*2)
 
         let randNumber = random(min: CGFloat(0.1), max: CGFloat(0.9))
         ball.position = CGPoint(x: size.width * randNumber, y: size.height * 0.9)
 
-        ball.physicsBody = SKPhysicsBody(rectangleOf:ball.size)
-//        spriteA.physicsBody?.restitution = random(min: CGFloat(1.0), max: CGFloat(1.5))
+        ball.physicsBody = SKPhysicsBody(circleOfRadius: ballRadius)
         ball.physicsBody?.isDynamic = true
         ball.physicsBody?.contactTestBitMask = 0x00000001
         ball.physicsBody?.collisionBitMask = 0x00000001
@@ -114,8 +105,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func buildMaze(){
+        // make side and top
         self.addSidesAndTop()
-        
+
+        // make maze
         self.addStaticBlock(x:0.5, y:0.8, w:0.7, h:0.04)
         self.addStaticBlock(x:0.25, y:0.7, w:0.4, h:0.04)
         self.addStaticBlock(x:0.75, y:0.7, w:0.4, h:0.04)
@@ -123,6 +116,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addStaticBlock(x:0.25, y:0.5, w:0.4, h:0.04)
         self.addStaticBlock(x:0.75, y:0.5, w:0.4, h:0.04)
         
+        // make wind mill
         self.addWindmill(CGPoint(x: size.width * 0.8, y: size.height * 0.2))
         self.addWindmill(CGPoint(x: size.width * 0.2, y: size.height * 0.2))
         self.addWindmill(CGPoint(x: size.width * 0.5, y: size.height * 0.3))
@@ -156,6 +150,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         mill.physicsBody?.allowsRotation = true
         let randNumber = random(min: CGFloat(-1), max: CGFloat(1))
         mill.physicsBody?.angularVelocity = (randNumber > 0) ? 4 : -4
+        mill.physicsBody?.angularDamping = 0
 
         self.addChild(mill)
     }
@@ -191,16 +186,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        if contact.bodyA.node == spinBlock || contact.bodyB.node == spinBlock {
+        if (contact.bodyA.node == spinBlock) {
             self.score += 1
-            
-            if (contact.bodyA.node != spinBlock) {
-                contact.bodyA.node?.isHidden = true
-            }
+            contact.bodyB.node?.removeFromParent()
+            contact.bodyB.node?.physicsBody = nil
+            contact.bodyB.node?.removeAllActions()
+        }
 
-            if (contact.bodyB.node != spinBlock) {
-                contact.bodyB.node?.isHidden = true
-            }
+        if (contact.bodyB.node == spinBlock) {
+            self.score += 1
+            contact.bodyA.node?.removeFromParent()
+            contact.bodyA.node?.physicsBody = nil
+            contact.bodyA.node?.removeAllActions()
         }
     }
     

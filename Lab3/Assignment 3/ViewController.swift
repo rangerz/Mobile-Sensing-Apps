@@ -24,7 +24,6 @@ extension Date {
 }
 
 class ViewController: UIViewController {
-
     @IBOutlet weak var todayStepsLabel: UILabel!
     @IBOutlet weak var yesterdayStepsLabel: UILabel!
     @IBOutlet weak var currentActivityLabel: UILabel!
@@ -155,12 +154,11 @@ class ViewController: UIViewController {
             }
         }
     }
-    
+
     func updateTodaySteps(steps:Int) {
         self.todaySteps = steps
         self.todayStepsLabel.text = "\(steps) steps"
         self.updateMissingGoalSteps(currentSteps: steps)
     }
-    
 }
 

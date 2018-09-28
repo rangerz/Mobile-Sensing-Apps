@@ -10,6 +10,7 @@ import UIKit
 import SpriteKit
 import CoreMotion
 
+// set value by ViewController.swift
 var bonusMode = false
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -52,9 +53,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // make Maze for sides and stationary blocks
         self.buildMaze()
 
-        // add a spinning block
-        self.addBlockAtPoint()
-
         self.addBall()
 
         self.addScore()
@@ -92,23 +90,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         self.addChild(ball)
     }
-    
-    func addBlockAtPoint(){
-        spinBlock.color = UIColor.red
-        spinBlock.size = CGSize(width:size.width*0.5,height:size.height * 0.03)
-        spinBlock.position = CGPoint(x: size.width * 0.5, y: size.height * 0.05)
-        
-        spinBlock.physicsBody = SKPhysicsBody(rectangleOf:spinBlock.size)
-        spinBlock.physicsBody?.contactTestBitMask = 0x00000001
-        spinBlock.physicsBody?.collisionBitMask = 0x00000001
-        spinBlock.physicsBody?.categoryBitMask = 0x00000001
-        spinBlock.physicsBody?.isDynamic = true
-        spinBlock.physicsBody?.pinned = true
-        spinBlock.physicsBody?.allowsRotation = false
-        
-        self.addChild(spinBlock)
-    }
-    
+
     func buildMaze(){
         // make side and top
         self.addSidesAndTop()
@@ -125,8 +107,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addWindmill(CGPoint(x: size.width * 0.8, y: size.height * 0.2))
         self.addWindmill(CGPoint(x: size.width * 0.2, y: size.height * 0.2))
         self.addWindmill(CGPoint(x: size.width * 0.5, y: size.height * 0.3))
+        
+        // add a spinning block
+        self.addBlockAtPoint()
     }
 
+    func addSidesAndTop(){
+        let left = SKSpriteNode()
+        let right = SKSpriteNode()
+        let top = SKSpriteNode()
+        
+        left.size = CGSize(width:size.width*0.1,height:size.height)
+        left.position = CGPoint(x:0, y:size.height*0.5)
+        
+        right.size = CGSize(width:size.width*0.1,height:size.height)
+        right.position = CGPoint(x:size.width, y:size.height*0.5)
+        
+        top.size = CGSize(width:size.width,height:size.height*0.1)
+        // 30 is for UINavigationItem height
+        top.position = CGPoint(x:size.width*0.5, y:size.height - 30)
+        
+        for obj in [left,right,top]{
+            obj.color = UIColor.blue
+            obj.physicsBody = SKPhysicsBody(rectangleOf:obj.size)
+            obj.physicsBody?.isDynamic = true
+            obj.physicsBody?.pinned = true
+            obj.physicsBody?.allowsRotation = false
+            self.addChild(obj)
+        }
+    }
+    
     func addStaticBlock(x:CGFloat, y:CGFloat, w:CGFloat, h:CGFloat){
         let block = SKSpriteNode()
         block.color = UIColor.blue
@@ -159,30 +169,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         self.addChild(mill)
     }
-    
-    func addSidesAndTop(){
-        let left = SKSpriteNode()
-        let right = SKSpriteNode()
-        let top = SKSpriteNode()
+
+    func addBlockAtPoint(){
+        spinBlock.color = UIColor.red
+        spinBlock.size = CGSize(width:size.width*0.5,height:size.height * 0.03)
+        spinBlock.position = CGPoint(x: size.width * 0.5, y: size.height * 0.05)
         
-        left.size = CGSize(width:size.width*0.1,height:size.height)
-        left.position = CGPoint(x:0, y:size.height*0.5)
+        spinBlock.physicsBody = SKPhysicsBody(rectangleOf:spinBlock.size)
+        spinBlock.physicsBody?.contactTestBitMask = 0x00000001
+        spinBlock.physicsBody?.collisionBitMask = 0x00000001
+        spinBlock.physicsBody?.categoryBitMask = 0x00000001
+        spinBlock.physicsBody?.isDynamic = true
+        spinBlock.physicsBody?.pinned = true
+        spinBlock.physicsBody?.allowsRotation = false
         
-        right.size = CGSize(width:size.width*0.1,height:size.height)
-        right.position = CGPoint(x:size.width, y:size.height*0.5)
-        
-        top.size = CGSize(width:size.width,height:size.height*0.1)
-        // 30 is for UINavigationItem height
-        top.position = CGPoint(x:size.width*0.5, y:size.height - 30)
-        
-        for obj in [left,right,top]{
-            obj.color = UIColor.blue
-            obj.physicsBody = SKPhysicsBody(rectangleOf:obj.size)
-            obj.physicsBody?.isDynamic = true
-            obj.physicsBody?.pinned = true
-            obj.physicsBody?.allowsRotation = false
-            self.addChild(obj)
-        }
+        self.addChild(spinBlock)
     }
     
     // MARK: =====Delegate Functions=====

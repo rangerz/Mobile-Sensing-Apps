@@ -27,6 +27,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var todayStepsLabel: UILabel!
     @IBOutlet weak var yesterdayStepsLabel: UILabel!
     @IBOutlet weak var currentActivityLabel: UILabel!
+    @IBOutlet weak var currentStatusImage: UIImageView!
     @IBOutlet weak var goalStepsSlider: UISlider!
     @IBOutlet weak var goalStepsLabel: UILabel!
     @IBOutlet weak var goalMissingStepsLabel: UILabel!
@@ -65,16 +66,22 @@ class ViewController: UIViewController {
                 if let unwrappedActivity = activity {
                     if unwrappedActivity.unknown {
                         self.currentActivityLabel.text = "Unknown"
+                        self.currentStatusImage.image = UIImage(named:"unknown")
                     } else if unwrappedActivity.stationary {
                         self.currentActivityLabel.text = "Still"
+                        self.currentStatusImage.image = UIImage(named:"still")
                     } else if unwrappedActivity.walking {
                         self.currentActivityLabel.text = "Walking"
+                        self.currentStatusImage.image = UIImage(named:"walking")
                     } else if unwrappedActivity.running {
                         self.currentActivityLabel.text = "Running"
+                        self.currentStatusImage.image = UIImage(named:"running")
                     } else if unwrappedActivity.cycling {
                         self.currentActivityLabel.text = "Cycling"
+                        self.currentStatusImage.image = UIImage(named:"cycling")
                     } else if unwrappedActivity.automotive {
                         self.currentActivityLabel.text = "Driving"
+                        self.currentStatusImage.image = UIImage(named:"driving")
                     }
                 }
             }
@@ -108,7 +115,7 @@ class ViewController: UIViewController {
             self.pedometer.queryPedometerData(from: startOfYesterday!, to: endOfYesterday!, withHandler: { (pedData, error) in
                 if let unwrappedData = pedData {
                     DispatchQueue.main.async {
-                        self.yesterdayStepsLabel.text = "\(unwrappedData.numberOfSteps) steps"
+                        self.yesterdayStepsLabel.text = "\(unwrappedData.numberOfSteps)" //"\(unwrappedData.numberOfSteps) steps"
                     }
                 }
             })
@@ -153,17 +160,19 @@ class ViewController: UIViewController {
                 self.gameButton.isHidden = true
             }
 
-            if goalSteps < currentSteps*2 {
+            if (goalSteps < currentSteps*2) {
                 bonusMode = true
+                self.gameButton.setTitle("Play Game (Bonus Mode) 🏆", for: .normal)
             } else {
                 bonusMode = false
+                self.gameButton.setTitle("Play Game 🎱", for: .normal)
             }
         }
     }
 
     func updateTodaySteps(steps:Int) {
         self.todaySteps = steps
-        self.todayStepsLabel.text = "\(steps) steps"
+        self.todayStepsLabel.text = "\(steps)" //"\(steps) steps"
         self.updateMissingGoalSteps(currentSteps: steps)
     }
 }

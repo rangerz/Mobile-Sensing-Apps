@@ -115,7 +115,7 @@ class ViewController: UIViewController {
             self.pedometer.queryPedometerData(from: startOfYesterday!, to: endOfYesterday!, withHandler: { (pedData, error) in
                 if let unwrappedData = pedData {
                     DispatchQueue.main.async {
-                        self.yesterdayStepsLabel.text = "\(unwrappedData.numberOfSteps)" //"\(unwrappedData.numberOfSteps) steps"
+                        self.yesterdayStepsLabel.text = "\(unwrappedData.numberOfSteps)"
                     }
                 }
             })
@@ -172,7 +172,7 @@ class ViewController: UIViewController {
 
     func updateTodaySteps(steps:Int) {
         self.todaySteps = steps
-        self.todayStepsLabel.text = "\(steps)" //"\(steps) steps"
+        self.todayStepsLabel.text = "\(steps)"
         self.updateMissingGoalSteps(currentSteps: steps)
     }
 }

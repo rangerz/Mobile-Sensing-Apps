@@ -10,6 +10,8 @@ import UIKit
 import SpriteKit
 import CoreMotion
 
+var bonusMode = false
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
 
     // MARK: Raw Motion Functions
@@ -72,7 +74,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func addBall(){
         let ballRadius: CGFloat = 12
-        let ball = SKSpriteNode(imageNamed: "ball")
+        var ball = SKSpriteNode(imageNamed: "ball")
+        if (bonusMode) {
+            ball = SKSpriteNode(imageNamed: "gold")
+        }
         ball.size = CGSize(width:ballRadius*2 ,height:ballRadius*2)
 
         let randNumber = random(min: CGFloat(0.1), max: CGFloat(0.9))
@@ -186,18 +191,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        if (contact.bodyA.node == spinBlock) {
-            self.score += 1
-            contact.bodyB.node?.removeFromParent()
-            contact.bodyB.node?.physicsBody = nil
-            contact.bodyB.node?.removeAllActions()
-        }
-
-        if (contact.bodyB.node == spinBlock) {
-            self.score += 1
-            contact.bodyA.node?.removeFromParent()
-            contact.bodyA.node?.physicsBody = nil
-            contact.bodyA.node?.removeAllActions()
+        if (contact.bodyA.node == spinBlock || contact.bodyB.node == spinBlock) {
+            let ball = (contact.bodyA.node == spinBlock) ? contact.bodyB.node : contact.bodyA.node
+            self.score += bonusMode ? 3 : 1
+            ball?.removeFromParent()
+            ball?.physicsBody = nil
+            ball?.removeAllActions()
         }
     }
     

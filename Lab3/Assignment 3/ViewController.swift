@@ -152,6 +152,12 @@ class ViewController: UIViewController {
                 self.goalMissingStepsLabel.text = "\(missingSteps) steps"
                 self.gameButton.isHidden = true
             }
+
+            if goalSteps < currentSteps*2 {
+                bonusMode = true
+            } else {
+                bonusMode = false
+            }
         }
     }
 

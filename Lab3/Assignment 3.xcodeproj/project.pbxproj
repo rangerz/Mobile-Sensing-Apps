@@ -199,6 +199,7 @@
 				TargetAttributes = {
 					B59C7D302159AF1500814D66 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
 					};
 					B59C7D442159AF1600814D66 = {
 						CreatedOnToolsVersion = 10.0;
@@ -440,6 +441,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G2U5PVL4L4;
 				INFOPLIST_FILE = "Assignment 3/Info.plist";
@@ -450,6 +452,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexHenkel.Assignment-3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -459,6 +463,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G2U5PVL4L4;
 				INFOPLIST_FILE = "Assignment 3/Info.plist";
@@ -469,6 +474,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AlexHenkel.Assignment-3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -16,7 +16,7 @@ class ViewController: UIViewController   {
     var videoManager:VideoAnalgesic! = nil
     let pinchFilterIndex = 2
     var detector:CIDetector! = nil
-    let bridge = OpenCVBridge()
+    let bridge = OpenCVBridgeSub()
     
     //MARK: Outlets in view
     @IBOutlet weak var flashSlider: UISlider!
@@ -123,6 +123,7 @@ class ViewController: UIViewController   {
     
     func getFaces(img:CIImage) -> [CIFaceFeature]{
         // this ungodly mess makes sure the image is the correct orientation
+        //let optsFace = [CIDetectorImageOrientation:self.videoManager.getImageOrientationFromUIOrientation(UIApplication.sharedApplication().statusBarOrientation)]
         let optsFace = [CIDetectorImageOrientation:self.videoManager.ciOrientation]
         // get Face Features
         return self.detector.features(in: img, options: optsFace) as! [CIFaceFeature]
@@ -160,7 +161,7 @@ class ViewController: UIViewController   {
         self.videoManager.toggleCameraPosition()
     }
     
-    @IBAction func setFlashLevel(_ sender: UISlider) {
+    @IBAction func setFlashLevel(sender: UISlider) {
         if(sender.value>0.0){
             self.videoManager.turnOnFlashwithLevel(sender.value)
         }

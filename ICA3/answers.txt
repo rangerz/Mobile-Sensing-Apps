@@ -1,0 +1,5 @@
+1. Yes, it can access the method because 'OpenCVBridgeSub' inherits from 'OpenCVBrige', which means that all the methods from the parent are available on the children.
+
+2. The function was printing the colors as BGR, but the values were returned as RGB. So we changed the labels to have the correct channel. 
+
+3. How many milliseconds: Around 3816ms (Number changes so it's printed on the console)

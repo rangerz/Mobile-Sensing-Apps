@@ -21,6 +21,10 @@ class ViewController: UIViewController   {
     //MARK: Outlets in view
     @IBOutlet weak var flashSlider: UISlider!
     @IBOutlet weak var stageLabel: UILabel!
+    @IBOutlet weak var flashButton: UIButton!
+    @IBOutlet weak var positionButton: UIButton!
+    var prevStatus = false
+    var keepTime = 0
     
     //MARK: ViewController Hierarchy
     override func viewDidLoad() {
@@ -32,7 +36,7 @@ class ViewController: UIViewController   {
         self.bridge.loadHaarCascade(withFilename: "nose")
         
         self.videoManager = VideoAnalgesic.sharedInstance
-        self.videoManager.setCameraPosition(position: AVCaptureDevice.Position.front)
+        self.videoManager.setCameraPosition(position: AVCaptureDevice.Position.back)
         
         // create dictionary for face detection
         // HINT: you need to manipulate these proerties for better face detection efficiency
@@ -53,37 +57,53 @@ class ViewController: UIViewController   {
     
     //MARK: Process image output
     func processImage(inputImage:CIImage) -> CIImage{
-        
-        // detect faces
-        let f = getFaces(img: inputImage)
-        
-        // if no faces, just return original image
-        if f.count == 0 { return inputImage }
-        
         var retImage = inputImage
         
-        // if you just want to process on separate queue use this code
-        // this is a NON BLOCKING CALL, but any changes to the image in OpenCV cannot be displayed real time
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) { () -> Void in
-//            self.bridge.setImage(retImage, withBounds: retImage.extent, andContext: self.videoManager.getCIContext())
-//            self.bridge.processImage()
-//        }
-        
-        // use this code if you are using OpenCV and want to overwrite the displayed image via OpenCv
-        // this is a BLOCKING CALL
-//        self.bridge.setTransforms(self.videoManager.transform)
-//        self.bridge.setImage(retImage, withBounds: retImage.extent, andContext: self.videoManager.getCIContext())
-//        self.bridge.processImage()
-//        retImage = self.bridge.getImage()
-        
-        //HINT: you can also send in the bounds of the face to ONLY process the face in OpenCV
-        // or any bounds to only process a certain bounding region in OpenCV
         self.bridge.setTransforms(self.videoManager.transform)
         self.bridge.setImage(retImage,
-                             withBounds: f[0].bounds, // the first face bounds
+                             withBounds: retImage.extent, // the first face bounds
                              andContext: self.videoManager.getCIContext())
         
-        self.bridge.processImage()
+        var isCovered = self.bridge.processImage()
+        
+//        if (prevStatus != isCovered) {
+//            self.keepTime = self.keepTime + 1;
+//            if (100 < self.keepTime) {
+//                self.prevStatus = isCovered
+//                self.keepTime = 0
+//            } else {
+//                isCovered = self.prevStatus
+//            }
+//        }
+        
+//        NSLog("keepTime = %d", self.keepTime)
+    
+        if (prevStatus != isCovered) {
+            DispatchQueue.main.async {
+                if isCovered {
+                    self.flashButton.isEnabled = false;
+                    self.positionButton.isEnabled = false;
+                    _ = self.videoManager.turnOnFlashwithLevel(1.0)
+                } else {
+                    self.flashButton.isEnabled = true;
+                    self.positionButton.isEnabled = true;
+                    self.videoManager.turnOffFlash()
+//                    self.keepTime = 1;
+                }
+            }
+        }
+
+//        if (self.keepTime > 1) {
+//            if (100 < self.keepTime) {
+//                self.videoManager.turnOffFlash()
+//                self.keepTime = 0
+//            } else {
+//                self.keepTime = self.keepTime + 1++
+//            }
+//        }
+        
+        self.prevStatus = isCovered
+        
         retImage = self.bridge.getImageComposite() // get back opencv processed part of the image (overlayed on original)
         
         return retImage

@@ -29,7 +29,7 @@
 -(CIImage*)getImageComposite;
 
 // call this to perfrom processing (user controlled for better transparency)
--(void)processImage;
+-(bool)processImage;
 
 // for the video manager transformations
 -(void)setTransforms:(CGAffineTransform)trans;

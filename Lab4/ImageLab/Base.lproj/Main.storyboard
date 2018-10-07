@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aIs-P8-nXz">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Face Detection-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="FaceDetectionViewController" customModule="ImageLab" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Face Detection" id="LMO-ol-Okv"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="986" y="-291"/>
+        </scene>
+        <!--Assignment 4-->
+        <scene sceneID="zD1-7s-8dR">
+            <objects>
+                <tableViewController id="OkG-zz-cwy" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="SOO-Kd-lRI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <sections>
+                            <tableViewSection id="Rnb-3Z-cTq">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="r18-Wv-hur" userLabel="Module A: Face Detection">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r18-Wv-hur" id="k03-03-gSm">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Module A: CoreImage - Face Detection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LBw-so-urJ">
+                                                    <rect key="frame" x="16" y="11" width="343" height="28"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="LBw-so-urJ" firstAttribute="top" secondItem="k03-03-gSm" secondAttribute="topMargin" id="0bM-cY-B4D"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="LBw-so-urJ" secondAttribute="bottom" id="CsP-Vk-swN"/>
+                                                <constraint firstItem="LBw-so-urJ" firstAttribute="leading" secondItem="k03-03-gSm" secondAttribute="leadingMargin" id="mEA-Ih-CLG"/>
+                                                <constraint firstItem="LBw-so-urJ" firstAttribute="trailing" secondItem="k03-03-gSm" secondAttribute="trailingMargin" id="shf-F1-eRH"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="l9G-Ib-ehV"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="NlG-oJ-8iG" userLabel="Module B: Heart Rate Detection">
+                                        <rect key="frame" x="0.0" y="50" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NlG-oJ-8iG" id="Q0q-rq-OQx">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Module B: OpenCV - Heart Rate Detection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hk9-Fu-Uqh">
+                                                    <rect key="frame" x="16" y="11" width="343" height="28"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="hk9-Fu-Uqh" firstAttribute="leading" secondItem="Q0q-rq-OQx" secondAttribute="leadingMargin" id="7mB-F3-9uV"/>
+                                                <constraint firstItem="hk9-Fu-Uqh" firstAttribute="top" secondItem="Q0q-rq-OQx" secondAttribute="topMargin" id="Ef1-VI-Ci2"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="hk9-Fu-Uqh" secondAttribute="bottom" id="KoR-hK-D4g"/>
+                                                <constraint firstItem="hk9-Fu-Uqh" firstAttribute="trailing" secondItem="Q0q-rq-OQx" secondAttribute="trailingMargin" id="obi-0a-nDm"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="rpT-V8-e4r" kind="show" id="lZA-rK-bxb"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="OkG-zz-cwy" id="Mmf-RE-Vpa"/>
+                            <outlet property="delegate" destination="OkG-zz-cwy" id="lPm-r3-0jt"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Assignment 4" id="bnQ-cJ-n4F"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yq7-AY-9C1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="173.59999999999999" y="-291.00449775112446"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Dka-Px-muR">
+            <objects>
+                <navigationController id="aIs-P8-nXz" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="A5s-Fc-9rC">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="OkG-zz-cwy" kind="relationship" relationship="rootViewController" id="rpV-1j-gru"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dZb-7o-YcL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-647" y="-291"/>
+        </scene>
+        <!--Heart Rate Detection-->
+        <scene sceneID="eZj-8Q-bfo">
+            <objects>
+                <viewController id="rpT-V8-e4r" customClass="HeartRateDetectionViewController" customModule="ImageLab" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JiZ-Pw-YIl"/>
+                        <viewControllerLayoutGuide type="bottom" id="IBZ-h5-Imu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3QW-bq-AdM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="h5d-KR-EJU">
+                                <rect key="frame" x="14" y="617" width="347" height="31"/>
+                                <connections>
+                                    <action selector="setFlashLevel:" destination="rpT-V8-e4r" eventType="valueChanged" id="Vqu-Jw-Msl"/>
+                                </connections>
+                            </slider>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qck-aw-CNP">
+                                <rect key="frame" x="255" y="579" width="104" height="30"/>
+                                <state key="normal" title="Toggle Camera"/>
+                                <connections>
+                                    <action selector="switchCamera:" destination="rpT-V8-e4r" eventType="touchUpInside" id="N26-xY-5MV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ecf-pr-LHl">
+                                <rect key="frame" x="16" y="579" width="87" height="30"/>
+                                <state key="normal" title="Toggle Flash"/>
+                                <connections>
+                                    <action selector="flash:" destination="rpT-V8-e4r" eventType="touchUpInside" id="LFt-lA-fo1"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stage: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3X-Y0-Y2e">
+                                <rect key="frame" x="155.5" y="550" width="64" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="ecf-pr-LHl" firstAttribute="leading" secondItem="h5d-KR-EJU" secondAttribute="leading" id="4rS-ND-HKU"/>
+                            <constraint firstAttribute="bottom" secondItem="h5d-KR-EJU" secondAttribute="bottom" constant="20" symbolic="YES" id="ADN-ZH-RVb"/>
+                            <constraint firstItem="t3X-Y0-Y2e" firstAttribute="centerX" secondItem="h5d-KR-EJU" secondAttribute="centerX" id="BYH-fv-AFe"/>
+                            <constraint firstItem="h5d-KR-EJU" firstAttribute="top" secondItem="t3X-Y0-Y2e" secondAttribute="bottom" constant="46" id="CCW-X6-EOe"/>
+                            <constraint firstItem="ecf-pr-LHl" firstAttribute="baseline" secondItem="qck-aw-CNP" secondAttribute="baseline" id="HTQ-E5-Ouh"/>
+                            <constraint firstItem="qck-aw-CNP" firstAttribute="trailing" secondItem="h5d-KR-EJU" secondAttribute="trailing" id="I5w-PT-mLE"/>
+                            <constraint firstItem="h5d-KR-EJU" firstAttribute="leading" secondItem="3QW-bq-AdM" secondAttribute="leadingMargin" id="hiI-f3-Kdl"/>
+                            <constraint firstItem="h5d-KR-EJU" firstAttribute="trailing" secondItem="3QW-bq-AdM" secondAttribute="trailingMargin" id="lZ1-pt-NCK"/>
+                            <constraint firstItem="h5d-KR-EJU" firstAttribute="top" secondItem="qck-aw-CNP" secondAttribute="bottom" constant="8" symbolic="YES" id="z01-WE-8W0"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="icg-bl-YkS" appends="YES" id="UHR-0g-myK"/>
+                            <outletCollection property="gestureRecognizers" destination="r5A-BD-aGI" appends="YES" id="R81-dA-y8R"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="Heart Rate Detection" id="FRC-QO-Y5c"/>
+                    <connections>
+                        <outlet property="flashButton" destination="ecf-pr-LHl" id="FTF-ST-kI1"/>
+                        <outlet property="flashSlider" destination="h5d-KR-EJU" id="GDm-dI-GM7"/>
+                        <outlet property="positionButton" destination="qck-aw-CNP" id="6Ej-db-ATp"/>
+                        <outlet property="stageLabel" destination="t3X-Y0-Y2e" id="jvI-6w-G1U"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LK1-ML-De7" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="icg-bl-YkS">
+                    <connections>
+                        <action selector="swipeRecognized:" destination="rpT-V8-e4r" id="mSv-hp-maf"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="r5A-BD-aGI">
+                    <connections>
+                        <action selector="swipeRecognized:" destination="rpT-V8-e4r" id="3MV-kg-nX3"/>
+                    </connections>
+                </swipeGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="985" y="453"/>
+        </scene>
+    </scenes>
+</document>

@@ -140,6 +140,7 @@ class FaceDetectionViewController: UIViewController   {
     }
 
     //MARK: Apply filters and apply feature detectors
+    // CoreImage filter doc: https://developer.apple.com/library/archive/documentation/GraphicsImaging/Reference/CoreImageFilterReference/index.html
     func applyFiltersToFaces(inputImage:CIImage,features:[CIFaceFeature])->CIImage{
         var retImage = inputImage
 

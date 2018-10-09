@@ -29,7 +29,7 @@ using namespace cv;
 
 
 #pragma mark Define Custom Functions Here
--(bool)processImage{
+-(void)processImage{
     
     cv::Mat frame_gray,image_copy;
     const int kCannyLowThreshold = 300;
@@ -250,8 +250,6 @@ using namespace cv;
             break;
             
     }
-    
-    return false;
 }
 
 

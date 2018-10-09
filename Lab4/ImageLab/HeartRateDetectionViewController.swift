@@ -23,8 +23,8 @@ class HeartRateDetectionViewController: UIViewController   {
     @IBOutlet weak var stageLabel: UILabel!
     @IBOutlet weak var flashButton: UIButton!
     @IBOutlet weak var positionButton: UIButton!
+    var keepTime: Date! = Date()
     var prevStatus = false
-    var keepTime = 0
 
     //MARK: ViewController Hierarchy
     override func viewDidLoad() {
@@ -71,45 +71,53 @@ class HeartRateDetectionViewController: UIViewController   {
                              withBounds: retImage.extent, // the first face bounds
             andContext: self.videoManager.getCIContext())
 
-        var isCovered = self.bridge.processImage()
+        self.bridge.drawColorODS()
 
-        //        if (prevStatus != isCovered) {
-        //            self.keepTime = self.keepTime + 1;
-        //            if (100 < self.keepTime) {
-        //                self.prevStatus = isCovered
-        //                self.keepTime = 0
-        //            } else {
-        //                isCovered = self.prevStatus
-        //            }
-        //        }
+        var red:Double! = 0.0
+        var green:Double! = 0.0
+        var blue:Double! = 0.0
+        self.bridge.getColorMean(&red, withGreen:&green, andBlue:&blue)
 
-        //        NSLog("keepTime = %d", self.keepTime)
-
-        if (prevStatus != isCovered) {
-            DispatchQueue.main.async {
-                if isCovered {
-                    self.flashButton.isEnabled = false;
-                    self.positionButton.isEnabled = false;
-                    _ = self.videoManager.turnOnFlashwithLevel(1.0)
-                } else {
-                    self.flashButton.isEnabled = true;
-                    self.positionButton.isEnabled = true;
-                    self.videoManager.turnOffFlash()
-                    //                    self.keepTime = 1;
-                }
+        // check dark or red color to set cover status
+        var isCovered = false
+        let maxValue = max(red, green, blue)
+        if maxValue < 30 {
+            if maxValue == red {
+                isCovered = true
+            }
+        } else if red < 100 {
+            if green < (red - 25) && blue < (red - 25) {
+                isCovered = true
+            }
+        } else if red >= 100 {
+            if green < (red - 50) && blue < (red - 50) {
+                isCovered = true
             }
         }
 
-        //        if (self.keepTime > 1) {
-        //            if (100 < self.keepTime) {
-        //                self.videoManager.turnOffFlash()
-        //                self.keepTime = 0
-        //            } else {
-        //                self.keepTime = self.keepTime + 1++
-        //            }
-        //        }
+        // keep light 2 second for avoiding flicker
+        let elapsed = keepTime.timeIntervalSinceNow * -1
+        if (prevStatus != isCovered) {
+            if 2 < elapsed || isCovered {
+                prevStatus = isCovered
+                keepTime = Date()
+            }
+        } else {
+            keepTime = Date()
+        }
 
-        self.prevStatus = isCovered
+        // turn on or off light
+        DispatchQueue.main.async {
+            if self.prevStatus {
+                self.flashButton.isEnabled = false;
+                self.positionButton.isEnabled = false;
+                _ = self.videoManager.turnOnFlashwithLevel(1.0)
+            } else {
+                self.flashButton.isEnabled = true;
+                self.positionButton.isEnabled = true;
+                self.videoManager.turnOffFlash()
+            }
+        }
 
         retImage = self.bridge.getImageComposite() // get back opencv processed part of the image (overlayed on original)
 

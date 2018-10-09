@@ -10,4 +10,8 @@
 
 @interface OpenCVBridgeSub : OpenCVBridge
 
+-(void)drawColorODS;
+
+-(void)getColorMean:(double*)red withGreen:(double*)green andBlue:(double*)blue;
+
 @end

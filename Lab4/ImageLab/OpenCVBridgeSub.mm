@@ -22,61 +22,39 @@ using namespace std::chrono;
 @dynamic image;
 //@dynamic just tells the compiler that the getter and setter methods are implemented not by the class itself but somewhere else (like the superclass or will be provided at runtime).
 
--(bool)processImage{
-    
-    cv::Mat frame_gray,image_copy;
-    char text[50];
-    Scalar avgPixelIntensity;
+// For Debug
+-(void)drawColorODS{
+    cv::Mat image_copy;
     cv::Mat image = self.image;
-    
     cvtColor(image, image_copy, CV_BGRA2BGR); // get rid of alpha for processing
+
+    Scalar avgPixelIntensity;
     avgPixelIntensity = cv::mean( image_copy );
-    sprintf(text,"Avg. R: %.0f, G: %.0f, B: %.0f", avgPixelIntensity.val[0],avgPixelIntensity.val[1],avgPixelIntensity.val[2]);
-    cv::putText(image, text, cv::Point(20, 20), FONT_HERSHEY_PLAIN, 0.75, Scalar::all(255), 1, 2);
-    
-    float red = avgPixelIntensity.val[0];
-    float green = avgPixelIntensity.val[1];
-    float blue = avgPixelIntensity.val[2];
-    
+    double red = avgPixelIntensity.val[0];
+    double green = avgPixelIntensity.val[1];
+    double blue = avgPixelIntensity.val[2];
+
+    char text[50];
+    sprintf(text,"Avg. R: %3.2f", red);
+    cv::putText(image, text, cv::Point(20, 60), FONT_HERSHEY_PLAIN, 0.75, Scalar::all(255), 1, 2);
+    sprintf(text,"Avg. G: %3.2f", green);
+    cv::putText(image, text, cv::Point(20, 70), FONT_HERSHEY_PLAIN, 0.75, Scalar::all(255), 1, 2);
+    sprintf(text,"Avg. B: %3.2f", blue);
+    cv::putText(image, text, cv::Point(20, 80), FONT_HERSHEY_PLAIN, 0.75, Scalar::all(255), 1, 2);
     self.image = image;
-    bool isCovered = false;
+}
 
-    
-    int th = 50;
-    if (red > 100) {
-        if (((red - th) > green) && ((red - th) > blue)) {
-            isCovered = true;
-        }
-    }
-    
-    static int count = 0;
-    static float redArr[100];
-    static float greenArr[100];
-    static float blueArr[100];
+-(void)getColorMean:(double*)red withGreen:(double*)green andBlue:(double*)blue{
+    cv::Mat image_copy;
+    cv::Mat image = self.image;
+    cvtColor(image, image_copy, CV_BGRA2BGR); // get rid of alpha for processing
 
-    if (isCovered) {
-        if (count == 100) {
-            count++;
-            printf("covered 100 times\n");
-        } else {
-            redArr[count] = red;
-            greenArr[count] = green;
-            blueArr[count] = blue;
-            count++;
-        }
-    }
+    Scalar avgPixelIntensity;
+    avgPixelIntensity = cv::mean( image_copy );
 
-    static milliseconds startTime = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
-    milliseconds nowTime = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
-    if (count == 1) {
-        startTime = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
-    } else if (count == 100) {
-        if (startTime != nowTime) {
-            printf("100 points float array for %lld ms\n", (nowTime - startTime));
-        }
-    }
-
-    return isCovered;
+    *red = avgPixelIntensity.val[0];
+    *green = avgPixelIntensity.val[1];
+    *blue = avgPixelIntensity.val[2];
 }
 
 @end

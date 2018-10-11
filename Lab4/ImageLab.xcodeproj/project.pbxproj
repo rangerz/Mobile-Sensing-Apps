@@ -12,6 +12,9 @@
 		44E19F33216A0E1B004F1C8E /* OpenCVBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44E19F31216A0E1B004F1C8E /* OpenCVBridge.mm */; };
 		44E19F35216A0E4C004F1C8E /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E19F34216A0E4C004F1C8E /* opencv2.framework */; };
 		44E19F37216A1255004F1C8E /* nose.xml in Resources */ = {isa = PBXBuildFile; fileRef = 44E19F36216A1255004F1C8E /* nose.xml */; };
+		B5035060216E527100126506 /* FFTHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B503505D216E527100126506 /* FFTHelper.m */; };
+		B5035061216E527100126506 /* PeakFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = B503505F216E527100126506 /* PeakFinder.m */; };
+		B579613F216F32EB00D69EF4 /* SMUGraphHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B579613E216F32EB00D69EF4 /* SMUGraphHelper.m */; };
 		B650B31B1D8340F0000114A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650B31A1D8340F0000114A1 /* AppDelegate.swift */; };
 		B650B31D1D8340F0000114A1 /* FaceDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650B31C1D8340F0000114A1 /* FaceDetectionViewController.swift */; };
 		B650B3201D8340F0000114A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B650B31E1D8340F0000114A1 /* Main.storyboard */; };
@@ -30,6 +33,12 @@
 		44E19F32216A0E1B004F1C8E /* OpenCVBridge.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = OpenCVBridge.hh; path = ImageDSPUtils/OpenCVBridge.hh; sourceTree = SOURCE_ROOT; };
 		44E19F34216A0E4C004F1C8E /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ImageDSPUtils/opencv2.framework; sourceTree = "<group>"; };
 		44E19F36216A1255004F1C8E /* nose.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = nose.xml; sourceTree = SOURCE_ROOT; };
+		B503505C216E527100126506 /* PeakFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeakFinder.h; path = ImageDSPUtils/PeakFinder.h; sourceTree = SOURCE_ROOT; };
+		B503505D216E527100126506 /* FFTHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FFTHelper.m; path = ImageDSPUtils/FFTHelper.m; sourceTree = SOURCE_ROOT; };
+		B503505E216E527100126506 /* FFTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FFTHelper.h; path = ImageDSPUtils/FFTHelper.h; sourceTree = SOURCE_ROOT; };
+		B503505F216E527100126506 /* PeakFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PeakFinder.m; path = ImageDSPUtils/PeakFinder.m; sourceTree = SOURCE_ROOT; };
+		B579613D216F32EB00D69EF4 /* SMUGraphHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMUGraphHelper.h; path = ImageDSPUtils/SMUGraphHelper.h; sourceTree = SOURCE_ROOT; };
+		B579613E216F32EB00D69EF4 /* SMUGraphHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMUGraphHelper.m; path = ImageDSPUtils/SMUGraphHelper.m; sourceTree = SOURCE_ROOT; };
 		B650B3171D8340F0000114A1 /* ImageLab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageLab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B650B31A1D8340F0000114A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B650B31C1D8340F0000114A1 /* FaceDetectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectionViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +97,12 @@
 		B650B34A1D83435A000114A1 /* ImageDSPUtils */ = {
 			isa = PBXGroup;
 			children = (
+				B579613D216F32EB00D69EF4 /* SMUGraphHelper.h */,
+				B579613E216F32EB00D69EF4 /* SMUGraphHelper.m */,
+				B503505E216E527100126506 /* FFTHelper.h */,
+				B503505D216E527100126506 /* FFTHelper.m */,
+				B503505C216E527100126506 /* PeakFinder.h */,
+				B503505F216E527100126506 /* PeakFinder.m */,
 				44E19F32216A0E1B004F1C8E /* OpenCVBridge.hh */,
 				44E19F31216A0E1B004F1C8E /* OpenCVBridge.mm */,
 				44E19F2F216A0C09004F1C8E /* OpenCVBridgeSub.h */,
@@ -132,7 +147,7 @@
 				TargetAttributes = {
 					B650B3161D8340F0000114A1 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = G2U5PVL4L4;
+						DevelopmentTeam = 9GAP7JC7AZ;
 						LastSwiftMigration = 1000;
 					};
 				};
@@ -174,11 +189,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B579613F216F32EB00D69EF4 /* SMUGraphHelper.m in Sources */,
 				B6E657991D95AA4500E75C60 /* VideoAnalgesic.swift in Sources */,
 				44E19F30216A0C09004F1C8E /* OpenCVBridgeSub.mm in Sources */,
+				B5035061216E527100126506 /* PeakFinder.m in Sources */,
 				B650B31D1D8340F0000114A1 /* FaceDetectionViewController.swift in Sources */,
 				44E19F33216A0E1B004F1C8E /* OpenCVBridge.mm in Sources */,
 				B650B31B1D8340F0000114A1 /* AppDelegate.swift in Sources */,
+				B5035060216E527100126506 /* FFTHelper.m in Sources */,
 				44E19F2A216A037C004F1C8E /* HeartRateDetectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,7 +334,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = G2U5PVL4L4;
+				DEVELOPMENT_TEAM = 9GAP7JC7AZ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -338,7 +356,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = G2U5PVL4L4;
+				DEVELOPMENT_TEAM = 9GAP7JC7AZ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

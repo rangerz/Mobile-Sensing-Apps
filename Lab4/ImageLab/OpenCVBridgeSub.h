@@ -12,6 +12,6 @@
 
 -(void)drawColorODS;
 
--(void)getColorMean:(double*)red withGreen:(double*)green andBlue:(double*)blue;
+-(void)getColorMean:(float*)red withGreen:(float*)green andBlue:(float*)blue;
 
 @end

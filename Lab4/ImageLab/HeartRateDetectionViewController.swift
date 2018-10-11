@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import GLKit
 import AVFoundation
 
-class HeartRateDetectionViewController: UIViewController   {
+class HeartRateDetectionViewController: GLKViewController   {
 
     //MARK: Class Properties
     var filters : [CIFilter]! = nil
@@ -17,15 +18,19 @@ class HeartRateDetectionViewController: UIViewController   {
     let pinchFilterIndex = 2
     var detector:CIDetector! = nil
     let bridge = OpenCVBridgeSub()
+    let secondsPerBuffer:Int32 = 4
+    let FPS_RATE:Int32 = 30
+    lazy var BUFFER_SIZE:Int32 = FPS_RATE * secondsPerBuffer
+    lazy var graphHelper = SMUGraphHelper(controller: self, preferredFramesPerSecond: FPS_RATE, numGraphs: 1, plotStyle: PlotStyleSeparated, maxPointsPerGraph: BUFFER_SIZE)
+    lazy var peakFinder = PeakFinder(frequencyResolution: 1)
+    lazy var redValues = UnsafeMutablePointer<Float>.allocate(capacity: Int(BUFFER_SIZE))
+    var counter = 0
 
-    //MARK: Outlets in view
-    @IBOutlet weak var flashSlider: UISlider!
-    @IBOutlet weak var stageLabel: UILabel!
-    @IBOutlet weak var flashButton: UIButton!
-    @IBOutlet weak var positionButton: UIButton!
     var keepTime: Date! = Date()
     var prevStatus = false
-
+    var changed = false
+    @IBOutlet weak var beatsLabel: UILabel!
+    
     //MARK: ViewController Hierarchy
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,10 +53,13 @@ class HeartRateDetectionViewController: UIViewController   {
             options: (optsDetector as [String : AnyObject]))
 
         self.videoManager.setProcessingBlock(newProcessBlock: self.processImage)
+        self.videoManager.setFPS(desiredFrameRate: 30.0)
 
         if !videoManager.isRunning{
             videoManager.start()
         }
+        
+        self.graphHelper?.setFullScreenBounds()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -73,11 +81,11 @@ class HeartRateDetectionViewController: UIViewController   {
 
         self.bridge.drawColorODS()
 
-        var red:Double! = 0.0
-        var green:Double! = 0.0
-        var blue:Double! = 0.0
+        var red:Float! = 0.0
+        var green:Float! = 0.0
+        var blue:Float! = 0.0
         self.bridge.getColorMean(&red, withGreen:&green, andBlue:&blue)
-
+        
         // check dark or red color to set cover status
         var isCovered = false
         let maxValue = max(red, green, blue)
@@ -100,26 +108,34 @@ class HeartRateDetectionViewController: UIViewController   {
         if (prevStatus != isCovered) {
             if 2 < elapsed || isCovered {
                 prevStatus = isCovered
+                changed = true
                 keepTime = Date()
             }
         } else {
             keepTime = Date()
         }
-
+        
+        
         // turn on or off light
         DispatchQueue.main.async {
-            if self.prevStatus {
-                self.flashButton.isEnabled = false;
-                self.positionButton.isEnabled = false;
-                _ = self.videoManager.turnOnFlashwithLevel(1.0)
-            } else {
-                self.flashButton.isEnabled = true;
-                self.positionButton.isEnabled = true;
-                self.videoManager.turnOffFlash()
+            if self.changed {
+                if self.prevStatus {
+                    _ = self.videoManager.turnOnFlashwithLevel(1.0)
+                    self.beatsLabel.text = "Getting data..."
+                } else {
+                    self.videoManager.turnOffFlash()
+                    self.beatsLabel.text = "Cover camera with your finger"
+                    self.resetData()
+                }
+                self.changed = false
             }
         }
 
         retImage = self.bridge.getImageComposite() // get back opencv processed part of the image (overlayed on original)
+        
+        if isCovered {
+            self.analyzeHeartRate(red: red)
+        }
 
         return retImage
     }
@@ -163,42 +179,53 @@ class HeartRateDetectionViewController: UIViewController   {
         // get Face Features
         return self.detector.features(in: img, options: optsFace) as! [CIFaceFeature]
     }
-
-    @IBAction func swipeRecognized(_ sender: UISwipeGestureRecognizer) {
-        switch sender.direction {
-        case UISwipeGestureRecognizerDirection.left:
-            self.bridge.processType += 1
-        case UISwipeGestureRecognizerDirection.right:
-            self.bridge.processType -= 1
-        default:
-            break
-
+    
+    func resetData() {
+        self.counter = 0
+        for i in 0...Int(self.BUFFER_SIZE) - 1 {
+            self.redValues[i] = 0
         }
-
-        stageLabel.text = "Stage: \(self.bridge.processType)"
+        self.graphHelper?.setGraphData(self.redValues, withDataLength: self.BUFFER_SIZE, forGraphIndex: 0)
     }
-
-    //MARK: Convenience Methods for UI Flash and Camera Toggle
-    @IBAction func flash(_ sender: AnyObject) {
-        if(self.videoManager.toggleFlash()){
-            self.flashSlider.value = 1.0
+    
+    // MARK: Analyze heart beats
+    func analyzeHeartRate(red: Float) {
+        // Parse red to 1.0 scale
+        let redThreshold:Float = 0.983
+        let parsedRed:Float = red / 256
+        if self.counter == 0 && parsedRed < redThreshold {
+             return
         }
-        else{
-            self.flashSlider.value = 0.0
+        
+        if self.counter < self.BUFFER_SIZE {
+            self.redValues[counter] = parsedRed
+            self.counter = self.counter + 1
+        } else {
+            let peaks = self.peakFinder?.getFundamentalPeaks(fromBuffer: self.redValues, withLength: UInt(self.BUFFER_SIZE), usingWindowSize: UInt(self.BUFFER_SIZE / 5), andPeakMagnitudeMinimum: 0, aboveFrequency: 1)
+            if peaks != nil {
+                let peak:Peak = peaks![0] as! Peak
+                print("Peaks found \(String(describing: peaks!.count))-\(peak.magnitude)")
+                
+                // Print bpm
+                let peakCount = peaks!.count + 1
+                let bpm = peakCount * Int(60/self.secondsPerBuffer)
+                DispatchQueue.main.async {
+                    self.beatsLabel.text = "BPM: \(bpm)"
+                }
+            } else {
+                print("Peaks nil")
+            }
+            self.graphHelper?.setGraphData(self.redValues, withDataLength: self.BUFFER_SIZE, forGraphIndex: 0, withNormalization: 1.0, withZeroValue: redThreshold)
+//            for i in 0...self.BUFFER_SIZE - 1 {
+//                print("\(self.redValues[i])")
+//            }
+            self.counter = 0
         }
     }
-
-    @IBAction func switchCamera(_ sender: AnyObject) {
-        self.videoManager.toggleCameraPosition()
-    }
-
-    @IBAction func setFlashLevel(sender: UISlider) {
-        if(sender.value>0.0){
-            _ = self.videoManager.turnOnFlashwithLevel(sender.value)
-        }
-        else if(sender.value==0.0){
-            self.videoManager.turnOffFlash()
-        }
+    
+    
+    override func glkView(_ view: GLKView, drawIn rect: CGRect) {
+        self.graphHelper?.draw()
     }
 }
 

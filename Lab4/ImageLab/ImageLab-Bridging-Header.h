@@ -3,3 +3,6 @@
 //
 
 #import "OpenCVBridgeSub.h"
+#import "FFTHelper.h"
+#import "PeakFinder.h"
+#import "SMUGraphHelper.h"

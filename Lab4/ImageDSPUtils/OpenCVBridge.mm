@@ -350,7 +350,7 @@ using namespace cv;
                                         8 * _image.elemSize(),                           // Bits per pixel
                                         _image.step[0],                                  // Bytes per row
                                         colorSpace,                                     // Colorspace
-                                        kCGImageAlphaNone | kCGBitmapByteOrderDefault,  // Bitmap info flags
+                                        kCGImageAlphaNoneSkipLast  | kCGBitmapByteOrderDefault,  // Bitmap info flags
                                         provider,                                       // CGDataProviderRef
                                         NULL,                                           // Decode
                                         false,                                          // Should interpolate
@@ -394,7 +394,7 @@ using namespace cv;
                                         8 * _image.elemSize(),                           // Bits per pixel
                                         _image.step[0],                                  // Bytes per row
                                         colorSpace,                                     // Colorspace
-                                        kCGImageAlphaNone | kCGBitmapByteOrderDefault,  // Bitmap info flags
+                                        kCGImageAlphaNoneSkipLast  | kCGBitmapByteOrderDefault,  // Bitmap info flags
                                         provider,                                       // CGDataProviderRef
                                         NULL,                                           // Decode
                                         false,                                          // Should interpolate

@@ -12,6 +12,7 @@
 		44E19F33216A0E1B004F1C8E /* OpenCVBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44E19F31216A0E1B004F1C8E /* OpenCVBridge.mm */; };
 		44E19F35216A0E4C004F1C8E /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E19F34216A0E4C004F1C8E /* opencv2.framework */; };
 		44E19F37216A1255004F1C8E /* nose.xml in Resources */ = {isa = PBXBuildFile; fileRef = 44E19F36216A1255004F1C8E /* nose.xml */; };
+		44E19F40217065D6004F1C8E /* CircularBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E19F3F217065D6004F1C8E /* CircularBuffer.m */; };
 		B5035060216E527100126506 /* FFTHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B503505D216E527100126506 /* FFTHelper.m */; };
 		B5035061216E527100126506 /* PeakFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = B503505F216E527100126506 /* PeakFinder.m */; };
 		B579613F216F32EB00D69EF4 /* SMUGraphHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B579613E216F32EB00D69EF4 /* SMUGraphHelper.m */; };
@@ -33,6 +34,8 @@
 		44E19F32216A0E1B004F1C8E /* OpenCVBridge.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = OpenCVBridge.hh; path = ImageDSPUtils/OpenCVBridge.hh; sourceTree = SOURCE_ROOT; };
 		44E19F34216A0E4C004F1C8E /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ImageDSPUtils/opencv2.framework; sourceTree = "<group>"; };
 		44E19F36216A1255004F1C8E /* nose.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = nose.xml; sourceTree = SOURCE_ROOT; };
+		44E19F3E217065D6004F1C8E /* CircularBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircularBuffer.h; path = ImageDSPUtils/CircularBuffer.h; sourceTree = SOURCE_ROOT; };
+		44E19F3F217065D6004F1C8E /* CircularBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircularBuffer.m; path = ImageDSPUtils/CircularBuffer.m; sourceTree = SOURCE_ROOT; };
 		B503505C216E527100126506 /* PeakFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeakFinder.h; path = ImageDSPUtils/PeakFinder.h; sourceTree = SOURCE_ROOT; };
 		B503505D216E527100126506 /* FFTHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FFTHelper.m; path = ImageDSPUtils/FFTHelper.m; sourceTree = SOURCE_ROOT; };
 		B503505E216E527100126506 /* FFTHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FFTHelper.h; path = ImageDSPUtils/FFTHelper.h; sourceTree = SOURCE_ROOT; };
@@ -97,6 +100,8 @@
 		B650B34A1D83435A000114A1 /* ImageDSPUtils */ = {
 			isa = PBXGroup;
 			children = (
+				44E19F3E217065D6004F1C8E /* CircularBuffer.h */,
+				44E19F3F217065D6004F1C8E /* CircularBuffer.m */,
 				B579613D216F32EB00D69EF4 /* SMUGraphHelper.h */,
 				B579613E216F32EB00D69EF4 /* SMUGraphHelper.m */,
 				B503505E216E527100126506 /* FFTHelper.h */,
@@ -147,7 +152,7 @@
 				TargetAttributes = {
 					B650B3161D8340F0000114A1 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 9GAP7JC7AZ;
+						DevelopmentTeam = G2U5PVL4L4;
 						LastSwiftMigration = 1000;
 					};
 				};
@@ -189,6 +194,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44E19F40217065D6004F1C8E /* CircularBuffer.m in Sources */,
 				B579613F216F32EB00D69EF4 /* SMUGraphHelper.m in Sources */,
 				B6E657991D95AA4500E75C60 /* VideoAnalgesic.swift in Sources */,
 				44E19F30216A0C09004F1C8E /* OpenCVBridgeSub.mm in Sources */,
@@ -334,7 +340,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 9GAP7JC7AZ;
+				DEVELOPMENT_TEAM = G2U5PVL4L4;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -356,7 +362,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 9GAP7JC7AZ;
+				DEVELOPMENT_TEAM = G2U5PVL4L4;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

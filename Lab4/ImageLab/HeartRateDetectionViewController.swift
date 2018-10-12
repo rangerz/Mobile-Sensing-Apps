@@ -13,21 +13,20 @@ import AVFoundation
 class HeartRateDetectionViewController: GLKViewController   {
 
     //MARK: Class Properties
-    var filters : [CIFilter]! = nil
     var videoManager:VideoAnalgesic! = nil
-    let pinchFilterIndex = 2
     var detector:CIDetector! = nil
     let bridge = OpenCVBridgeSub()
-    let secondsPerBuffer:Int32 = 4
+    let DETECT_SEC:Int32 = 7
     let FPS_RATE:Int32 = 30
-    lazy var BUFFER_SIZE:Int32 = FPS_RATE * secondsPerBuffer
+    lazy var BUFFER_SIZE:Int32 = FPS_RATE * DETECT_SEC
     lazy var graphHelper = SMUGraphHelper(controller: self, preferredFramesPerSecond: FPS_RATE, numGraphs: 1, plotStyle: PlotStyleSeparated, maxPointsPerGraph: BUFFER_SIZE)
-    lazy var peakFinder = PeakFinder(frequencyResolution: 1)
-    lazy var redValues = UnsafeMutablePointer<Float>.allocate(capacity: Int(BUFFER_SIZE))
-    var counter = 0
-
+    var peakFinder = PeakFinder(frequencyResolution: 1)
+    lazy var inputBuf = UnsafeMutablePointer<Float>.allocate(capacity: Int(1))
+    lazy var drawBuf = UnsafeMutablePointer<Float>.allocate(capacity: Int(BUFFER_SIZE))
+    lazy var buffer = CircularBuffer(numChannels: 1, andBufferSize: Int64(BUFFER_SIZE))
+    var prevBpm:Float = 0.0
     var keepTime: Date! = Date()
-    var prevStatus = false
+    var prevStatus: Bool! = false
     var changed = false
     @IBOutlet weak var beatsLabel: UILabel!
     
@@ -36,7 +35,6 @@ class HeartRateDetectionViewController: GLKViewController   {
         super.viewDidLoad()
 
         self.view.backgroundColor = nil
-        self.setupFilters()
 
         self.bridge.loadHaarCascade(withFilename: "nose")
 
@@ -53,13 +51,13 @@ class HeartRateDetectionViewController: GLKViewController   {
             options: (optsDetector as [String : AnyObject]))
 
         self.videoManager.setProcessingBlock(newProcessBlock: self.processImage)
-        self.videoManager.setFPS(desiredFrameRate: 30.0)
+        self.videoManager.setFPS(desiredFrameRate: Double(FPS_RATE))
 
         if !videoManager.isRunning{
             videoManager.start()
         }
         
-        self.graphHelper?.setFullScreenBounds()
+        self.graphHelper?.setBoundsWithTop(-0.2 , bottom: -1, left: -0.95, right: 0.95)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -74,19 +72,54 @@ class HeartRateDetectionViewController: GLKViewController   {
     func processImage(inputImage:CIImage) -> CIImage{
         var retImage = inputImage
 
+        let f = getFaces(img: inputImage)
+
+        // if no faces, just return original image
+        if f.count == 0 {
+//            NSLog("Face: %d", f.count)
+        }
+
         self.bridge.setTransforms(self.videoManager.transform)
         self.bridge.setImage(retImage,
                              withBounds: retImage.extent, // the first face bounds
             andContext: self.videoManager.getCIContext())
 
-        self.bridge.drawColorODS()
+//        self.bridge.drawColorODS()
 
         var red:Float! = 0.0
         var green:Float! = 0.0
         var blue:Float! = 0.0
         self.bridge.getColorMean(&red, withGreen:&green, andBlue:&blue)
-        
+
         // check dark or red color to set cover status
+        let isCovered = checkCovered(red:red, green:green, blue:blue)
+
+        // turn on or off light
+        DispatchQueue.main.async {
+            if self.changed {
+                if isCovered {
+                    _ = self.videoManager.turnOnFlashwithLevel(1.0)
+                    self.beatsLabel.text = "Getting data..."
+                } else {
+                    self.videoManager.turnOffFlash()
+                    self.beatsLabel.text = "Cover camera with your finger"
+                }
+                self.changed = false
+            }
+        }
+
+        retImage = self.bridge.getImageComposite() // get back opencv processed part of the image (overlayed on original)
+        
+        if isCovered {
+            self.analyzeHeartRate(red: red)
+        } else {
+            self.resetData()
+        }
+
+        return retImage
+    }
+
+    func checkCovered(red: Float, green: Float, blue: Float) -> Bool{
         var isCovered = false
         let maxValue = max(red, green, blue)
         if maxValue < 30 {
@@ -114,41 +147,8 @@ class HeartRateDetectionViewController: GLKViewController   {
         } else {
             keepTime = Date()
         }
-        
-        
-        // turn on or off light
-        DispatchQueue.main.async {
-            if self.changed {
-                if self.prevStatus {
-                    _ = self.videoManager.turnOnFlashwithLevel(1.0)
-                    self.beatsLabel.text = "Getting data..."
-                } else {
-                    self.videoManager.turnOffFlash()
-                    self.beatsLabel.text = "Cover camera with your finger"
-                    self.resetData()
-                }
-                self.changed = false
-            }
-        }
 
-        retImage = self.bridge.getImageComposite() // get back opencv processed part of the image (overlayed on original)
-        
-        if isCovered {
-            self.analyzeHeartRate(red: red)
-        }
-
-        return retImage
-    }
-
-    //MARK: Setup filtering
-    func setupFilters(){
-        filters = []
-
-        let filterPinch = CIFilter(name:"CIBumpDistortion")!
-        filterPinch.setValue(-0.5, forKey: "inputScale")
-        filterPinch.setValue(75, forKey: "inputRadius")
-        filters.append(filterPinch)
-
+        return prevStatus
     }
 
     //MARK: Apply filters and apply feature detectors
@@ -160,70 +160,101 @@ class HeartRateDetectionViewController: GLKViewController   {
             //set where to apply filter
             filterCenter.x = f.bounds.midX
             filterCenter.y = f.bounds.midY
-
-            //do for each filter (assumes all filters have property, "inputCenter")
-            for filt in filters{
-                filt.setValue(retImage, forKey: kCIInputImageKey)
-                filt.setValue(CIVector(cgPoint: filterCenter), forKey: "inputCenter")
-                // could also manipualte the radius of the filter based on face size!
-                retImage = filt.outputImage!
-            }
         }
+
         return retImage
     }
 
     func getFaces(img:CIImage) -> [CIFaceFeature]{
         // this ungodly mess makes sure the image is the correct orientation
-        //let optsFace = [CIDetectorImageOrientation:self.videoManager.getImageOrientationFromUIOrientation(UIApplication.sharedApplication().statusBarOrientation)]
         let optsFace = [CIDetectorImageOrientation:self.videoManager.ciOrientation]
         // get Face Features
         return self.detector.features(in: img, options: optsFace) as! [CIFaceFeature]
     }
     
     func resetData() {
-        self.counter = 0
-        for i in 0...Int(self.BUFFER_SIZE) - 1 {
-            self.redValues[i] = 0
-        }
-        self.graphHelper?.setGraphData(self.redValues, withDataLength: self.BUFFER_SIZE, forGraphIndex: 0)
+        buffer?.clear()
+        prevBpm = 0
+        buffer?.fetchFreshData(drawBuf, withNumSamples: Int64(BUFFER_SIZE))
+        self.graphHelper?.setGraphData(drawBuf, withDataLength: self.BUFFER_SIZE, forGraphIndex: 0)
     }
-    
+
+    // MARK: Calc Heart Rate
+    func getHeartRate(peaks:Array<Peak>)->Float {
+        var bpm:Float = 0.0
+        var totalDiff:Float = 0.0
+        var diffCount = 0
+
+        if 2 <= peaks.count {
+            let sortedPeaks = peaks.sorted(by: { $0.frequency > $1.frequency })
+
+            for index in 0...sortedPeaks.count-2 {
+                let peak:Peak = peaks[index]
+                let diff = peak.frequency - sortedPeaks[index+1].frequency
+
+                //pick available peak diff value (range in 60 ~ 150 bpm)
+                if diff >= 12 && diff <= 30 {
+                    totalDiff = totalDiff + diff
+                    diffCount = diffCount + 1
+                }
+            }
+        }
+
+        if 0 < diffCount {
+            let avgDiff:Float = totalDiff / Float(diffCount)
+            bpm = Float(60) * Float(FPS_RATE) / avgDiff
+        }
+
+        if 0 != bpm {
+            if 0 == prevBpm {
+                prevBpm = bpm
+            } else {
+                prevBpm = (bpm + prevBpm*9) / 10
+            }
+        }
+
+        return prevBpm;
+    }
+
     // MARK: Analyze heart beats
     func analyzeHeartRate(red: Float) {
+        var bpm:Float = 0.0
         // Parse red to 1.0 scale
-        let redThreshold:Float = 0.983
         let parsedRed:Float = red / 256
-        if self.counter == 0 && parsedRed < redThreshold {
-             return
-        }
-        
-        if self.counter < self.BUFFER_SIZE {
-            self.redValues[counter] = parsedRed
-            self.counter = self.counter + 1
-        } else {
-            let peaks = self.peakFinder?.getFundamentalPeaks(fromBuffer: self.redValues, withLength: UInt(self.BUFFER_SIZE), usingWindowSize: UInt(self.BUFFER_SIZE / 5), andPeakMagnitudeMinimum: 0, aboveFrequency: 1)
-            if peaks != nil {
-                let peak:Peak = peaks![0] as! Peak
-                print("Peaks found \(String(describing: peaks!.count))-\(peak.magnitude)")
-                
-                // Print bpm
-                let peakCount = peaks!.count + 1
-                let bpm = peakCount * Int(60/self.secondsPerBuffer)
-                DispatchQueue.main.async {
-                    self.beatsLabel.text = "BPM: \(bpm)"
+
+        inputBuf[0] = parsedRed
+        buffer?.addNewFloatData(inputBuf, withNumSamples: 1)
+
+        buffer?.fetchFreshData(drawBuf, withNumSamples: Int64(BUFFER_SIZE))
+        let numData = Int(buffer?.numUnreadFrames() ?? 0)
+
+        if BUFFER_SIZE <= numData {
+            do {
+                // Avoid crash here ...
+                guard let peaks:Array<Peak> = try self.peakFinder?.getFundamentalPeaks(
+                    fromBuffer: drawBuf,
+                    withLength: UInt(self.BUFFER_SIZE),
+                    usingWindowSize: UInt(self.BUFFER_SIZE / 5),
+                    andPeakMagnitudeMinimum: 0,
+                    aboveFrequency: 1
+                    ) as? Array<Peak> else {
+                        return
                 }
-            } else {
-                print("Peaks nil")
+
+                bpm = getHeartRate(peaks: peaks)
+            } catch {
             }
-            self.graphHelper?.setGraphData(self.redValues, withDataLength: self.BUFFER_SIZE, forGraphIndex: 0, withNormalization: 1.0, withZeroValue: redThreshold)
-//            for i in 0...self.BUFFER_SIZE - 1 {
-//                print("\(self.redValues[i])")
-//            }
-            self.counter = 0
+
+            if 0 != bpm {
+                DispatchQueue.main.async {
+                    self.beatsLabel.text = "BPM: \(Int(bpm))"
+                }
+            }
         }
+
+        self.graphHelper?.setGraphData(drawBuf, withDataLength: self.BUFFER_SIZE, forGraphIndex: 0, withNormalization: 0, withZeroValue: 1)
     }
-    
-    
+
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
         self.graphHelper?.draw()
     }

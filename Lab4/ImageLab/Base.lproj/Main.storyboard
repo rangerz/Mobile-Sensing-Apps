@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.15" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aIs-P8-nXz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aIs-P8-nXz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -191,18 +191,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cover camera with your finger" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ek-bT-mIn">
-                                <rect key="frame" x="16" y="80" width="343" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Cover Camera with your finger" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ek-bT-mIn">
+                                <rect key="frame" x="16" y="80" width="271" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZI-5y-BK9">
+                                <rect key="frame" x="295" y="80" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="Ct8-gb-LbE"/>
+                                    <constraint firstAttribute="height" constant="64" id="TBZ-tq-hRb"/>
+                                </constraints>
+                                <state key="normal" image="camera-white"/>
+                                <connections>
+                                    <action selector="switchCamera:" destination="rpT-V8-e4r" eventType="touchUpInside" id="Pyg-6M-TyT"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BPM: Detecting ..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ksB-Ly-vQZ">
+                                <rect key="frame" x="16" y="120.5" width="138" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="Z14-Gg-eqd" firstAttribute="trailing" secondItem="1Ek-bT-mIn" secondAttribute="trailing" constant="16" id="ZRC-fJ-TAH"/>
+                            <constraint firstItem="ksB-Ly-vQZ" firstAttribute="top" secondItem="1Ek-bT-mIn" secondAttribute="bottom" constant="20" id="6Vw-Md-nzM"/>
+                            <constraint firstItem="TZI-5y-BK9" firstAttribute="top" secondItem="Z14-Gg-eqd" secondAttribute="top" constant="16" id="8Ag-hn-g44"/>
+                            <constraint firstItem="ksB-Ly-vQZ" firstAttribute="leading" secondItem="Z14-Gg-eqd" secondAttribute="leading" constant="16" id="PGk-a6-6cT"/>
                             <constraint firstItem="1Ek-bT-mIn" firstAttribute="leading" secondItem="Z14-Gg-eqd" secondAttribute="leading" constant="16" id="fCB-Bm-yGG"/>
+                            <constraint firstItem="Z14-Gg-eqd" firstAttribute="trailing" secondItem="TZI-5y-BK9" secondAttribute="trailing" constant="16" id="g4W-Xx-cnR"/>
                             <constraint firstItem="1Ek-bT-mIn" firstAttribute="top" secondItem="Z14-Gg-eqd" secondAttribute="top" constant="16" id="gzA-Jm-EhY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Z14-Gg-eqd"/>
@@ -211,7 +231,8 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="pXW-Dj-7WP"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="beatsLabel" destination="1Ek-bT-mIn" id="SG2-r4-UTc"/>
+                        <outlet property="bpmLabel" destination="ksB-Ly-vQZ" id="9U7-CG-D6j"/>
+                        <outlet property="descriptionLabel" destination="1Ek-bT-mIn" id="C3j-dh-T63"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LK1-ML-De7" sceneMemberID="firstResponder"/>
@@ -223,6 +244,7 @@
     </scenes>
     <resources>
         <image name="camera-toggle" width="512" height="512"/>
-        <image name="poke" width="96" height="96"/>
+        <image name="camera-white" width="225" height="225"/>
+        <image name="poke" width="128" height="128"/>
     </resources>
 </document>

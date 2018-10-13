@@ -28,8 +28,9 @@ class HeartRateDetectionViewController: GLKViewController   {
     var keepTime: Date! = Date()
     var prevStatus: Bool! = false
     var changed = false
-    @IBOutlet weak var beatsLabel: UILabel!
-    
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var bpmLabel: UILabel!
+
     //MARK: ViewController Hierarchy
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,8 @@ class HeartRateDetectionViewController: GLKViewController   {
 
         self.videoManager = VideoAnalgesic.sharedInstance
         self.videoManager.setCameraPosition(position: AVCaptureDevice.Position.back)
+//        self.videoManager.setCameraPosition(position: AVCaptureDevice.Position.front)
+        self.updateDescription()
 
         // create dictionary for face detection
         // HINT: you need to manipulate these proerties for better face detection efficiency
@@ -57,7 +60,7 @@ class HeartRateDetectionViewController: GLKViewController   {
             videoManager.start()
         }
         
-        self.graphHelper?.setBoundsWithTop(-0.2 , bottom: -1, left: -0.95, right: 0.95)
+        self.graphHelper?.setBoundsWithTop(0 , bottom: -1, left: -0.95, right: 0.95)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -71,46 +74,50 @@ class HeartRateDetectionViewController: GLKViewController   {
     //MARK: Process image output
     func processImage(inputImage:CIImage) -> CIImage{
         var retImage = inputImage
-
-        let f = getFaces(img: inputImage)
-
-        // if no faces, just return original image
-        if f.count == 0 {
-//            NSLog("Face: %d", f.count)
-        }
-
-        self.bridge.setTransforms(self.videoManager.transform)
-        self.bridge.setImage(retImage,
-                             withBounds: retImage.extent, // the first face bounds
-            andContext: self.videoManager.getCIContext())
-
-//        self.bridge.drawColorODS()
-
+        var isDetect = false
         var red:Float! = 0.0
         var green:Float! = 0.0
         var blue:Float! = 0.0
-        self.bridge.getColorMean(&red, withGreen:&green, andBlue:&blue)
 
-        // check dark or red color to set cover status
-        let isCovered = checkCovered(red:red, green:green, blue:blue)
+        // detect finger
+        if AVCaptureDevice.Position.back == self.videoManager.getCameraPostion() {
+            self.bridge.setTransforms(self.videoManager.transform)
+            self.bridge.setImage(retImage,
+                                 withBounds: retImage.extent, // the first face bounds
+                andContext: self.videoManager.getCIContext())
+            self.bridge.getColorMean(&red, withGreen:&green, andBlue:&blue)
+            retImage = self.bridge.getImageComposite()
+            let isCovered = checkCovered(red:red, green:green, blue:blue)
 
-        // turn on or off light
-        DispatchQueue.main.async {
-            if self.changed {
-                if isCovered {
-                    _ = self.videoManager.turnOnFlashwithLevel(1.0)
-                    self.beatsLabel.text = "Getting data..."
-                } else {
-                    self.videoManager.turnOffFlash()
-                    self.beatsLabel.text = "Cover camera with your finger"
+            // turn on or off light
+            DispatchQueue.main.async {
+                if self.changed {
+                    if isCovered {
+                        _ = self.videoManager.turnOnFlashwithLevel(1.0)
+                    } else {
+                        self.videoManager.turnOffFlash()
+                    }
+                    self.changed = false
                 }
-                self.changed = false
+            }
+
+            isDetect = isCovered
+        } else { // detect face
+            let f = getFaces(img: inputImage)
+            retImage = inputImage
+
+            if f.count == 1 {
+                isDetect = true
+                self.bridge.setTransforms(self.videoManager.transform)
+                self.bridge.setImage(retImage,
+                                     withBounds: f[0].bounds, // the first face bounds
+                    andContext: self.videoManager.getCIContext())
+                self.bridge.getColorMean(&red, withGreen:&green, andBlue:&blue)
+                retImage = self.bridge.getImageComposite()
             }
         }
 
-        retImage = self.bridge.getImageComposite() // get back opencv processed part of the image (overlayed on original)
-        
-        if isCovered {
+        if isDetect {
             self.analyzeHeartRate(red: red)
         } else {
             self.resetData()
@@ -151,20 +158,6 @@ class HeartRateDetectionViewController: GLKViewController   {
         return prevStatus
     }
 
-    //MARK: Apply filters and apply feature detectors
-    func applyFiltersToFaces(inputImage:CIImage,features:[CIFaceFeature])->CIImage{
-        var retImage = inputImage
-        var filterCenter = CGPoint()
-
-        for f in features {
-            //set where to apply filter
-            filterCenter.x = f.bounds.midX
-            filterCenter.y = f.bounds.midY
-        }
-
-        return retImage
-    }
-
     func getFaces(img:CIImage) -> [CIFaceFeature]{
         // this ungodly mess makes sure the image is the correct orientation
         let optsFace = [CIDetectorImageOrientation:self.videoManager.ciOrientation]
@@ -173,10 +166,15 @@ class HeartRateDetectionViewController: GLKViewController   {
     }
     
     func resetData() {
-        buffer?.clear()
         prevBpm = 0
+        buffer?.clear()
         buffer?.fetchFreshData(drawBuf, withNumSamples: Int64(BUFFER_SIZE))
-        self.graphHelper?.setGraphData(drawBuf, withDataLength: self.BUFFER_SIZE, forGraphIndex: 0)
+        self.graphHelper?.setGraphData(drawBuf,
+                                       withDataLength: self.BUFFER_SIZE,
+                                       forGraphIndex: 0)
+        DispatchQueue.main.async {
+            self.bpmLabel.text = "BPM: no data"
+        }
     }
 
     // MARK: Calc Heart Rate
@@ -192,6 +190,7 @@ class HeartRateDetectionViewController: GLKViewController   {
                 let peak:Peak = peaks[index]
                 let diff = peak.frequency - sortedPeaks[index+1].frequency
 
+//                NSLog("[%d]Diff = %f", index, diff)
                 //pick available peak diff value (range in 60 ~ 150 bpm)
                 if diff >= 12 && diff <= 30 {
                     totalDiff = totalDiff + diff
@@ -206,10 +205,11 @@ class HeartRateDetectionViewController: GLKViewController   {
         }
 
         if 0 != bpm {
+//            NSLog("update bpm = %f", bpm)
             if 0 == prevBpm {
                 prevBpm = bpm
             } else {
-                prevBpm = (bpm + prevBpm*9) / 10
+                prevBpm = (bpm + prevBpm*29) / 30
             }
         }
 
@@ -247,12 +247,40 @@ class HeartRateDetectionViewController: GLKViewController   {
 
             if 0 != bpm {
                 DispatchQueue.main.async {
-                    self.beatsLabel.text = "BPM: \(Int(bpm))"
+                    self.bpmLabel.text = "BPM: \(Int(bpm))"
                 }
             }
         }
 
-        self.graphHelper?.setGraphData(drawBuf, withDataLength: self.BUFFER_SIZE, forGraphIndex: 0, withNormalization: 0, withZeroValue: 1)
+        if 0 == prevBpm {
+            DispatchQueue.main.async {
+                let sec = Calendar.current.component(.second, from: Date());
+                let dot = String(repeating: ".", count: sec % 3 + 1)
+                self.bpmLabel.text = "BPM: Detecting" + dot
+            }
+        }
+
+        self.graphHelper?.setGraphData(drawBuf,
+                                       withDataLength: self.BUFFER_SIZE,
+                                       forGraphIndex: 0,
+                                       withNormalization: 0,
+                                       withZeroValue: 1)
+    }
+
+    func updateDescription() {
+        DispatchQueue.main.async {
+            if AVCaptureDevice.Position.back == self.videoManager.getCameraPostion() {
+                self.descriptionLabel.text = "Cover camera with your finger"
+            } else {
+                self.descriptionLabel.text = "Look camera with your face"
+            }
+        }
+    }
+
+    @IBAction func switchCamera(_ sender: Any) {
+        self.videoManager.toggleCameraPosition()
+        self.updateDescription()
+        self.resetData()
     }
 
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {

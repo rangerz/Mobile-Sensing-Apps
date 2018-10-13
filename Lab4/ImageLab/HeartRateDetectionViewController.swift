@@ -218,7 +218,6 @@ class HeartRateDetectionViewController: GLKViewController   {
 
     // MARK: Analyze heart beats
     func analyzeHeartRate(red: Float) {
-        let redThreshold:Float = 0.983
         var bpm:Float = 0.0
         // Parse red to 1.0 scale
         let parsedRed:Float = red / 256
@@ -260,12 +259,20 @@ class HeartRateDetectionViewController: GLKViewController   {
                 self.bpmLabel.text = "BPM: Detecting" + dot
             }
         }
+        
+        var min = 1.0
+        for i in 0...self.BUFFER_SIZE - 1 {
+            print ("\(drawBuf[Int(i)])")
+            if drawBuf[Int(i)] > 0.97 && drawBuf[Int(i)] < Float(min) {
+                min = Double(drawBuf[Int(i)])
+            }
+        }
 
         self.graphHelper?.setGraphData(drawBuf,
                                        withDataLength: self.BUFFER_SIZE,
                                        forGraphIndex: 0,
                                        withNormalization: 1.0,
-                                       withZeroValue: redThreshold)
+                                       withZeroValue: Float(min))
     }
 
     func updateDescription() {

@@ -263,7 +263,7 @@ class HeartRateDetectionViewController: GLKViewController   {
         var min = 1.0
         for i in 0...self.BUFFER_SIZE - 1 {
             print ("\(drawBuf[Int(i)])")
-            if drawBuf[Int(i)] > 0.97 && drawBuf[Int(i)] < Float(min) {
+            if drawBuf[Int(i)] > 0.85 && drawBuf[Int(i)] < Float(min) {
                 min = Double(drawBuf[Int(i)])
             }
         }

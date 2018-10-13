@@ -259,11 +259,15 @@ class HeartRateDetectionViewController: GLKViewController   {
                 self.bpmLabel.text = "BPM: Detecting" + dot
             }
         }
-        
+
+        var th:Float = 0.85
+        if AVCaptureDevice.Position.front == self.videoManager.getCameraPostion() {
+            th = 0.4
+        }
         var min = 1.0
         for i in 0...self.BUFFER_SIZE - 1 {
             print ("\(drawBuf[Int(i)])")
-            if drawBuf[Int(i)] > 0.85 && drawBuf[Int(i)] < Float(min) {
+            if drawBuf[Int(i)] > th && drawBuf[Int(i)] < Float(min) {
                 min = Double(drawBuf[Int(i)])
             }
         }

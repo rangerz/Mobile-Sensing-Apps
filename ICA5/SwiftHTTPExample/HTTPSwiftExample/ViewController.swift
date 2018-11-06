@@ -15,7 +15,8 @@
 //    ifconfig |grep inet   
 // to see what your public facing IP address is, the ip address can be used here
 //let SERVER_URL = "http://erics-macbook-pro.local:8000" // change this for your server name!!!
-let SERVER_URL = "http://10.8.116.92:8000" // change this for your server name!!!
+//let SERVER_URL = "http://192.168.0.21:8000" // change this for your server name!!!
+let SERVER_URL = "http://10.8.115.142:8000"
 
 import UIKit
 import CoreMotion
@@ -43,7 +44,8 @@ class ViewController: UIViewController, URLSessionDelegate {
     @IBOutlet weak var downArrow: UILabel!
     @IBOutlet weak var leftArrow: UILabel!
     @IBOutlet weak var largeMotionMagnitude: UIProgressView!
-    
+    @IBOutlet weak var dsidStepper: UIStepper!
+
     // MARK: Class Properties with Observers
     enum CalibrationStage {
         case notCalibrating
@@ -112,6 +114,7 @@ class ViewController: UIViewController, URLSessionDelegate {
                 // update label when set
                 self.dsidLabel.layer.add(self.animation, forKey: nil)
                 self.dsidLabel.text = "Current DSID: \(self.dsid)"
+                self.dsidStepper.value = Double(self.dsid)
             }
         }
     }
@@ -322,7 +325,6 @@ class ViewController: UIViewController, URLSessionDelegate {
                     print(jsonDictionary["feature"]!)
                     print(jsonDictionary["label"]!)
                 }
-
         })
         
         postTask.resume() // start the task
@@ -345,21 +347,19 @@ class ViewController: UIViewController, URLSessionDelegate {
         request.httpBody = requestBody
         
         let postTask : URLSessionDataTask = self.session.dataTask(with: request,
-                                                                  completionHandler:{(data, response, error) in
-                                                                    if(error != nil){
-                                                                        if let res = response{
-                                                                            print("Response:\n",res)
-                                                                        }
-                                                                    }
-                                                                    else{
-                                                                        let jsonDictionary = self.convertDataToDictionary(with: data)
-                                                                        
-                                                                        let labelResponse = jsonDictionary["prediction"]!
-                                                                        print(labelResponse)
-                                                                        self.displayLabelResponse(labelResponse as! String)
+            completionHandler:{(data, response, error) in
+                if(error != nil){
+                    if let res = response{
+                        print("Response:\n",res)
+                    }
+                }
+                else{
+                    let jsonDictionary = self.convertDataToDictionary(with: data)
 
-                                                                    }
-                                                                    
+                    let labelResponse = jsonDictionary["prediction"]!
+                    print(labelResponse)
+                    self.displayLabelResponse(labelResponse as! String)
+                }
         })
         
         postTask.resume() // start the task
@@ -450,6 +450,9 @@ class ViewController: UIViewController, URLSessionDelegate {
         }
     }
 
+    @IBAction func dsidChanged(_ sender: UIStepper) {
+        self.dsid = Int(sender.value)
+    }
 }
 
 

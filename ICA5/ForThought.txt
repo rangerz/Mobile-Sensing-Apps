@@ -1,0 +1,4 @@
+14. Yes, it is blocking to the tornado IOLoop. According to tornado architecture, the saving the classifier handler of tornado.web.Application will block other handlers.
+
+15. It depends on OS of the server. If they are compatible, it works. If not (ex: big endian vs. little endian), it won't work.
+PS: The format of MongoDB is Binary JSON. 

@@ -37,12 +37,8 @@ class UploadLabeledDatapointHandler(BaseHandler):
 
         dbid = self.db.labeledinstances.insert(
             {"feature":fvals,"label":label,"dsid":sess}
-            );
-        self.write_json({"id":str(dbid),
-            "feature":[str(len(fvals))+" Points Received",
-                    "min of: " +str(min(fvals)),
-                    "max of: " +str(max(fvals))],
-            "label":label})
+            )
+        self.write_json({"id":str(dbid),"feature":fvals,"label":label})
 
 class RequestNewDatasetId(BaseHandler):
     def get(self):
@@ -72,12 +68,12 @@ class UpdateModelForDatasetId(BaseHandler):
             l.append(a['label'])
 
         # fit the model to the data
-        c1 = KNeighborsClassifier(n_neighbors=1);
+        c1 = KNeighborsClassifier(n_neighbors=3);
         acc = -1;
         if l:
             c1.fit(f,l) # training
             lstar = c1.predict(f)
-            self.clf = c1
+            self.clf[dsid] = c1
             acc = sum(lstar==l)/float(len(l))
             bytes = pickle.dumps(c1)
             self.db.models.update({"dsid":dsid},
@@ -101,9 +97,21 @@ class PredictOneFromDatasetId(BaseHandler):
 
         # load the model from the database (using pickle)
         # we are blocking tornado!! no!!
-        if(self.clf == []):
+        if dsid in self.clf:
             print('Loading Model From DB')
             tmp = self.db.models.find_one({"dsid":dsid})
-            self.clf = pickle.loads(tmp['model'])
-        predLabel = self.clf.predict(fvals);
+            if tmp:
+                self.clf[dsid] = pickle.loads(tmp['model'])
+            else:
+                self.clf[dsid] = KNeighborsClassifier(n_neighbors=3)
+                bytes = pickle.dumps(c1)
+                self.db.models.update({"dsid":dsid},
+                    {  "$set": {"model":Binary(bytes)}  },
+                    upsert=True)
+
+        if dsid in self.clf:
+            predLabel = self.clf[dsid].predict(fvals);
+        else:
+            predLabel = 'Unknown'
+
         self.write_json({"prediction":str(predLabel)})

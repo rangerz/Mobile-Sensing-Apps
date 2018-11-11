@@ -40,10 +40,10 @@ class Application(tornado.web.Application):
 
 
         try:
-            self.client  = MongoClient(serverSelectionTimeoutMS=5) # local host, default port
+            self.client  = MongoClient('mongodb://root:MobileSensing123@ds035747.mlab.com:35747/ms2018')
             print(self.client.server_info()) # force pymongo to look for possible running servers, error if none running
             # if we get here, at least one instance of pymongo is running
-            self.db = self.client.exampledatabase # database with labeledinstances, models
+            self.db = self.client.ms2018 # database with labeledinstances, models
             handlers.append((r"/SaveToDatabase[/]?",eh.LogToDatabaseHandler)) # add new handler for database
             
         except ServerSelectionTimeoutError as inst:

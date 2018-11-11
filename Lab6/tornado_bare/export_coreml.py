@@ -23,8 +23,8 @@ import coremltools
 
 
 dsid = 2
-client  = MongoClient(serverSelectionTimeoutMS=50)
-db = client.sklearndatabase
+client  = MongoClient('mongodb://root:MobileSensing123@ds035747.mlab.com:35747/ms2018')
+db = client.ms2018
 
 
 # create feature/label vectors from database

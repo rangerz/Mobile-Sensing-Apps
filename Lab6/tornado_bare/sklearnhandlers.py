@@ -11,10 +11,23 @@ from tornado.options import define, options
 from basehandler import BaseHandler
 
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import SGDClassifier
+from sklearn.ensemble import RandomForestClassifier
+
 import pickle
 from bson.binary import Binary
 import json
 import numpy as np
+
+def initModel(self, params={}):
+    if None == self.clf["KNN"]:
+        self.clf["KNN"] = KNeighborsClassifier(n_neighbors=3)
+
+    if None == self.clf["SVM"]:
+        self.clf["SVM"] = SGDClassifier(loss='log', alpha=.001)
+
+    if None == self.clf["RF"]:
+        self.clf["RF"] = RandomForestClassifier(n_estimators=100, max_depth=2, random_state=0)
 
 class PrintHandlers(BaseHandler):
     def get(self):
@@ -55,7 +68,9 @@ class UpdateModelForDatasetId(BaseHandler):
     def get(self):
         '''Train a new model (or update) for given dataset ID
         '''
+        initModel(self)
         dsid = self.get_int_arg("dsid",default=0)
+        # self.clf_type = self.get_string_arg("class") # TODO: get arg for clf type
 
         # create feature vectors from database
         f=[];
@@ -68,7 +83,7 @@ class UpdateModelForDatasetId(BaseHandler):
             l.append(a['label'])
 
         # fit the model to the data
-        c1 = KNeighborsClassifier(n_neighbors=3);
+        c1 = self.clf[self.clf_type]
         acc = -1;
         if l:
             c1.fit(f,l) # training
@@ -76,8 +91,9 @@ class UpdateModelForDatasetId(BaseHandler):
             self.clf[dsid] = c1
             acc = sum(lstar==l)/float(len(l))
             bytes = pickle.dumps(c1)
-            self.db.models.update({"dsid":dsid},
-                {  "$set": {"model":Binary(bytes)}  },
+            self.db.models.update(
+                {"type": self.clf_type},
+                {"$set": {"model":Binary(bytes)}},
                 upsert=True)
 
         # send back the resubstitution accuracy
@@ -88,6 +104,7 @@ class PredictOneFromDatasetId(BaseHandler):
     def post(self):
         '''Predict the class of a sent feature vector
         '''
+        initModel(self)
         data = json.loads(self.request.body.decode("utf-8"))    
 
         vals = data['feature'];
@@ -97,21 +114,13 @@ class PredictOneFromDatasetId(BaseHandler):
 
         # load the model from the database (using pickle)
         # we are blocking tornado!! no!!
-        if dsid in self.clf:
-            print('Loading Model From DB')
-            tmp = self.db.models.find_one({"dsid":dsid})
-            if tmp:
-                self.clf[dsid] = pickle.loads(tmp['model'])
-            else:
-                self.clf[dsid] = KNeighborsClassifier(n_neighbors=3)
-                bytes = pickle.dumps(c1)
-                self.db.models.update({"dsid":dsid},
-                    {  "$set": {"model":Binary(bytes)}  },
-                    upsert=True)
-
-        if dsid in self.clf:
-            predLabel = self.clf[dsid].predict(fvals);
+        print('Loading Model From DB')
+        tmp = self.db.models.find_one({"type": self.clf_type})
+        if tmp:
+            self.clf[self.clf_type] = pickle.loads(tmp['model'])
+            predLabel = self.clf[self.clf_type].predict(fvals);
         else:
+            print("Model is not tranined yet")
             predLabel = 'Unknown'
 
         self.write_json({"prediction":str(predLabel)})

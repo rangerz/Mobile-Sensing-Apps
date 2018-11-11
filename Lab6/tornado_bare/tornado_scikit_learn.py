@@ -45,6 +45,7 @@ class Application(tornado.web.Application):
 
         try:
             self.client = MongoClient('mongodb://root:MobileSensing123@ds035747.mlab.com:35747/ms2018')
+            # self.client = MongoClient(serverSelectionTimeoutMS=5)
             print(self.client.server_info()) # force pymongo to look for possible running servers, error if none running
             # if we get here, at least one instance of pymongo is running
             self.db = self.client.ms2018 # database with labeledinstances, models
@@ -54,8 +55,13 @@ class Application(tornado.web.Application):
             print('Are you running a valid local-hosted instance of mongodb?')
             #raise inst
         
-        self.clf = {} # the classifier model (in-class assignment, you might need to change this line!)
-        # but depending on your implementation, you may not need to change it  ¯\_(ツ)_/¯
+        self.clf = {
+            "KNN": None,
+            "SVM": None,
+            "RF": None #Random Forest
+        }
+
+        self.clf_type = "RF"
 
         settings = {'debug':True}
         tornado.web.Application.__init__(self, handlers, **settings)

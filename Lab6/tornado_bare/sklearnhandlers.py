@@ -51,6 +51,7 @@ class PrintHandlers(BaseHandler):
         self.write(self.application.handlers_string.replace('),','),\n'))
 
 class UpdateModelParam(BaseHandler):
+    @require_login
     def get(self):
         if "KNN" == self.clf_type:
             n_neighbors = self.get_float_arg("param", default=3)

@@ -38,9 +38,13 @@ class ViewController: UIViewController, URLSessionDelegate {
     var isCalibrating = false
     var dsid:Int = 2
     let cookie_secret = "eric_cookie=61oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o"
+    var currentAlgorithm = 0
     
     var isWaitingForMotionData = false
     
+    @IBOutlet weak var paramSlider: UISlider!
+    @IBOutlet weak var paramLabel: UILabel!
+    @IBOutlet weak var paramValue: UILabel!
     @IBOutlet weak var awayArrow: UILabel!
     @IBOutlet weak var rightArrow: UILabel!
     @IBOutlet weak var towardsArrow: UILabel!
@@ -297,12 +301,68 @@ class ViewController: UIViewController, URLSessionDelegate {
         }
         
     }
+
+    func getAlgorithm() -> String {
+        switch self.currentAlgorithm {
+        case 0:
+            return "KNN"
+        case 1:
+            return "SVM"
+        default:
+            return "RF"
+        }
+    }
+    
+    func getHelpLabel() {
+        switch self.currentAlgorithm {
+        case 0:
+            self.paramLabel.text = "Select the number of neighbors"
+            self.paramSlider.minimumValue = 1
+            self.paramSlider.maximumValue = 10
+            self.paramSlider.value = 3
+            self.paramValue.text = "3"
+        case 1:
+            self.paramLabel.text = "Select alpha"
+            self.paramSlider.minimumValue = 0
+            self.paramSlider.maximumValue = 4
+            self.paramSlider.value = 3
+            self.paramValue.text = "0.0001"
+        default:
+            self.paramLabel.text = "Select the number of estimators"
+            self.paramSlider.minimumValue = 1
+            self.paramSlider.maximumValue = 200
+            self.paramSlider.value = 100
+            self.paramValue.text = "100"
+        }
+    }
+    
+    @IBAction func onAlgorithmChange(_ sender: UISegmentedControl) {
+        self.currentAlgorithm = sender.selectedSegmentIndex
+        getHelpLabel()
+    }
+    
+    @IBAction func onParamChange(_ sender: UISlider) {
+        switch self.currentAlgorithm {
+        case 0:
+            self.paramValue.text = "\(Int(sender.value))"
+        case 1:
+            var number = "0."
+            if (Int(sender.value) > 0) {
+                for _ in 1...Int(sender.value) {
+                    number.append("0")
+                }
+            }
+            self.paramValue.text = "\(number)1"
+        default:
+            self.paramValue.text = "\(Int(sender.value))"
+        }
+    }
     
     @IBAction func makeModel(_ sender: AnyObject) {
         
         // create a GET request for server to update the ML model with current data
         let baseURL = "\(SERVER_URL)/UpdateModel"
-        let query = "?dsid=\(self.dsid)&type=KNN"
+        let query = "?dsid=\(self.dsid)&type=\(self.getAlgorithm())&param=\(self.paramValue.text!)"
         // type support KNN, SVM, and RF
         
         let getUrl = URL(string: baseURL+query)

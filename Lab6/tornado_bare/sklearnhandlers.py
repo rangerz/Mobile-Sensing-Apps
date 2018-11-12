@@ -50,6 +50,18 @@ class PrintHandlers(BaseHandler):
         self.set_header("Content-Type", "application/json")
         self.write(self.application.handlers_string.replace('),','),\n'))
 
+class UpdateModelParam(BaseHandler):
+    def get(self):
+        if "KNN" == self.clf_type:
+            n_neighbors = self.get_float_arg("param", default=3)
+            self.clf["KNN"] = KNeighborsClassifier(n_neighbors=n_neighbors)
+        elif "SVM" == self.clf_type:
+            alpha = self.get_float_arg("param", default=0.001)
+            self.clf["SVM"] = SGDClassifier(loss='log', alpha=alpha)
+        elif "RF":
+            n_estimators = self.get_float_arg("param", default=100)
+            self.clf["RF"] = RandomForestClassifier(n_estimators=n_estimators, max_depth=2, random_state=0)
+
 class UploadLabeledDatapointHandler(BaseHandler):
     @require_login
     def post(self):

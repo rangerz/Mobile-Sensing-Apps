@@ -85,8 +85,13 @@ class UpdateModelForDatasetId(BaseHandler):
         '''Train a new model (or update) for given dataset ID
         '''
         initModel(self)
-        dsid = self.get_int_arg("dsid",default=0)
-        # self.clf_type = self.get_string_arg("class") # TODO: get arg for clf type
+        dsid = self.get_int_arg("dsid", default=0)
+        clf_type = self.get_str_arg("type")
+
+        if clf_type in self.clf:
+            self.clf_type = clf_type
+        else:
+            print('Unknown type')
 
         # create feature vectors from database
         f=[];

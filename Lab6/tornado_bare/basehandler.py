@@ -120,6 +120,14 @@ class BaseHandler(tornado.web.RequestHandler):
             e = "%s could not be read as a long integer" % value
             raise HTTPJSONError(1, e)
 
+    def get_str_arg(self, name, default=[], strip=True):
+        try:
+            arg = self.get_argument(name, default, strip)
+            return default if arg == default else arg
+        except ValueError:
+            e = "%s could not be read as a string" % value
+            raise HTTPJSONError(1, e)
+
     def write_json(self, value={}):
         '''Completes header and writes JSONified 
            HTTP back to client

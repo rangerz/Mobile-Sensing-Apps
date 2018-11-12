@@ -408,7 +408,8 @@ class ViewController: UIViewController, URLSessionDelegate {
         
         // create a GET request for server to update the ML model with current data
         let baseURL = "\(SERVER_URL)/UpdateModel"
-        let query = "?dsid=\(self.dsid)"
+        let query = "?dsid=\(self.dsid)&type=KNN"
+        // type support KNN, SVM, and RF
         
         let getUrl = URL(string: baseURL+query)
         var request: URLRequest = URLRequest(url: getUrl!)

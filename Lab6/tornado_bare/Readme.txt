@@ -18,3 +18,6 @@ conda create --name mslc scipy numpy matplotlib tornado scikit-learn pymongo
 source activate mslc
 
 source deactivate mslc
+
+# OpenML
+pip install coremltools

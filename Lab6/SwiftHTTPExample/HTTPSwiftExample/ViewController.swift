@@ -210,7 +210,9 @@ class ViewController: UIViewController, URLSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+
+
+
         let sessionConfig = URLSessionConfiguration.ephemeral
         
         sessionConfig.timeoutIntervalForRequest = 5.0
@@ -251,7 +253,7 @@ class ViewController: UIViewController, URLSessionDelegate {
     func sendFeatures(_ array:[Double], withLabel label:CalibrationStage){
         let baseURL = "\(SERVER_URL)/AddDataPoint"
         let postUrl = URL(string: "\(baseURL)")
-        
+
         // create a custom HTTP POST request
         var request = URLRequest(url: postUrl!)
         request.setValue(self.cookie_secret, forHTTPHeaderField: "Cookie")
@@ -300,7 +302,8 @@ class ViewController: UIViewController, URLSessionDelegate {
         
         // create a GET request for server to update the ML model with current data
         let baseURL = "\(SERVER_URL)/UpdateModel"
-        let query = "?dsid=\(self.dsid)"
+        let query = "?dsid=\(self.dsid)&type=KNN"
+        // type support KNN, SVM, and RF
         
         let getUrl = URL(string: baseURL+query)
         var request: URLRequest = URLRequest(url: getUrl!)

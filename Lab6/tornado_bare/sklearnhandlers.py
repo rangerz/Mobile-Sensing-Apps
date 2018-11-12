@@ -18,6 +18,19 @@ import pickle
 from bson.binary import Binary
 import json
 import numpy as np
+import functools
+
+cookie_secret = "61oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o"
+
+def require_login(method):
+    @functools.wraps(method)
+    def wrapped(self, *args, **kwargs):
+        cookie = self.get_cookie("eric_cookie")
+        if cookie_secret != cookie:
+            self.redirect('GoAway')
+            return
+        return method(self, *args, **kwargs)
+    return wrapped
 
 def initModel(self, params={}):
     if None == self.clf["KNN"]:
@@ -38,6 +51,7 @@ class PrintHandlers(BaseHandler):
         self.write(self.application.handlers_string.replace('),','),\n'))
 
 class UploadLabeledDatapointHandler(BaseHandler):
+    @require_login
     def post(self):
         '''Save data point and class label to database
         '''
@@ -54,6 +68,7 @@ class UploadLabeledDatapointHandler(BaseHandler):
         self.write_json({"id":str(dbid),"feature":fvals,"label":label})
 
 class RequestNewDatasetId(BaseHandler):
+    @require_login
     def get(self):
         '''Get a new dataset ID for building a new dataset
         '''
@@ -65,12 +80,18 @@ class RequestNewDatasetId(BaseHandler):
         self.write_json({"dsid":newSessionId})
 
 class UpdateModelForDatasetId(BaseHandler):
+    @require_login
     def get(self):
         '''Train a new model (or update) for given dataset ID
         '''
         initModel(self)
-        dsid = self.get_int_arg("dsid",default=0)
-        # self.clf_type = self.get_string_arg("class") # TODO: get arg for clf type
+        dsid = self.get_int_arg("dsid", default=0)
+        clf_type = self.get_str_arg("type")
+
+        if clf_type in self.clf:
+            self.clf_type = clf_type
+        else:
+            print('Unknown type')
 
         # create feature vectors from database
         f=[];
@@ -101,6 +122,7 @@ class UpdateModelForDatasetId(BaseHandler):
         self.write_json({"resubAccuracy":acc})
 
 class PredictOneFromDatasetId(BaseHandler):
+    @require_login
     def post(self):
         '''Predict the class of a sent feature vector
         '''
@@ -124,3 +146,7 @@ class PredictOneFromDatasetId(BaseHandler):
             predLabel = 'Unknown'
 
         self.write_json({"prediction":str(predLabel)})
+
+class GoAway(BaseHandler):
+    def get(self):
+        self.write('Go Away Please')

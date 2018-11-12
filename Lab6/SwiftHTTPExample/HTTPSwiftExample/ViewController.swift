@@ -10,14 +10,6 @@
 //              tornado_example.py 
 //              from the course GitHub repository: tornado_bare, branch sklearn_example
 
-
-// if you do not know your local sharing server name try:
-//    ifconfig |grep inet   
-// to see what your public facing IP address is, the ip address can be used here
-//let SERVER_URL = "http://erics-macbook-pro.local:8000" // change this for your server name!!!
-//let SERVER_URL = "http://192.168.0.21:8000" // change this for your server name!!!
-//let SERVER_URL = "http://192.168.1.69:8000"
-
 import UIKit
 import CoreMotion
 
@@ -37,7 +29,6 @@ class ViewController: UIViewController, URLSessionDelegate {
     var magValue = 0.5
     var isCalibrating = false
     var dsid:Int = 2
-    let cookie_secret = "eric_cookie=61oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o"
     var currentAlgorithm = 0
     
     var isWaitingForMotionData = false
@@ -260,7 +251,7 @@ class ViewController: UIViewController, URLSessionDelegate {
 
         // create a custom HTTP POST request
         var request = URLRequest(url: postUrl!)
-        request.setValue(self.cookie_secret, forHTTPHeaderField: "Cookie")
+        request.setValue(COOKIE_SECRET, forHTTPHeaderField: "Cookie")
         request.httpShouldHandleCookies = true
         
         // data to send in body of post request (send arguments as json)
@@ -367,7 +358,7 @@ class ViewController: UIViewController, URLSessionDelegate {
         
         let getUrl = URL(string: baseURL+query)
         var request: URLRequest = URLRequest(url: getUrl!)
-        request.setValue(self.cookie_secret, forHTTPHeaderField: "Cookie")
+        request.setValue(COOKIE_SECRET, forHTTPHeaderField: "Cookie")
         request.httpShouldHandleCookies = true
         let dataTask : URLSessionDataTask = self.session.dataTask(with: request,
               completionHandler:{(data, response, error) in

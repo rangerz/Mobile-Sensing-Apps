@@ -22,7 +22,7 @@ class GameViewController: UIViewController, URLSessionDelegate {
     var JSON = JSONUtilities()
     let animation = CATransition()
     let motion = CMMotionManager()
-    
+
     var magValue = 0.5
     var dsid:Int = 2
     var currentDirection = ""
@@ -114,6 +114,8 @@ class GameViewController: UIViewController, URLSessionDelegate {
         
         // create a custom HTTP POST request
         var request = URLRequest(url: postUrl!)
+        request.setValue(COOKIE_SECRET, forHTTPHeaderField: "Cookie")
+        request.httpShouldHandleCookies = true
         
         // data to send in body of post request (send arguments as json)
         let jsonUpload:NSDictionary = ["feature":array, "dsid":self.dsid]

@@ -6,6 +6,8 @@
 //  Copyright © 2018 Eric Larson. All rights reserved.
 //
 let SERVER_URL = "http://192.168.1.69:8000"
+//let SERVER_URL = "http://192.168.0.21:8000"
+let COOKIE_SECRET = "eric_cookie=61oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o"
 
 import UIKit
 

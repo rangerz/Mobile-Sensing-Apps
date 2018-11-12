@@ -15,8 +15,8 @@
 //    ifconfig |grep inet   
 // to see what your public facing IP address is, the ip address can be used here
 //let SERVER_URL = "http://erics-macbook-pro.local:8000" // change this for your server name!!!
-//let SERVER_URL = "http://192.168.0.21:8000" // change this for your server name!!!
-let SERVER_URL = "http://10.8.115.142:8000"
+let SERVER_URL = "http://192.168.0.21:8000" // change this for your server name!!!
+//let SERVER_URL = "http://10.8.115.142:8000"
 
 import UIKit
 import CoreMotion
@@ -35,7 +35,8 @@ class ViewController: UIViewController, URLSessionDelegate {
     
     var magValue = 0.1
     var isCalibrating = false
-    
+    let cookie_secret = "eric_cookie=61oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o"
+
     var isWaitingForMotionData = false
     
     @IBOutlet weak var dsidLabel: UILabel!
@@ -236,7 +237,9 @@ class ViewController: UIViewController, URLSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+
+
+
         let sessionConfig = URLSessionConfiguration.ephemeral
         
         sessionConfig.timeoutIntervalForRequest = 5.0
@@ -265,7 +268,9 @@ class ViewController: UIViewController, URLSessionDelegate {
         let baseURL = "\(SERVER_URL)/GetNewDatasetId"
         
         let getUrl = URL(string: baseURL)
-        let request: URLRequest = URLRequest(url: getUrl!)
+        var request: URLRequest = URLRequest(url: getUrl!)
+        request.setValue(self.cookie_secret, forHTTPHeaderField: "Cookie")
+        request.httpShouldHandleCookies = true
         let dataTask : URLSessionDataTask = self.session.dataTask(with: request,
             completionHandler:{(data, response, error) in
                 if(error != nil){
@@ -297,9 +302,11 @@ class ViewController: UIViewController, URLSessionDelegate {
     func sendFeatures(_ array:[Double], withLabel label:CalibrationStage){
         let baseURL = "\(SERVER_URL)/AddDataPoint"
         let postUrl = URL(string: "\(baseURL)")
-        
+
         // create a custom HTTP POST request
         var request = URLRequest(url: postUrl!)
+        request.setValue(self.cookie_secret, forHTTPHeaderField: "Cookie")
+        request.httpShouldHandleCookies = true
         
         // data to send in body of post request (send arguments as json)
         let jsonUpload:NSDictionary = ["feature":array,
@@ -336,6 +343,8 @@ class ViewController: UIViewController, URLSessionDelegate {
         
         // create a custom HTTP POST request
         var request = URLRequest(url: postUrl!)
+        request.setValue(self.cookie_secret, forHTTPHeaderField: "Cookie")
+        request.httpShouldHandleCookies = true
         
         // data to send in body of post request (send arguments as json)
         let jsonUpload:NSDictionary = ["feature":array, "dsid":self.dsid]
@@ -402,7 +411,9 @@ class ViewController: UIViewController, URLSessionDelegate {
         let query = "?dsid=\(self.dsid)"
         
         let getUrl = URL(string: baseURL+query)
-        let request: URLRequest = URLRequest(url: getUrl!)
+        var request: URLRequest = URLRequest(url: getUrl!)
+        request.setValue(self.cookie_secret, forHTTPHeaderField: "Cookie")
+        request.httpShouldHandleCookies = true
         let dataTask : URLSessionDataTask = self.session.dataTask(with: request,
               completionHandler:{(data, response, error) in
                 // handle error!

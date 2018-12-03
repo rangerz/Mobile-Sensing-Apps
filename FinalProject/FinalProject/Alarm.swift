@@ -22,6 +22,6 @@ class AlarmModel {
         // Get date string
         formatter.dateFormat = "MMM d, yyyy"
         parsedDate = formatter.string(from: alarm.date!)
-        self.date = parsedDate
+        self.date = parsedDate  
     }
 }

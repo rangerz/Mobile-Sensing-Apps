@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreData
+import UserNotifications
 
 final class Alarms {
     static let sharedInstance = Alarms()
@@ -54,10 +55,34 @@ final class Alarms {
         // Save context
         do {
             try managedContext.save()
+            // Create notification
+            createNotification(date: date)
             return true
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
             return false
+        }
+    }
+    
+    func createNotification(date: Date) {
+        let content = UNMutableNotificationContent()
+        content.title = NSString.localizedUserNotificationString(forKey: "Wake up!", arguments: nil)
+        content.body = NSString.localizedUserNotificationString(forKey: "Rise and shine! It's morning time!", arguments: nil)
+        content.sound = UNNotificationSound.default
+        
+        let userCalendar = Calendar.current
+        let dateComponents = userCalendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: "Alarm", content: content, trigger: trigger)
+        
+        let center = UNUserNotificationCenter.current()
+        
+        center.add(request) { (error : Error?) in
+            if let theError = error {
+                print(theError.localizedDescription)
+            }
         }
     }
     

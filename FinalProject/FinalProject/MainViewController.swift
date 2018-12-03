@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import UserNotifications
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, UNUserNotificationCenterDelegate {
     
     @IBOutlet weak var alarmCollection: UICollectionView!
     @IBOutlet weak var newButton: UIButton!
@@ -19,6 +20,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
 
         newButton.layer.cornerRadius = 8
+        UNUserNotificationCenter.current().delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,6 +34,24 @@ class MainViewController: UIViewController {
         // Reload data in collection view
         self.alarmCollection.reloadData()
     }
+    
+    // MARK: Notifications
+    // Allow in-app notifications
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        // TODO: Play alarm sound
+        
+        // Allow alert and sound on in-app notifications
+        completionHandler([.alert, .sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        // TODO: Fire alarm modal
+        let modalVC: AlarmOnViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AlarmOnViewController") as UIViewController as! AlarmOnViewController
+        
+        self.present(modalVC, animated: false, completion: nil)
+    }
+    
 }
 
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -46,6 +66,24 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         return cell
     }
 }
+
+//extension MainViewController : UNUserNotificationCenterDelegate {
+//    private func userNotificationCenter(_ center: UNUserNotificationCenter,
+//                                willPresent notification: UNNotification,
+//                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+//        // Update the app interface directly.
+//
+//        // Play a sound.
+//        completionHandler(UNNotificationPresentationOptions.sound)
+//    }
+
+////    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+////        completionHandler(UNNotificationPresentationOptions.sound)
+////    }
+////    func userNotificationCenter(_ center: UNUserNotificationCenter, openSettingsFor notification: UNNotification?) {
+////
+////    }
+//}
 
 extension UIView {
     // Add acces to parent ViewController in every view

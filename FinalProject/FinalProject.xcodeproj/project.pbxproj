@@ -19,6 +19,7 @@
 		B56019D721B442C8008CFB5C /* Alarms.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56019D621B442C8008CFB5C /* Alarms.swift */; };
 		B56019D921B444A3008CFB5C /* AlarmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56019D821B444A3008CFB5C /* AlarmCollectionViewCell.swift */; };
 		B5601A1921B464D4008CFB5C /* persistentData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5601A1721B464D4008CFB5C /* persistentData.xcdatamodeld */; };
+		B58CDF8621B5015600B95442 /* AlarmOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58CDF8521B5015600B95442 /* AlarmOnViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		B56019D621B442C8008CFB5C /* Alarms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarms.swift; sourceTree = "<group>"; };
 		B56019D821B444A3008CFB5C /* AlarmCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmCollectionViewCell.swift; sourceTree = "<group>"; };
 		B5601A1821B464D4008CFB5C /* persistentData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = persistentData.xcdatamodel; sourceTree = "<group>"; };
+		B58CDF8521B5015600B95442 /* AlarmOnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmOnViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				B56019A521B1A3E0008CFB5C /* Assets.xcassets */,
 				B56019A721B1A3E0008CFB5C /* LaunchScreen.storyboard */,
 				B56019AA21B1A3E0008CFB5C /* Info.plist */,
+				B58CDF8521B5015600B95442 /* AlarmOnViewController.swift */,
 			);
 			path = FinalProject;
 			sourceTree = "<group>";
@@ -208,6 +211,11 @@
 				TargetAttributes = {
 					B560199A21B1A3DE008CFB5C = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					B56019AE21B1A3E0008CFB5C = {
 						CreatedOnToolsVersion = 10.1;
@@ -278,6 +286,7 @@
 				B56019D721B442C8008CFB5C /* Alarms.swift in Sources */,
 				B5601A1921B464D4008CFB5C /* persistentData.xcdatamodeld in Sources */,
 				B56019D321B36AD6008CFB5C /* CreateAlarmViewController.swift in Sources */,
+				B58CDF8621B5015600B95442 /* AlarmOnViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

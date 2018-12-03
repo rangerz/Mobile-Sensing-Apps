@@ -10,9 +10,15 @@ import UIKit
 
 class AlarmCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var contView: UIView!
+    
+    var dataSource = Alarms.sharedInstance
+    var mainCtrl = MainViewController()
+    
+    var index: Int = -1
     
     var gradientLayer: CAGradientLayer!
     var gradients = [
@@ -28,8 +34,13 @@ class AlarmCollectionViewCell: UICollectionViewCell {
          UIColor.init(rgbColorCodeRed: 253, green: 131, blue: 243, alpha: 0.5).cgColor],
     ]
     
-    func setAlarm(alarm: Alarm, index: Int) {
+    func setAlarm(alarm: AlarmModel, index: Int) {
+        // Set labels
         timeLabel.text = alarm.time
+        dateLabel.text = alarm.date
+        // Save index from context to delete if necessary
+        self.index = index
+        // Add gradient
         createGradientLayer(index: index)
     }
     
@@ -51,20 +62,32 @@ class AlarmCollectionViewCell: UICollectionViewCell {
         contView.backgroundColor = UIColor(white: 1, alpha: 0)
         // Set text color
         timeLabel.textColor = UIColor(white: 1, alpha: 1)
+        dateLabel.textColor = UIColor(white: 1, alpha: 0.7)
         // Bring content to the front
         bgView.bringSubviewToFront(contView)
+    }
+    
+    @IBAction func handleDelete(_ sender: UIButton) {
+        deleteAlarm()
+    }
+    
+    func deleteAlarm() {
+        if dataSource.deleteItem(index: self.index) {
+            if let mainViewController = parentViewController as? MainViewController {
+                // Reload data in collection view from main controller
+                mainViewController.reloadCollection()
+            }
+        }
     }
 }
 
 extension UIColor {
-
+    // Utility to use 255 range in RGB
     convenience init(rgbColorCodeRed red: Int, green: Int, blue: Int, alpha: CGFloat) {
-
         let redPart: CGFloat = CGFloat(red) / 255
         let greenPart: CGFloat = CGFloat(green) / 255
         let bluePart: CGFloat = CGFloat(blue) / 255
 
         self.init(red: redPart, green: greenPart, blue: bluePart, alpha: alpha)
-
     }
 }

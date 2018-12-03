@@ -8,12 +8,20 @@
 
 import Foundation
 
-class Alarm {
+class AlarmModel {
     var time: String
-    var active: Bool
+    var date: String
     
-    init(time: String, active: Bool) {
-        self.time = time
-        self.active = active
+    init(alarm: Alarm) {
+        // Get time string
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        var parsedDate = formatter.string(from: alarm.date!)
+        self.time = parsedDate
+        
+        // Get date string
+        formatter.dateFormat = "MMM d, yyyy"
+        parsedDate = formatter.string(from: alarm.date!)
+        self.date = parsedDate
     }
 }

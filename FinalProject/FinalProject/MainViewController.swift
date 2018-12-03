@@ -10,25 +10,28 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    @IBOutlet weak var alarmCollection: UICollectionView!
+    @IBOutlet weak var newButton: UIButton!
+    
     var dataSource = Alarms.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        newButton.layer.cornerRadius = 8
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadCollection()
     }
-    */
-
+    
+    func reloadCollection() {
+        // Get new data from DB
+        dataSource.refreshData()
+        // Reload data in collection view
+        self.alarmCollection.reloadData()
+    }
 }
 
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -38,9 +41,22 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let alarm = dataSource.alarms[indexPath.row]
-//        let cell = collectionView.dequeueReusableCell(withIdentifier: "AlarmCell") as! AlarmCollectionViewCell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AlarmCollectionCell", for: indexPath) as! AlarmCollectionViewCell
         cell.setAlarm(alarm: alarm, index: indexPath.row)
         return cell
+    }
+}
+
+extension UIView {
+    // Add acces to parent ViewController in every view
+    var parentViewController: UIViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.next
+            if let viewController = parentResponder as? UIViewController {
+                return viewController
+            }
+        }
+        return nil
     }
 }

@@ -7,27 +7,36 @@
 //
 
 import UIKit
+import CoreData
 
 class CreateAlarmViewController: UIViewController {
 
+    @IBOutlet weak var picker: UIDatePicker!
+    @IBOutlet weak var saveButton: UIButton!
+    
+    var dataSource = Alarms.sharedInstance
+    var mainController = MainViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // Set min date to current date
+        picker.minimumDate = Date()
+        saveButton.layer.cornerRadius = 8
     }
     
-    @IBAction func handleClose(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+    @IBAction func handleSave(_ sender: UIButton) {
+        save(date: picker.date)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func save(date: Date) {
+        // Save data and pop view
+        if dataSource.save(date: date) {
+            closeView()
+        }
     }
-    */
-
+    
+    func closeView() {
+        navigationController?.popViewController(animated: true)
+    }
 }

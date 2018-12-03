@@ -18,22 +18,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LKK-Ow-agK">
-                                <rect key="frame" x="320" y="32" width="39" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Close"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mGp-Gp-fP4">
+                                <rect key="frame" x="16" y="399" width="382" height="44"/>
+                                <color key="backgroundColor" red="0.082352941176470587" green="0.55686274509803924" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                <state key="normal" title="Save Alarm">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
                                 <connections>
-                                    <action selector="handleClose:" destination="idh-1r-93e" eventType="touchUpInside" id="c3d-kJ-asz"/>
+                                    <action selector="handleSave:" destination="idh-1r-93e" eventType="touchUpInside" id="aYY-cw-eWg"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New alarm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J7Z-4B-9tJ">
+                                <rect key="frame" x="32" y="104" width="168" height="41"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="zSI-r8-SpP">
+                                <rect key="frame" x="0.0" y="161" width="414" height="216"/>
+                                <date key="date" timeIntervalSinceReferenceDate="565470008.72153497">
+                                    <!--2018-12-02 19:00:08 +0000-->
+                                </date>
+                                <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
+                                    <!--1970-01-01 11:00:00 +0000-->
+                                </date>
+                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="zSI-r8-SpP" firstAttribute="top" secondItem="J7Z-4B-9tJ" secondAttribute="bottom" constant="16" id="6r8-Ys-28X"/>
+                            <constraint firstItem="zSI-r8-SpP" firstAttribute="trailing" secondItem="Tfo-Cb-qcL" secondAttribute="trailing" id="8N0-mF-ipF"/>
+                            <constraint firstItem="mGp-Gp-fP4" firstAttribute="leading" secondItem="Tfo-Cb-qcL" secondAttribute="leading" constant="16" id="9r3-fV-qav"/>
+                            <constraint firstItem="J7Z-4B-9tJ" firstAttribute="leading" secondItem="Tfo-Cb-qcL" secondAttribute="leading" constant="32" id="eeq-6b-U2c"/>
+                            <constraint firstItem="Tfo-Cb-qcL" firstAttribute="trailing" secondItem="mGp-Gp-fP4" secondAttribute="trailing" constant="16" id="gZp-Nd-686"/>
+                            <constraint firstItem="mGp-Gp-fP4" firstAttribute="top" secondItem="zSI-r8-SpP" secondAttribute="bottom" constant="22" id="gsn-p4-lii"/>
+                            <constraint firstItem="zSI-r8-SpP" firstAttribute="leading" secondItem="Tfo-Cb-qcL" secondAttribute="leading" id="hh9-ef-doy"/>
+                            <constraint firstItem="J7Z-4B-9tJ" firstAttribute="top" secondItem="Tfo-Cb-qcL" secondAttribute="top" constant="16" id="wLA-zb-ahA"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Tfo-Cb-qcL"/>
                     </view>
+                    <connections>
+                        <outlet property="picker" destination="zSI-r8-SpP" id="pqV-KM-0vK"/>
+                        <outlet property="saveButton" destination="mGp-Gp-fP4" id="1VB-Wg-djg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xS2-om-8Uo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3787" y="460"/>
+            <point key="canvasLocation" x="3786.9565217391309" y="459.375"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="lv9-uy-0Fb">
@@ -53,10 +86,17 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b8g-j7-nRE">
-                                        <rect key="frame" x="293" y="5" width="73" height="30"/>
-                                        <state key="normal" title="New alarm"/>
+                                        <rect key="frame" x="276" y="5" width="90" height="30"/>
+                                        <color key="backgroundColor" red="0.08235294118" green="0.5568627451" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="90" id="4Eg-lC-VHE"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="New alarm">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
-                                            <segue destination="idh-1r-93e" kind="presentation" id="sLr-tm-wVw"/>
+                                            <segue destination="idh-1r-93e" kind="show" id="7FJ-ao-avQ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -93,22 +133,41 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="343" height="79"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZUE-Xa-ove">
-                                                                    <rect key="frame" x="20" y="15.5" width="303" height="48"/>
+                                                                    <rect key="frame" x="20" y="5" width="303" height="48"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="40"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="74x-Fy-gon">
-                                                                    <rect key="frame" x="286" y="24" width="51" height="31"/>
-                                                                </switch>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGG-jS-m9x">
+                                                                    <rect key="frame" x="20" y="50" width="200" height="21"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="200" id="opK-J2-1l5"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="paN-cc-QJp">
+                                                                    <rect key="frame" x="292" y="4" width="37" height="71"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <state key="normal" title="Delete">
+                                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="handleDelete:" destination="xw9-t7-VqO" eventType="touchUpInside" id="ibV-HD-ApO"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
-                                                                <constraint firstItem="ZUE-Xa-ove" firstAttribute="centerY" secondItem="74x-Fy-gon" secondAttribute="centerY" id="MdT-a9-HJR"/>
+                                                                <constraint firstItem="VGG-jS-m9x" firstAttribute="leading" secondItem="Uk3-So-zmr" secondAttribute="leading" constant="20" id="A9i-B3-uZe"/>
                                                                 <constraint firstItem="ZUE-Xa-ove" firstAttribute="leading" secondItem="Uk3-So-zmr" secondAttribute="leading" constant="20" id="bNK-yk-vGl"/>
+                                                                <constraint firstItem="VGG-jS-m9x" firstAttribute="bottom" secondItem="Uk3-So-zmr" secondAttribute="bottomMargin" id="hEj-nE-uII"/>
+                                                                <constraint firstItem="paN-cc-QJp" firstAttribute="centerY" secondItem="Uk3-So-zmr" secondAttribute="centerY" id="jfj-EC-fC8"/>
+                                                                <constraint firstAttribute="trailing" secondItem="paN-cc-QJp" secondAttribute="trailing" constant="14" id="kCQ-5B-rA6"/>
+                                                                <constraint firstItem="ZUE-Xa-ove" firstAttribute="top" secondItem="Uk3-So-zmr" secondAttribute="top" constant="5" id="nC6-QH-Z47"/>
                                                                 <constraint firstItem="ZUE-Xa-ove" firstAttribute="centerX" secondItem="Uk3-So-zmr" secondAttribute="centerX" id="oTG-Ed-fu7"/>
-                                                                <constraint firstItem="74x-Fy-gon" firstAttribute="trailing" secondItem="Uk3-So-zmr" secondAttribute="trailingMargin" id="yfi-cK-Xop"/>
-                                                                <constraint firstItem="ZUE-Xa-ove" firstAttribute="centerY" secondItem="Uk3-So-zmr" secondAttribute="centerY" id="yy1-tG-vog"/>
+                                                                <constraint firstAttribute="bottom" secondItem="paN-cc-QJp" secondAttribute="bottom" constant="4" id="wdx-pL-6eW"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
@@ -133,6 +192,7 @@
                                         <connections>
                                             <outlet property="bgView" destination="wXY-gm-oIH" id="Dnj-kC-5f2"/>
                                             <outlet property="contView" destination="Uk3-So-zmr" id="0dD-Ss-XCD"/>
+                                            <outlet property="dateLabel" destination="VGG-jS-m9x" id="UoY-fX-47t"/>
                                             <outlet property="timeLabel" destination="ZUE-Xa-ove" id="aEz-VJ-CVn"/>
                                         </connections>
                                     </collectionViewCell>
@@ -156,10 +216,14 @@
                         <viewLayoutGuide key="safeArea" id="5CX-5g-r7a"/>
                     </view>
                     <navigationItem key="navigationItem" id="5Lw-9P-Qiz"/>
+                    <connections>
+                        <outlet property="alarmCollection" destination="Ycy-Sm-Dkc" id="eCb-Cw-Mc5"/>
+                        <outlet property="newButton" destination="b8g-j7-nRE" id="KXo-BJ-Als"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yum-wh-JFV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2891.304347826087" y="460.04464285714283"/>
+            <point key="canvasLocation" x="2889.8550724637685" y="460.04464285714283"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="X78-GA-u4U">

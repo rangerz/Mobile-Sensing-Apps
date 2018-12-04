@@ -501,5 +501,20 @@
             </objects>
             <point key="canvasLocation" x="4689.8550724637689" y="1207.3660714285713"/>
         </scene>
+        <!--Game View Controller-->
+        <scene sceneID="PXv-KT-vBJ">
+            <objects>
+                <viewController storyboardIdentifier="GameChallengeViewController" id="Yhu-hq-W94" customClass="GameViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qro-hI-ebS" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="OD0-S2-YzI"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="geu-Fe-fBO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4690" y="1915"/>
+        </scene>
     </scenes>
 </document>

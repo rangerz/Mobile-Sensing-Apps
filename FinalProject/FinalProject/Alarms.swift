@@ -83,7 +83,7 @@ final class Alarms {
         
 //        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
-        
+
         let request = UNNotificationRequest(identifier: "Alarm-\(nextIndex)-\(alarmNameIndex)-\(hash)", content: content, trigger: trigger)
         
         let center = UNUserNotificationCenter.current()
@@ -103,7 +103,7 @@ final class Alarms {
             // Get alarm object
             let toRemove = alarms[index]
             // Cancel notification by reconstructing its identifier
-            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ["Alarm-\(index)-\(toRemove.alarmNameIndex)-\(toRemove.hash)"])
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["Alarm-\(index)-\(toRemove.alarmNameIndex)-\(toRemove.hash)"])
         }
 
         do {

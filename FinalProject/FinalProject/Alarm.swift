@@ -26,7 +26,7 @@ class AlarmModel {
         parsedDate = formatter.string(from: alarm.date!)
         self.date = parsedDate
         
-        // Store hash to identify alarm
+        // Store hash to identify alarm while removing them
         self.hash = alarm.id!
         
         // Store alarm name index

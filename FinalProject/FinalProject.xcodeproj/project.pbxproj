@@ -29,7 +29,10 @@
 		B578DF8221B5E36E004AD521 /* JSONUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF8121B5E36E004AD521 /* JSONUtilities.swift */; };
 		B578DF8621B626CF004AD521 /* FaceDetectorChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF8521B626CF004AD521 /* FaceDetectorChallengeViewController.swift */; };
 		B578DF8821B62996004AD521 /* VideoAnalgesic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF8721B62996004AD521 /* VideoAnalgesic.swift */; };
+		B578DF8A21B64895004AD521 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF8921B64895004AD521 /* GameViewController.swift */; };
+		B578DF8C21B64918004AD521 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF8B21B64918004AD521 /* GameScene.swift */; };
 		B58CDF8621B5015600B95442 /* AlarmOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58CDF8521B5015600B95442 /* AlarmOnViewController.swift */; };
+		B5D07EA321B64AEE008C4BFD /* gold.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D07EA221B64AED008C4BFD /* gold.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,7 +81,10 @@
 		B578DF8121B5E36E004AD521 /* JSONUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONUtilities.swift; sourceTree = "<group>"; };
 		B578DF8521B626CF004AD521 /* FaceDetectorChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectorChallengeViewController.swift; sourceTree = "<group>"; };
 		B578DF8721B62996004AD521 /* VideoAnalgesic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAnalgesic.swift; sourceTree = "<group>"; };
+		B578DF8921B64895004AD521 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		B578DF8B21B64918004AD521 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		B58CDF8521B5015600B95442 /* AlarmOnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmOnViewController.swift; sourceTree = "<group>"; };
+		B5D07EA221B64AED008C4BFD /* gold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gold.png; path = "../../Lab3/Assignment 3/Assets.xcassets/gold.imageset/gold.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,7 +146,10 @@
 				B578DF7921B59DE0004AD521 /* SoundManager.swift */,
 				B56019D621B442C8008CFB5C /* Alarms.swift */,
 				B56019CC21B1A672008CFB5C /* Alarm.swift */,
+				B5D07EA221B64AED008C4BFD /* gold.png */,
 				B56019A221B1A3DE008CFB5C /* Main.storyboard */,
+				B578DF8B21B64918004AD521 /* GameScene.swift */,
+				B578DF8921B64895004AD521 /* GameViewController.swift */,
 				B578DF8521B626CF004AD521 /* FaceDetectorChallengeViewController.swift */,
 				B578DF7D21B5E2B7004AD521 /* MLChallengeViewController.swift */,
 				B578DF7B21B59F93004AD521 /* RunningChallengeViewController.swift */,
@@ -285,6 +294,7 @@
 				B56019A921B1A3E0008CFB5C /* LaunchScreen.storyboard in Resources */,
 				B578DF7821B598B3004AD521 /* submarine.mp3 in Resources */,
 				B56019A621B1A3E0008CFB5C /* Assets.xcassets in Resources */,
+				B5D07EA321B64AEE008C4BFD /* gold.png in Resources */,
 				B578DF7621B598B3004AD521 /* analog.mp3 in Resources */,
 				B56019A421B1A3DE008CFB5C /* Main.storyboard in Resources */,
 				B578DF7721B598B3004AD521 /* clockbuzzer.mp3 in Resources */,
@@ -323,7 +333,9 @@
 				B56019D721B442C8008CFB5C /* Alarms.swift in Sources */,
 				B578DF8221B5E36E004AD521 /* JSONUtilities.swift in Sources */,
 				B5601A1921B464D4008CFB5C /* persistentData.xcdatamodeld in Sources */,
+				B578DF8C21B64918004AD521 /* GameScene.swift in Sources */,
 				B56019D321B36AD6008CFB5C /* CreateAlarmViewController.swift in Sources */,
+				B578DF8A21B64895004AD521 /* GameViewController.swift in Sources */,
 				B578DF8621B626CF004AD521 /* FaceDetectorChallengeViewController.swift in Sources */,
 				B58CDF8621B5015600B95442 /* AlarmOnViewController.swift in Sources */,
 				B578DF7A21B59DE0004AD521 /* SoundManager.swift in Sources */,

@@ -56,7 +56,7 @@ class MainViewController: UIViewController, UNUserNotificationCenterDelegate {
         let items: [String] = response.notification.request.identifier.components(separatedBy: "-")
         // Get alarm index and try to remove it
         let alarmIndex = Int(items[1])!
-        let _ = dataSource.deleteItem(index: alarmIndex)
+        let _ = dataSource.deleteItem(index: alarmIndex, removeNotification: false)
         
         // Get alarm name index and play it again
         let alarmNameIndex = Int(items[2])!

@@ -72,7 +72,7 @@ class AlarmCollectionViewCell: UICollectionViewCell {
     }
     
     func deleteAlarm() {
-        if dataSource.deleteItem(index: self.index) {
+        if dataSource.deleteItem(index: self.index, removeNotification: true) {
             if let mainViewController = parentViewController as? MainViewController {
                 // Reload data in collection view from main controller
                 mainViewController.reloadCollection()

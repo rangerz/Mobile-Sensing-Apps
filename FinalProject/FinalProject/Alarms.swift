@@ -44,6 +44,8 @@ final class Alarms {
     }
     
     func save(date: Date) -> Bool {
+        let alarmHash = randomString(length: 4)
+        let alarmNameIndex = soundManager.getRandomAlarmIndex()
         let managedContext = getDBContext()
         // Create new object to be added and add its values
         let entity =
@@ -52,12 +54,14 @@ final class Alarms {
         let alarm = NSManagedObject(entity: entity,
                                     insertInto: managedContext)
         alarm.setValue(date, forKeyPath: "date")
+        alarm.setValue(alarmHash, forKey: "id")
+        alarm.setValue(alarmNameIndex, forKey: "alarmNameIndex")
         
         // Save context
         do {
             try managedContext.save()
             // Create notification with date and index of object
-            createNotification(date: date, nextIndex: alarmsDb.count)
+            createNotification(date: date, nextIndex: alarmsDb.count, hash: alarmHash, alarmNameIndex: alarmNameIndex)
             return true
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
@@ -65,8 +69,7 @@ final class Alarms {
         }
     }
     
-    func createNotification(date: Date, nextIndex: Int) {
-        let alarmNameIndex = soundManager.getRandomAlarmIndex()
+    func createNotification(date: Date, nextIndex: Int, hash: String, alarmNameIndex: Int) {
         let content = UNMutableNotificationContent()
         content.title = NSString.localizedUserNotificationString(forKey: "Wake up!", arguments: nil)
         content.body = NSString.localizedUserNotificationString(forKey: "Rise and shine! It's morning time!", arguments: nil)
@@ -81,7 +84,7 @@ final class Alarms {
 //        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
         
-        let request = UNNotificationRequest(identifier: "Alarm-\(nextIndex)-\(alarmNameIndex)", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: "Alarm-\(nextIndex)-\(alarmNameIndex)-\(hash)", content: content, trigger: trigger)
         
         let center = UNUserNotificationCenter.current()
         
@@ -92,8 +95,17 @@ final class Alarms {
         }
     }
     
-    func deleteItem(index: Int) -> Bool {
+    func deleteItem(index: Int, removeNotification: Bool) -> Bool {
         let managedContext = getDBContext()
+        
+        // If alarm hasn't sound, cancel alarm notification
+        if removeNotification {
+            // Get alarm object
+            let toRemove = alarms[index]
+            // Cancel notification by reconstructing its identifier
+            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ["Alarm-\(index)-\(toRemove.alarmNameIndex)-\(toRemove.hash)"])
+        }
+
         do {
             // Delete alarm in current context
             managedContext.delete(alarmsDb[index])
@@ -115,5 +127,11 @@ final class Alarms {
         }
         
         return appDelegate.persistentContainer.viewContext
+    }
+    
+    // Generate a random key
+    func randomString(length: Int) -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        return String((0...length-1).map{ _ in letters.randomElement()! })
     }
 }

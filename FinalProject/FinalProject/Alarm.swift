@@ -11,6 +11,8 @@ import Foundation
 class AlarmModel {
     var time: String
     var date: String
+    var hash: String
+    var alarmNameIndex: Int
     
     init(alarm: Alarm) {
         // Get time string
@@ -22,6 +24,12 @@ class AlarmModel {
         // Get date string
         formatter.dateFormat = "MMM d, yyyy"
         parsedDate = formatter.string(from: alarm.date!)
-        self.date = parsedDate  
+        self.date = parsedDate
+        
+        // Store hash to identify alarm
+        self.hash = alarm.id!
+        
+        // Store alarm name index
+        self.alarmNameIndex = Int(alarm.alarmNameIndex)
     }
 }

@@ -356,14 +356,23 @@
                                     <outlet property="delegate" destination="0rg-FQ-mnh" id="DUV-Cz-eiK"/>
                                 </connections>
                             </collectionView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No alarms yet 😫" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRZ-MS-K3F">
+                                <rect key="frame" x="32" y="214" width="350" height="38.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="5CX-5g-r7a" firstAttribute="bottom" secondItem="Ycy-Sm-Dkc" secondAttribute="bottom" constant="16" id="0py-zC-Yun"/>
                             <constraint firstItem="5CX-5g-r7a" firstAttribute="trailing" secondItem="qNX-IF-nai" secondAttribute="trailing" constant="16" id="4y9-TJ-nGj"/>
+                            <constraint firstAttribute="trailing" secondItem="FRZ-MS-K3F" secondAttribute="trailing" constant="32" id="9q1-Di-C5p"/>
                             <constraint firstItem="Ycy-Sm-Dkc" firstAttribute="top" secondItem="qNX-IF-nai" secondAttribute="bottom" constant="16" id="A4e-Pm-beE"/>
                             <constraint firstItem="5CX-5g-r7a" firstAttribute="trailing" secondItem="Ycy-Sm-Dkc" secondAttribute="trailing" constant="16" id="NH4-ps-hYJ"/>
                             <constraint firstItem="qNX-IF-nai" firstAttribute="top" secondItem="5CX-5g-r7a" secondAttribute="top" constant="16" id="azj-J9-OuB"/>
+                            <constraint firstItem="FRZ-MS-K3F" firstAttribute="leading" secondItem="5CX-5g-r7a" secondAttribute="leading" constant="32" id="bJ5-Hc-rXJ"/>
+                            <constraint firstItem="FRZ-MS-K3F" firstAttribute="top" secondItem="qNX-IF-nai" secondAttribute="bottom" constant="70" id="dx2-Hs-J0N"/>
                             <constraint firstItem="Ycy-Sm-Dkc" firstAttribute="leading" secondItem="5CX-5g-r7a" secondAttribute="leading" constant="16" id="ict-na-cHj"/>
                             <constraint firstItem="qNX-IF-nai" firstAttribute="leading" secondItem="5CX-5g-r7a" secondAttribute="leading" constant="16" id="xtu-aU-uFN"/>
                         </constraints>
@@ -372,6 +381,7 @@
                     <navigationItem key="navigationItem" id="5Lw-9P-Qiz"/>
                     <connections>
                         <outlet property="alarmCollection" destination="Ycy-Sm-Dkc" id="eCb-Cw-Mc5"/>
+                        <outlet property="emptyLabel" destination="FRZ-MS-K3F" id="T03-5i-Jsa"/>
                         <outlet property="newButton" destination="b8g-j7-nRE" id="KXo-BJ-Als"/>
                     </connections>
                 </viewController>

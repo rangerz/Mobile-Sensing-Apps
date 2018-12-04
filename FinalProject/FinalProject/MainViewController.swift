@@ -13,6 +13,7 @@ class MainViewController: UIViewController, UNUserNotificationCenterDelegate {
     
     @IBOutlet weak var alarmCollection: UICollectionView!
     @IBOutlet weak var newButton: UIButton!
+    @IBOutlet weak var emptyLabel: UILabel!
     
     var dataSource = Alarms.sharedInstance
     var soundManager = SoundManager.sharedInstance
@@ -32,6 +33,13 @@ class MainViewController: UIViewController, UNUserNotificationCenterDelegate {
     func reloadCollection() {
         // Get new data from DB
         dataSource.refreshData()
+        
+        if dataSource.alarms.count == 0 {
+            emptyLabel.isHidden = false
+        } else {
+            emptyLabel.isHidden = true
+        }
+        
         // Reload data in collection view
         self.alarmCollection.reloadData()
     }

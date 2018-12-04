@@ -15,6 +15,7 @@ final class Alarms {
     static let sharedInstance = Alarms()
     var alarms: [AlarmModel] = []
     var alarmsDb: [NSManagedObject] = []
+    var soundManager = SoundManager.sharedInstance
     
     fileprivate init() {
         refreshData()
@@ -55,8 +56,8 @@ final class Alarms {
         // Save context
         do {
             try managedContext.save()
-            // Create notification
-            createNotification(date: date)
+            // Create notification with date and index of object
+            createNotification(date: date, nextIndex: alarmsDb.count)
             return true
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
@@ -64,18 +65,23 @@ final class Alarms {
         }
     }
     
-    func createNotification(date: Date) {
+    func createNotification(date: Date, nextIndex: Int) {
+        let alarmNameIndex = soundManager.getRandomAlarmIndex()
         let content = UNMutableNotificationContent()
         content.title = NSString.localizedUserNotificationString(forKey: "Wake up!", arguments: nil)
         content.body = NSString.localizedUserNotificationString(forKey: "Rise and shine! It's morning time!", arguments: nil)
-        content.sound = UNNotificationSound.default
+//        content.sound = UNNotificationSound.default
+        
+        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundManager.getAlarmNameForIndex(index: alarmNameIndex)))
+        
         
         let userCalendar = Calendar.current
         let dateComponents = userCalendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
         
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+//        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
         
-        let request = UNNotificationRequest(identifier: "Alarm", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: "Alarm-\(nextIndex)-\(alarmNameIndex)", content: content, trigger: trigger)
         
         let center = UNUserNotificationCenter.current()
         

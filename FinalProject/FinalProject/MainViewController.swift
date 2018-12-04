@@ -15,6 +15,7 @@ class MainViewController: UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet weak var newButton: UIButton!
     
     var dataSource = Alarms.sharedInstance
+    var soundManager = SoundManager.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,22 +39,29 @@ class MainViewController: UIViewController, UNUserNotificationCenterDelegate {
     // MARK: Notifications
     // Allow in-app notifications
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        // TODO: Play alarm sound
-        
         // Allow alert and sound on in-app notifications
         completionHandler([.alert, .sound])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
-        // TODO: Fire alarm modal
-        let modalVC: AlarmOnViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AlarmOnViewController") as UIViewController as! AlarmOnViewController
+        let items: [String] = response.notification.request.identifier.components(separatedBy: "-")
+        // Get alarm index and try to remove it
+        let alarmIndex = Int(items[1])!
+        let _ = dataSource.deleteItem(index: alarmIndex)
         
+        // Get alarm name index and play it again
+        let alarmNameIndex = Int(items[2])!
+        soundManager.startAlarm(index: alarmNameIndex)
+        
+        // Present new view controller
+        let modalVC: AlarmOnViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AlarmOnViewController") as UIViewController as! AlarmOnViewController
         self.present(modalVC, animated: false, completion: nil)
     }
     
 }
 
+// Handle collection view with alarms list
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.alarms.count
@@ -66,24 +74,6 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         return cell
     }
 }
-
-//extension MainViewController : UNUserNotificationCenterDelegate {
-//    private func userNotificationCenter(_ center: UNUserNotificationCenter,
-//                                willPresent notification: UNNotification,
-//                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-//        // Update the app interface directly.
-//
-//        // Play a sound.
-//        completionHandler(UNNotificationPresentationOptions.sound)
-//    }
-
-////    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-////        completionHandler(UNNotificationPresentationOptions.sound)
-////    }
-////    func userNotificationCenter(_ center: UNUserNotificationCenter, openSettingsFor notification: UNNotification?) {
-////
-////    }
-//}
 
 extension UIView {
     // Add acces to parent ViewController in every view

@@ -20,6 +20,8 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSMotionUsageDescription</key>
+	<string>Hey, we need to use your data to have a cool alarm? Agree?</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

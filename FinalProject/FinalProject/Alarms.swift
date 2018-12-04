@@ -81,8 +81,9 @@ final class Alarms {
         let userCalendar = Calendar.current
         let dateComponents = userCalendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
         
-//        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        // Debug trigger, to not wait until selected time
+        // let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
 
         let request = UNNotificationRequest(identifier: "Alarm-\(nextIndex)-\(alarmNameIndex)-\(hash)", content: content, trigger: trigger)
         

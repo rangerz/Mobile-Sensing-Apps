@@ -32,6 +32,10 @@
 		B578DF8A21B64895004AD521 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF8921B64895004AD521 /* GameViewController.swift */; };
 		B578DF8C21B64918004AD521 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF8B21B64918004AD521 /* GameScene.swift */; };
 		B58CDF8621B5015600B95442 /* AlarmOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58CDF8521B5015600B95442 /* AlarmOnViewController.swift */; };
+		B5A43C6821B6C8940048A808 /* OpenCVBridgeSub.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5A43C6721B6C8940048A808 /* OpenCVBridgeSub.mm */; };
+		B5A43C6B21B6C9200048A808 /* OpenCVBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5A43C6A21B6C9200048A808 /* OpenCVBridge.mm */; };
+		B5A43C6E21B6C9620048A808 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5A43C6D21B6C9620048A808 /* opencv2.framework */; };
+		B5A43C7221B6CC710048A808 /* ColorChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A43C7121B6CC710048A808 /* ColorChallengeViewController.swift */; };
 		B5D07EA321B64AEE008C4BFD /* gold.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D07EA221B64AED008C4BFD /* gold.png */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +88,14 @@
 		B578DF8921B64895004AD521 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		B578DF8B21B64918004AD521 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		B58CDF8521B5015600B95442 /* AlarmOnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmOnViewController.swift; sourceTree = "<group>"; };
+		B5A43C6521B6C86D0048A808 /* OpenCVBridgeSub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVBridgeSub.h; sourceTree = "<group>"; };
+		B5A43C6621B6C8930048A808 /* FinalProject-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FinalProject-Bridging-Header.h"; sourceTree = "<group>"; };
+		B5A43C6721B6C8940048A808 /* OpenCVBridgeSub.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVBridgeSub.mm; sourceTree = "<group>"; };
+		B5A43C6921B6C9200048A808 /* OpenCVBridge.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenCVBridge.hh; sourceTree = "<group>"; };
+		B5A43C6A21B6C9200048A808 /* OpenCVBridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVBridge.mm; sourceTree = "<group>"; };
+		B5A43C6C21B6C9410048A808 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		B5A43C6D21B6C9620048A808 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = FinalProject/opencv2.framework; sourceTree = "<group>"; };
+		B5A43C7121B6CC710048A808 /* ColorChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChallengeViewController.swift; sourceTree = "<group>"; };
 		B5D07EA221B64AED008C4BFD /* gold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gold.png; path = "../../Lab3/Assignment 3/Assets.xcassets/gold.imageset/gold.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5A43C6E21B6C9620048A808 /* opencv2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +128,7 @@
 		B560199221B1A3DE008CFB5C = {
 			isa = PBXGroup;
 			children = (
+				B5A43C6D21B6C9620048A808 /* opencv2.framework */,
 				B560199D21B1A3DE008CFB5C /* FinalProject */,
 				B56019B221B1A3E0008CFB5C /* FinalProjectTests */,
 				B56019BD21B1A3E0008CFB5C /* FinalProjectUITests */,
@@ -135,9 +149,6 @@
 		B560199D21B1A3DE008CFB5C /* FinalProject */ = {
 			isa = PBXGroup;
 			children = (
-				B578DF7321B598B3004AD521 /* analog.mp3 */,
-				B578DF7421B598B3004AD521 /* clockbuzzer.mp3 */,
-				B578DF7521B598B3004AD521 /* submarine.mp3 */,
 				B560199E21B1A3DE008CFB5C /* AppDelegate.swift */,
 				B56019D821B444A3008CFB5C /* AlarmCollectionViewCell.swift */,
 				B56019D221B36AD6008CFB5C /* CreateAlarmViewController.swift */,
@@ -146,20 +157,30 @@
 				B578DF7921B59DE0004AD521 /* SoundManager.swift */,
 				B56019D621B442C8008CFB5C /* Alarms.swift */,
 				B56019CC21B1A672008CFB5C /* Alarm.swift */,
-				B5D07EA221B64AED008C4BFD /* gold.png */,
 				B56019A221B1A3DE008CFB5C /* Main.storyboard */,
+				B5A43C7121B6CC710048A808 /* ColorChallengeViewController.swift */,
 				B578DF8B21B64918004AD521 /* GameScene.swift */,
 				B578DF8921B64895004AD521 /* GameViewController.swift */,
 				B578DF8521B626CF004AD521 /* FaceDetectorChallengeViewController.swift */,
 				B578DF7D21B5E2B7004AD521 /* MLChallengeViewController.swift */,
 				B578DF7B21B59F93004AD521 /* RunningChallengeViewController.swift */,
-				B578DF8121B5E36E004AD521 /* JSONUtilities.swift */,
-				B578DF7F21B5E32E004AD521 /* RingBuffer.swift */,
-				B578DF8721B62996004AD521 /* VideoAnalgesic.swift */,
 				B5601A1721B464D4008CFB5C /* persistentData.xcdatamodeld */,
 				B56019A521B1A3E0008CFB5C /* Assets.xcassets */,
 				B56019A721B1A3E0008CFB5C /* LaunchScreen.storyboard */,
 				B56019AA21B1A3E0008CFB5C /* Info.plist */,
+				B578DF8121B5E36E004AD521 /* JSONUtilities.swift */,
+				B578DF8721B62996004AD521 /* VideoAnalgesic.swift */,
+				B578DF7F21B5E32E004AD521 /* RingBuffer.swift */,
+				B5D07EA221B64AED008C4BFD /* gold.png */,
+				B578DF7421B598B3004AD521 /* clockbuzzer.mp3 */,
+				B578DF7321B598B3004AD521 /* analog.mp3 */,
+				B578DF7521B598B3004AD521 /* submarine.mp3 */,
+				B5A43C6C21B6C9410048A808 /* PrefixHeader.pch */,
+				B5A43C6A21B6C9200048A808 /* OpenCVBridge.mm */,
+				B5A43C6921B6C9200048A808 /* OpenCVBridge.hh */,
+				B5A43C6521B6C86D0048A808 /* OpenCVBridgeSub.h */,
+				B5A43C6721B6C8940048A808 /* OpenCVBridgeSub.mm */,
+				B5A43C6621B6C8930048A808 /* FinalProject-Bridging-Header.h */,
 			);
 			path = FinalProject;
 			sourceTree = "<group>";
@@ -250,6 +271,7 @@
 				TargetAttributes = {
 					B560199A21B1A3DE008CFB5C = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -329,7 +351,10 @@
 				B578DF7C21B59F93004AD521 /* RunningChallengeViewController.swift in Sources */,
 				B56019D521B441F2008CFB5C /* MainViewController.swift in Sources */,
 				B578DF8021B5E32E004AD521 /* RingBuffer.swift in Sources */,
+				B5A43C6B21B6C9200048A808 /* OpenCVBridge.mm in Sources */,
 				B56019D921B444A3008CFB5C /* AlarmCollectionViewCell.swift in Sources */,
+				B5A43C6821B6C8940048A808 /* OpenCVBridgeSub.mm in Sources */,
+				B5A43C7221B6CC710048A808 /* ColorChallengeViewController.swift in Sources */,
 				B56019D721B442C8008CFB5C /* Alarms.swift in Sources */,
 				B578DF8221B5E36E004AD521 /* JSONUtilities.swift in Sources */,
 				B5601A1921B464D4008CFB5C /* persistentData.xcdatamodeld in Sources */,
@@ -513,8 +538,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9GAP7JC7AZ;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FinalProject",
+				);
 				INFOPLIST_FILE = FinalProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -522,7 +553,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexHenkel.FinalProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "FinalProject/FinalProject-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -532,8 +564,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9GAP7JC7AZ;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FinalProject",
+				);
 				INFOPLIST_FILE = FinalProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -541,7 +579,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.AlexHenkel.FinalProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "FinalProject/FinalProject-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

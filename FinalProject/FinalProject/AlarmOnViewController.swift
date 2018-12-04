@@ -33,8 +33,7 @@ class AlarmOnViewController: UIViewController {
     
     func handleChallenges() {
         // Pick a random challenge
-        let challengeNumber = Int.random(in: 0 ..< 4)
-        //let challengeNumber = 3
+        let challengeNumber = Int.random(in: 0 ..< 5)
         
         // Variables to open next view controller
         var modalChallenge: UIViewController?
@@ -50,6 +49,8 @@ class AlarmOnViewController: UIViewController {
             modalChallenge = storyboard.instantiateViewController(withIdentifier: "FaceDetectorChallengeViewController") as UIViewController as! FaceDetectorChallengeViewController
         case 3:
             modalChallenge = storyboard.instantiateViewController(withIdentifier: "GameChallengeViewController") as UIViewController as! GameViewController
+        case 4:
+            modalChallenge = storyboard.instantiateViewController(withIdentifier: "ColorChallengeViewController") as UIViewController as! ColorChallengeViewController
         default:
             print("Challenge error")
         }

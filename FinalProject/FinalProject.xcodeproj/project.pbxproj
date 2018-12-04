@@ -27,6 +27,8 @@
 		B578DF7E21B5E2B7004AD521 /* MLChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF7D21B5E2B7004AD521 /* MLChallengeViewController.swift */; };
 		B578DF8021B5E32E004AD521 /* RingBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF7F21B5E32E004AD521 /* RingBuffer.swift */; };
 		B578DF8221B5E36E004AD521 /* JSONUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF8121B5E36E004AD521 /* JSONUtilities.swift */; };
+		B578DF8621B626CF004AD521 /* FaceDetectorChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF8521B626CF004AD521 /* FaceDetectorChallengeViewController.swift */; };
+		B578DF8821B62996004AD521 /* VideoAnalgesic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF8721B62996004AD521 /* VideoAnalgesic.swift */; };
 		B58CDF8621B5015600B95442 /* AlarmOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58CDF8521B5015600B95442 /* AlarmOnViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +76,8 @@
 		B578DF7D21B5E2B7004AD521 /* MLChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLChallengeViewController.swift; sourceTree = "<group>"; };
 		B578DF7F21B5E32E004AD521 /* RingBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingBuffer.swift; sourceTree = "<group>"; };
 		B578DF8121B5E36E004AD521 /* JSONUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONUtilities.swift; sourceTree = "<group>"; };
+		B578DF8521B626CF004AD521 /* FaceDetectorChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectorChallengeViewController.swift; sourceTree = "<group>"; };
+		B578DF8721B62996004AD521 /* VideoAnalgesic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAnalgesic.swift; sourceTree = "<group>"; };
 		B58CDF8521B5015600B95442 /* AlarmOnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmOnViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,10 +141,12 @@
 				B56019D621B442C8008CFB5C /* Alarms.swift */,
 				B56019CC21B1A672008CFB5C /* Alarm.swift */,
 				B56019A221B1A3DE008CFB5C /* Main.storyboard */,
+				B578DF8521B626CF004AD521 /* FaceDetectorChallengeViewController.swift */,
 				B578DF7D21B5E2B7004AD521 /* MLChallengeViewController.swift */,
 				B578DF7B21B59F93004AD521 /* RunningChallengeViewController.swift */,
 				B578DF8121B5E36E004AD521 /* JSONUtilities.swift */,
 				B578DF7F21B5E32E004AD521 /* RingBuffer.swift */,
+				B578DF8721B62996004AD521 /* VideoAnalgesic.swift */,
 				B5601A1721B464D4008CFB5C /* persistentData.xcdatamodeld */,
 				B56019A521B1A3E0008CFB5C /* Assets.xcassets */,
 				B56019A721B1A3E0008CFB5C /* LaunchScreen.storyboard */,
@@ -309,6 +315,7 @@
 				B578DF7E21B5E2B7004AD521 /* MLChallengeViewController.swift in Sources */,
 				B560199F21B1A3DE008CFB5C /* AppDelegate.swift in Sources */,
 				B56019CD21B1A672008CFB5C /* Alarm.swift in Sources */,
+				B578DF8821B62996004AD521 /* VideoAnalgesic.swift in Sources */,
 				B578DF7C21B59F93004AD521 /* RunningChallengeViewController.swift in Sources */,
 				B56019D521B441F2008CFB5C /* MainViewController.swift in Sources */,
 				B578DF8021B5E32E004AD521 /* RingBuffer.swift in Sources */,
@@ -317,6 +324,7 @@
 				B578DF8221B5E36E004AD521 /* JSONUtilities.swift in Sources */,
 				B5601A1921B464D4008CFB5C /* persistentData.xcdatamodeld in Sources */,
 				B56019D321B36AD6008CFB5C /* CreateAlarmViewController.swift in Sources */,
+				B578DF8621B626CF004AD521 /* FaceDetectorChallengeViewController.swift in Sources */,
 				B58CDF8621B5015600B95442 /* AlarmOnViewController.swift in Sources */,
 				B578DF7A21B59DE0004AD521 /* SoundManager.swift in Sources */,
 			);

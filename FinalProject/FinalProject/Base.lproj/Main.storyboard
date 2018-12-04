@@ -220,7 +220,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pGK-1m-dth" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4760.8695652173919" y="739.95535714285711"/>
+            <point key="canvasLocation" x="4690" y="500"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="lv9-uy-0Fb">
@@ -437,7 +437,69 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mW3-5N-dhn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4760.8695652173919" y="11.383928571428571"/>
+            <point key="canvasLocation" x="4690" y="-196"/>
+        </scene>
+        <!--Face Detector Challenge View Controller-->
+        <scene sceneID="5gW-MY-o7H">
+            <objects>
+                <viewController storyboardIdentifier="FaceDetectorChallengeViewController" id="CZn-FD-ukt" customClass="FaceDetectorChallengeViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Kx4-Hh-yG5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKM-yG-BvC">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="200"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hbt-gR-oYW">
+                                <rect key="frame" x="0.0" y="60" width="414" height="95"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7W-0z-h2F">
+                                        <rect key="frame" x="16" y="8" width="382" height="41"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't blink 5 seconds to turn alarm off" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWf-cQ-BDG">
+                                        <rect key="frame" x="16" y="57" width="382" height="21"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="95" id="2Pb-Yo-UpV"/>
+                                    <constraint firstItem="e7W-0z-h2F" firstAttribute="top" secondItem="hbt-gR-oYW" secondAttribute="topMargin" id="3ix-3D-ybb"/>
+                                    <constraint firstItem="JWf-cQ-BDG" firstAttribute="trailing" secondItem="e7W-0z-h2F" secondAttribute="trailing" id="8jZ-ek-MXV"/>
+                                    <constraint firstItem="JWf-cQ-BDG" firstAttribute="top" secondItem="e7W-0z-h2F" secondAttribute="bottom" constant="8" symbolic="YES" id="LLf-sc-3Gi"/>
+                                    <constraint firstItem="JWf-cQ-BDG" firstAttribute="leading" secondItem="e7W-0z-h2F" secondAttribute="leading" id="Mpm-wW-y3E"/>
+                                    <constraint firstItem="e7W-0z-h2F" firstAttribute="leading" secondItem="hbt-gR-oYW" secondAttribute="leading" constant="16" id="ekp-LQ-4tb"/>
+                                    <constraint firstAttribute="trailing" secondItem="e7W-0z-h2F" secondAttribute="trailing" constant="16" id="eqi-H8-8Mz"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="hbt-gR-oYW" firstAttribute="top" secondItem="Brs-do-m1t" secondAttribute="top" constant="16" id="5Pp-11-7cE"/>
+                            <constraint firstItem="Brs-do-m1t" firstAttribute="bottom" secondItem="lKM-yG-BvC" secondAttribute="bottom" id="5cb-ee-sXZ"/>
+                            <constraint firstItem="hbt-gR-oYW" firstAttribute="leading" secondItem="Brs-do-m1t" secondAttribute="leading" id="C1E-jg-NM6"/>
+                            <constraint firstItem="lKM-yG-BvC" firstAttribute="leading" secondItem="Brs-do-m1t" secondAttribute="leading" id="SDR-tT-F7d"/>
+                            <constraint firstItem="lKM-yG-BvC" firstAttribute="top" secondItem="Brs-do-m1t" secondAttribute="top" id="WVA-FJ-nrz"/>
+                            <constraint firstAttribute="trailing" secondItem="lKM-yG-BvC" secondAttribute="trailing" id="hdI-eT-ydi"/>
+                            <constraint firstItem="hbt-gR-oYW" firstAttribute="trailing" secondItem="Brs-do-m1t" secondAttribute="trailing" id="pya-oi-BKt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Brs-do-m1t"/>
+                    </view>
+                    <connections>
+                        <outlet property="countLabel" destination="lKM-yG-BvC" id="SIi-qA-pPw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9nX-gg-Ltg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4689.8550724637689" y="1207.3660714285713"/>
         </scene>
     </scenes>
 </document>

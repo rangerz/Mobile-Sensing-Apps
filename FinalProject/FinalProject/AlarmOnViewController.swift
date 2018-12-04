@@ -14,6 +14,7 @@ class AlarmOnViewController: UIViewController {
     
     static let notificationName = Notification.Name("alarmTurnedOff")
     var soundSource = SoundManager.sharedInstance
+    var videoManager = VideoAnalgesic.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +33,8 @@ class AlarmOnViewController: UIViewController {
     
     func handleChallenges() {
         // Pick a random challenge
-        let challengeNumber = Int.random(in: 0 ..< 2)
-//        let challengeNumber = 1
+        let challengeNumber = Int.random(in: 0 ..< 3)
+        //let challengeNumber = 2
         
         // Variables to open next view controller
         var modalChallenge: UIViewController?
@@ -45,6 +46,8 @@ class AlarmOnViewController: UIViewController {
             modalChallenge = storyboard.instantiateViewController(withIdentifier: "RunningChallengeViewController") as UIViewController as! RunningChallengeViewController
         case 1:
             modalChallenge = storyboard.instantiateViewController(withIdentifier: "MLChallengeViewController") as UIViewController as! MLChallengeViewController
+        case 2:
+            modalChallenge = storyboard.instantiateViewController(withIdentifier: "FaceDetectorChallengeViewController") as UIViewController as! FaceDetectorChallengeViewController
         default:
             print("Challenge error")
         }
@@ -54,7 +57,12 @@ class AlarmOnViewController: UIViewController {
     
     // Notification received to turn off alarm and close modal
     @objc func onTurnOffAlarm(notification:Notification) {
+        // Stop alarm
         soundSource.stopAlarm()
+        // Make sure video is off
+        videoManager.stop()
+        videoManager.shutdown()
+        // Close modal
         self.dismiss(animated: false, completion: nil)
     }
 }

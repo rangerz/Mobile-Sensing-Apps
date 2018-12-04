@@ -130,7 +130,7 @@ final class Alarms {
         return appDelegate.persistentContainer.viewContext
     }
     
-    // Generate a random key
+    // Generate a random key to uniquely identify each alarm while deleting it
     func randomString(length: Int) -> String {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return String((0...length-1).map{ _ in letters.randomElement()! })

@@ -36,6 +36,8 @@
 		B5A43C6B21B6C9200048A808 /* OpenCVBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5A43C6A21B6C9200048A808 /* OpenCVBridge.mm */; };
 		B5A43C6E21B6C9620048A808 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5A43C6D21B6C9620048A808 /* opencv2.framework */; };
 		B5A43C7221B6CC710048A808 /* ColorChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A43C7121B6CC710048A808 /* ColorChallengeViewController.swift */; };
+		B5A43C7421B6E7B70048A808 /* PasswordProtectedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A43C7321B6E7B70048A808 /* PasswordProtectedViewController.swift */; };
+		B5A43C7621B6EEA50048A808 /* TrainModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A43C7521B6EEA50048A808 /* TrainModelViewController.swift */; };
 		B5D07EA321B64AEE008C4BFD /* gold.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D07EA221B64AED008C4BFD /* gold.png */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +98,8 @@
 		B5A43C6C21B6C9410048A808 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B5A43C6D21B6C9620048A808 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = FinalProject/opencv2.framework; sourceTree = "<group>"; };
 		B5A43C7121B6CC710048A808 /* ColorChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChallengeViewController.swift; sourceTree = "<group>"; };
+		B5A43C7321B6E7B70048A808 /* PasswordProtectedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordProtectedViewController.swift; sourceTree = "<group>"; };
+		B5A43C7521B6EEA50048A808 /* TrainModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainModelViewController.swift; sourceTree = "<group>"; };
 		B5D07EA221B64AED008C4BFD /* gold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gold.png; path = "../../Lab3/Assignment 3/Assets.xcassets/gold.imageset/gold.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -164,6 +168,8 @@
 				B578DF8521B626CF004AD521 /* FaceDetectorChallengeViewController.swift */,
 				B578DF7D21B5E2B7004AD521 /* MLChallengeViewController.swift */,
 				B578DF7B21B59F93004AD521 /* RunningChallengeViewController.swift */,
+				B5A43C7321B6E7B70048A808 /* PasswordProtectedViewController.swift */,
+				B5A43C7521B6EEA50048A808 /* TrainModelViewController.swift */,
 				B5601A1721B464D4008CFB5C /* persistentData.xcdatamodeld */,
 				B56019A521B1A3E0008CFB5C /* Assets.xcassets */,
 				B56019A721B1A3E0008CFB5C /* LaunchScreen.storyboard */,
@@ -347,6 +353,7 @@
 				B578DF7E21B5E2B7004AD521 /* MLChallengeViewController.swift in Sources */,
 				B560199F21B1A3DE008CFB5C /* AppDelegate.swift in Sources */,
 				B56019CD21B1A672008CFB5C /* Alarm.swift in Sources */,
+				B5A43C7621B6EEA50048A808 /* TrainModelViewController.swift in Sources */,
 				B578DF8821B62996004AD521 /* VideoAnalgesic.swift in Sources */,
 				B578DF7C21B59F93004AD521 /* RunningChallengeViewController.swift in Sources */,
 				B56019D521B441F2008CFB5C /* MainViewController.swift in Sources */,
@@ -361,6 +368,7 @@
 				B578DF8C21B64918004AD521 /* GameScene.swift in Sources */,
 				B56019D321B36AD6008CFB5C /* CreateAlarmViewController.swift in Sources */,
 				B578DF8A21B64895004AD521 /* GameViewController.swift in Sources */,
+				B5A43C7421B6E7B70048A808 /* PasswordProtectedViewController.swift in Sources */,
 				B578DF8621B626CF004AD521 /* FaceDetectorChallengeViewController.swift in Sources */,
 				B58CDF8621B5015600B95442 /* AlarmOnViewController.swift in Sources */,
 				B578DF7A21B59DE0004AD521 /* SoundManager.swift in Sources */,
